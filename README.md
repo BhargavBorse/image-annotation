@@ -1,33 +1,23 @@
 # angular-editor-fabric-js
 
-> Drag-and-drop editor based on Fabricjs for Angular with multiple options
-
-### Example
-![Imgur](https://i.imgur.com/sQsL8G4.png)
-### Output
-![Imgur](https://i.imgur.com/hgTEb20.png)
-
 ### Features
-* Export to image
-* Export to SVG
-* Save to localStorage
-* Load From LocalStorage
 * Clean workspace
 * Resize workspace
 * Add text
 * Add Images
 * Upload Images
-* Add figures (Rectangle, Triangle, Square, Circle)
+* Upload Canvas Background Image
+* Add figures (Rectangle, Circle)
 * Render to JSON
 * Clone Object
-* Sent to front Object
-* Sent to back Object
+* Send Object to Front
+* Send Object back
 * Delete Object
 * Unselect Object
 * Add ID to Object
 * Opacity to Object
 * Color to Object
-* Font Famility to Object
+* Font Familiy to Object
 * Text Align to Object
 * Style to Object
 * Font Size to Object
@@ -45,8 +35,8 @@ npm i angular-editor-fabric-js
 ## Installing the project
 
 ```bash
-git clone https://github.com/kevoj/angular-editor-fabric-js.git
-cd angular-editor-fabric-js
+git clone https://github.com/BhargavBorse/image-annotation.git
+cd image-annotation
 npm install
 ```
 ## Start
@@ -67,4 +57,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 Before running the tests make sure you are serving the app via `ng serve`.
 
 ## License
-[MIT ©](https://github.com/kevoj/angular-editor-fabric-js/blob/master/LICENSE)
+[MIT ©](https://github.com/BhargavBorse/image-annotation/blob/main/LICENSE)
