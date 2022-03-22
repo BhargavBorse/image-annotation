@@ -20,19 +20,24 @@
                 <button data-toggle="tooltip" data-placement="bottom" title="Select" type="button" class="btn btn-outline-dark"
                 (click)="moveSelectedObj();">
                 <i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Select</button> &nbsp;
-                
+
+                <button data-toggle="tooltip" data-placement="bottom" title="ZoomIn" type="button" class="btn btn-outline-dark"
+                    (click)="xmlJson();">
+                    XML
+                </button> &nbsp;
+
                 <!--<button data-toggle="tooltip" data-placement="bottom" title="Export to image" type="button" class="btn btn-outline-dark" (click)="rasterize();">
                     <i class="fa fa-download" aria-hidden="true"></i> Export to image</button> &nbsp; 
                     <button data-toggle="tooltip" data-placement="bottom" title="Export to SVG" type="button" class="btn btn-outline-dark" (click)="rasterizeSVG();">
                         <i class="fa fa-download" aria-hidden="true"></i> Export to SVG</button> &nbsp;-->
                         
-                        <button data-toggle="tooltip" data-placement="bottom" title="Save in localStorage" type="button" class="btn btn-outline-dark"
+                        <!-- <button data-toggle="tooltip" data-placement="bottom" title="Save in localStorage" type="button" class="btn btn-outline-dark"
                         (click)="saveCanvasToJSON();">
                         <i class="fa fa-save" aria-hidden="true"></i> Save local</button> &nbsp;
                         
                         <button data-toggle="tooltip" data-placement="bottom" title="Load from localStorage" type="button" class="btn btn-outline-dark"
                         (click)="loadCanvasFromJSON();">
-                        <i class="fa fa-save" aria-hidden="true"></i> Load local</button> &nbsp;
+                        <i class="fa fa-save" aria-hidden="true"></i> Load local</button> &nbsp; -->
                         
                         
                         <button type="button" class="btn btn-outline-dark" (click)="addFigure('rectangle');">

@@ -25,6 +25,7 @@
     "bootstrap": "^4.4.1",
     "fabric": "^3.6.3",
     "font-awesome": "^4.7.0",
+    "js2xmlparser": "^4.0.2",
     "ngx-color-picker": "^9.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

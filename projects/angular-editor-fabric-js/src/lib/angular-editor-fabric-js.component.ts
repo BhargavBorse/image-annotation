@@ -2,6 +2,7 @@ import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { fabric } from 'fabric';
 import { Object } from 'fabric/fabric-impl';
+import * as js2xmlparser from 'js2xmlparser';
 
 var backImg = "assets/img/120.gif";
 
@@ -642,6 +643,29 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   rasterizeJSON() {
     this.json = JSON.stringify(this.canvas, null, 2);
+    // var json = JSON.parse(this.json);
+    // console.log(js2xmlparser.parse("xml", json));
+    // alert(json.objects[0].fill);
+  }
+
+  xmlJson() {
+    console.log("in xmlJson");
+    // let obj = {
+    //   "firstName": "John",
+    //   "lastName": "Smith",
+    //   "dateOfBirth": new Date(1964, 7, 26),
+    //   "address": {
+    //     "@": {
+    //       "type": "home"
+    //     },
+    //     "streetAddress": "3212 22nd St",
+    //     "city": "Chicago",
+    //     "state": "Illinois",
+    //     "zip": 10000
+    //   }
+    // };
+    
+    // console.log(js2xmlparser.parse("person", obj));
   }
 
   resetPanels() {

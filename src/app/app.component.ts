@@ -67,6 +67,10 @@ export class AppComponent {
     this.canvas.addImageOnCanvas(url,renderInBack);
   }
 
+  public xmlJson() {
+    this.canvas.xmlJson();
+  }
+
   public readUrl(event) {
     this.canvas.readUrl(event);
   }
