@@ -1,5 +1,3 @@
-# Image Viewer and Annotation using Angular
-
 ## Installing the library in your project
 
 ```bash
