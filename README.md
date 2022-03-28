@@ -1,7 +1,7 @@
 ## Installing the library in your project
 
 ```bash
-npm i app-angular-editor-fabric-js
+npm i image-annotator
 ```
 
 # Development
