@@ -3,7 +3,7 @@
 ## Installing the library in your project
 
 ```bash
-npm i angular-editor-fabric-js
+npm i app-angular-editor-fabric-js
 ```
 
 # Development
