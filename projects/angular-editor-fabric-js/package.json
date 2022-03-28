@@ -1,7 +1,7 @@
 {
-  "name": "angular-editor-fabric-js",
+  "name": "image-annotator",
   "version": "3.0.0",
-  "desription": "A FabricJS canvas editor for Angular",
+  "desription": "A FabricJS canvas editor using Angular",
   "dependencies": {
     "fabric": "^3.6.3",
     "@types/fabric": "^3.6.2",

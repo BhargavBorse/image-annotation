@@ -8,8 +8,14 @@ import { FabricjsEditorComponent } from 'projects/angular-editor-fabric-js/src/p
 })
 export class AppComponent {
   title = 'angular-editor-fabric-js';
-
+  
   @ViewChild('canvas', {static: false}) canvas: FabricjsEditorComponent;
+  data={
+    name: 'Bhargav',
+    age: '23',
+  }
+  
+  router: any;
 
   public rasterize() {
     this.canvas.rasterize();

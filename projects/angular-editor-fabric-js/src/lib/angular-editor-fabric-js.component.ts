@@ -41,6 +41,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   };
 
   public json: any;
+  public xml: any;
   private globalEditor = false;
   public textEditor = false;
   private imageEditor = false;
@@ -648,8 +649,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
     // alert(json.objects[0].fill);
   }
 
+
+
   xmlJson() {
-    console.log("in xmlJson");
+
+    this.xml = JSON.stringify(this.canvas, null, 2);
+    var json = JSON.parse(this.xml);
+    console.log(js2xmlparser.parse("xml", json));
+    const creatorTool = json.background;
+
+    document.getElementById('creatorTool').innerHTML = creatorTool;
+    const data = "in xmlJson";
+    this.xml = data;
+    // var json = JSON.parse(this.json);
+    // console.log(js2xmlparser.parse("xml", json));
+    // alert(json.objects[0].fill);
     // let obj = {
     //   "firstName": "John",
     //   "lastName": "Smith",
