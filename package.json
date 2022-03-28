@@ -69,5 +69,6 @@
     "typescript": "^3.6.4"
   },
   "author": "Bhargav Borse <bhargav.borse4@gmail.com> (https://bhargavborse.netlify.app/)",
+  "homepage": "https://bhargavborse.github.io/image-annotation/",
   "license": "MIT"
 }
