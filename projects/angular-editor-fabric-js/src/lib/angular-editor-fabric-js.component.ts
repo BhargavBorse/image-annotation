@@ -657,6 +657,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.xml = JSON.stringify(this.canvas, null, 2);
     var json = JSON.parse(this.xml);
     // alert(json.objects[0].fill);
+    for(let i = 0; i < json.objects.length; i++) {
+      alert(json.objects[i].fill);
+    }
 
     this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
     <x:xmpmeta xmlns:x="adobe:ns:meta/">
@@ -710,6 +713,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             </rdf:Description>
         </rdf:RDF>
         </x:xmpmeta>`; 
+
         // alert(js2xmlparser.parse("xml", json.objects[0].fill));
     // const creatorTool = json.background;
 
