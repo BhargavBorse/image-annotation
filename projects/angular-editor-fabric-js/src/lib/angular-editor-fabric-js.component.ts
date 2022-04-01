@@ -650,9 +650,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
     // alert(json.objects[0].fill);
   }
 
-
-
-  xmlJson() {
+  canvasModifiedCallback() {
+    console.log('canvas modified!');
+  };
+    // this.canvas.on('object:added', canvasModifiedCallback());
+    // this.canvas.on('object:removed', canvasModifiedCallback());
+    // this.canvas.on('object:modified', canvasModifiedCallback());
+    
+    xmlJson() {
 
     this.xml = JSON.stringify(this.canvas, null, 2);
     var json = JSON.parse(this.xml);
