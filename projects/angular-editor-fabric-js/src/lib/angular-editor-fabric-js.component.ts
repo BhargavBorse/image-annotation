@@ -658,8 +658,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
     var json = JSON.parse(this.xml);
     // alert(json.objects[0].fill);
     for(let i = 0; i < json.objects.length; i++) {
-      alert(json.objects[i].fill);
-    }
+      // alert(json.objects[i].fill);
+    
 
     this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
     <x:xmpmeta xmlns:x="adobe:ns:meta/">
@@ -676,7 +676,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                         <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
                         <Location type="System.String"><![CDATA[359.0909,245.4545]]></Location>
                         <Rotation type="System.Single">0</Rotation>
-                        <Size type="System.String"><![CDATA[404.5454,259.0909]]></Size>
+                        <Size type="System.String">`+ this.size.width + `x` + this.size.height +`</Size>
                         <Visible type="System.Boolean">True</Visible>
                         <CanMove type="System.Boolean">True</CanMove>
                         <CanResize type="System.Boolean">True</CanResize>
@@ -713,7 +713,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             </rdf:Description>
         </rdf:RDF>
         </x:xmpmeta>`; 
-
+    }
         // alert(js2xmlparser.parse("xml", json.objects[0].fill));
     // const creatorTool = json.background;
 
