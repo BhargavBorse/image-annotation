@@ -652,7 +652,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     var json = JSON.parse(this.xml);
     // alert(json.objects[0].fill);
     for(let i = 0; i < json.objects.length; i++) {
-      // alert(json.objects[i].fill);
+      // alert(json.objects[i].type);
     
 
     this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
