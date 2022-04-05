@@ -235,17 +235,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
           fill: '#3f51b5', opacity: 0.5
         });
         break;
-      case 'square':
-        add = new fabric.Rect({
-          width: 100, height: 100, left: 10, top: 10, angle: 0,
-          fill: '#4caf50', opacity: 0.5
-        });
-        break;
-      case 'triangle':
-        add = new fabric.Triangle({
-          width: 100, height: 100, left: 10, top: 10, fill: '#2196f3', opacity: 0.5
-        });
-        break;
       case 'circle':
         add = new fabric.Circle({
           radius: 50, left: 10, top: 10, fill: '#ff5722', opacity: 0.5
