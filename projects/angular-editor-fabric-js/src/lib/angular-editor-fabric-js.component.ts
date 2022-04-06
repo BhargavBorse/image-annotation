@@ -679,6 +679,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
                         <CanSelect type="System.Boolean">True</CanSelect>
                         <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
                         <GroupAnnotation type="System.Boolean">False</GroupAnnotation>
+                        `+ if(json.objects[i].type){ 
+                          
+                        }
+                        +`
                         <Items assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationDataCollection">
                             <Items type="System.Collections.ArrayList">
                                 <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
