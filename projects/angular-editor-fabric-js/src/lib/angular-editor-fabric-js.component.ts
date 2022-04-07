@@ -708,7 +708,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                     <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
                     <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
                     <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
-                    <Location type="System.String"><![CDATA[522.7272,431.8181]]></Location>
+                    <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
                     <Rotation type="System.Single">0</Rotation>
                     <Size type="System.String"><![CDATA[590.9091,504.5454]]></Size>
                     <Visible type="System.Boolean">True</Visible>
