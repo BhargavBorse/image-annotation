@@ -676,69 +676,68 @@ export class FabricjsEditorComponent implements AfterViewInit {
                         <CanSelect type="System.Boolean">True</CanSelect>
                         <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
                         <GroupAnnotation type="System.Boolean">False</GroupAnnotation>
-
                         `; 
-    for(let i = 0; i < json.objects.length; i++) {
-      // alert(json.objects[i].type);
-      if(json.objects[i].type == "rect"){ 
-        this.xmlData += `
-        <Items assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationDataCollection">
-        <Items type="System.Collections.ArrayList">
-            <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-                <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
-                <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
-                <Location type="System.String"><![CDATA[359.0909,245.4545]]></Location>
-                <Rotation type="System.Single">0</Rotation>
-                <Size type="System.String"><![CDATA[404.5454,259.0909]]></Size>
-                <Visible type="System.Boolean">True</Visible>
-                <CanMove type="System.Boolean">True</CanMove>
-                <CanResize type="System.Boolean">True</CanResize>
-                <CanRotate type="System.Boolean">True</CanRotate>
-                <CanMirror type="System.Boolean">True</CanMirror>
-                <CanSelect type="System.Boolean">True</CanSelect>
-                <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
-                <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-                    <ctor type="System.Int32">0</ctor>
-                    <Color type="System.Int32">-16777216</Color>
-                </Fill>
-                <Translucent type="System.Boolean">False</Translucent>
-            </RectangleData>
-        </Items>
-    </Items>`;   
-      }
-      else if(json.objects[i].type == "circle"){
-        this.xmlData += `
-        <Items assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationDataCollection">
-        <Items type="System.Collections.ArrayList">
-            <CircleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-                <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
-                <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
-                <Location type="System.String"><![CDATA[359.0909,245.4545]]></Location>
-                <Rotation type="System.Single">0</Rotation>
-                <Size type="System.String"><![CDATA[404.5454,259.0909]]></Size>
-                <Visible type="System.Boolean">True</Visible>
-                <CanMove type="System.Boolean">True</CanMove>
-                <CanResize type="System.Boolean">True</CanResize>
-                <CanRotate type="System.Boolean">True</CanRotate>
-                <CanMirror type="System.Boolean">True</CanMirror>
-                <CanSelect type="System.Boolean">True</CanSelect>
-                <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
-                <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-                    <ctor type="System.Int32">0</ctor>
-                    <Color type="System.Int32">-16777216</Color>
-                </Fill>
-                <Translucent type="System.Boolean">False</Translucent>
-            </CircleData>
-        </Items>
-    </Items>`;   
-      }
-    }
-    this.xmlData += `
-</LayerData>
-</LayerDataCollection>
-</rdf:Description>
-</rdf:RDF>
-</x:xmpmeta>`;
+                    for(let i = 0; i < json.objects.length; i++) {
+                      // alert(json.objects[i].type);
+                      if(json.objects[i].type == "rect"){ 
+                        this.xmlData += `
+                        <Items assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationDataCollection">
+                        <Items type="System.Collections.ArrayList">
+                            <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+                                <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
+                                <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
+                                <Location type="System.String"><![CDATA[359.0909,245.4545]]></Location>
+                                <Rotation type="System.Single">0</Rotation>
+                                <Size type="System.String"><![CDATA[404.5454,259.0909]]></Size>
+                                <Visible type="System.Boolean">True</Visible>
+                                <CanMove type="System.Boolean">True</CanMove>
+                                <CanResize type="System.Boolean">True</CanResize>
+                                <CanRotate type="System.Boolean">True</CanRotate>
+                                <CanMirror type="System.Boolean">True</CanMirror>
+                                <CanSelect type="System.Boolean">True</CanSelect>
+                                <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
+                                <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+                                    <ctor type="System.Int32">0</ctor>
+                                    <Color type="System.Int32">-16777216</Color>
+                                </Fill>
+                                <Translucent type="System.Boolean">False</Translucent>
+                            </RectangleData>
+                        </Items>
+                    </Items>`;   
+                  }
+                  else if(json.objects[i].type == "circle"){
+                    this.xmlData += `
+                    <Items assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationDataCollection">
+                    <Items type="System.Collections.ArrayList">
+                        <CircleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+                            <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
+                            <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
+                            <Location type="System.String"><![CDATA[359.0909,245.4545]]></Location>
+                            <Rotation type="System.Single">0</Rotation>
+                            <Size type="System.String"><![CDATA[404.5454,259.0909]]></Size>
+                            <Visible type="System.Boolean">True</Visible>
+                            <CanMove type="System.Boolean">True</CanMove>
+                            <CanResize type="System.Boolean">True</CanResize>
+                            <CanRotate type="System.Boolean">True</CanRotate>
+                            <CanMirror type="System.Boolean">True</CanMirror>
+                            <CanSelect type="System.Boolean">True</CanSelect>
+                            <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
+                            <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+                                <ctor type="System.Int32">0</ctor>
+                                <Color type="System.Int32">-16777216</Color>
+                            </Fill>
+                            <Translucent type="System.Boolean">False</Translucent>
+                        </CircleData>
+                    </Items>
+                </Items>`;   
+                  }
+                }
+                this.xmlData += `
+            </LayerData>
+          </LayerDataCollection>
+        </rdf:Description>
+      </rdf:RDF>
+    </x:xmpmeta>`;
     
     
         // alert(js2xmlparser.parse("xml", json.objects[0].fill));
