@@ -686,9 +686,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
                         <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
                         <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
                         <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
-                        <Location type="System.String"><![CDATA[359.0909,245.4545]]></Location>
+                        <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
                         <Rotation type="System.Single">0</Rotation>
-                        <Size type="System.String"><![CDATA[404.5454,259.0909]]></Size>
+                        <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
                         <Visible type="System.Boolean">True</Visible>
                         <CanMove type="System.Boolean">True</CanMove>
                         <CanResize type="System.Boolean">True</CanResize>
