@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { fabric } from 'fabric';
@@ -858,15 +859,24 @@ export class FabricjsEditorComponent implements AfterViewInit {
   </rdf:RDF>
 </x:xmpmeta>`;
     
-//create anchor tag and download the card-body content to it as a file with the name "sample.xml" 
-var anchor = document.createElement("a");
-var a_text = document.createTextNode('Download XML File');
+//Download button for XML file
+let anchor = document.createElement("a");
+anchor.className = "btn btn-outline-dark btn-sm";
+anchor.style.marginLeft = '10px';
+let a_text = document.createTextNode('Download XML File');
 anchor.appendChild(a_text);
+
+let iTag = document.createElement("i");
+iTag.setAttribute("class", "fa fa-download");
+iTag.style.marginLeft = "5px";
+
+anchor.appendChild(iTag);
 
 anchor.download = "sample.xml";
 anchor.href = "data:text/xml," + encodeURIComponent(this.xmlData);
 
-document.body.appendChild(anchor);
+let divCont = document.getElementById('card-header');
+divCont.appendChild(anchor);
     
         // alert(js2xmlparser.parse("xml", json.objects[0].fill));
     // const creatorTool = json.background;
