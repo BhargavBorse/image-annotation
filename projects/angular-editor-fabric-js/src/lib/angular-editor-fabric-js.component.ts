@@ -710,7 +710,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                     <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
                     <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
                     <Rotation type="System.Single">0</Rotation>
-                    <Size type="System.String"><![CDATA[590.9091,504.5454]]></Size>
+                    <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
                     <Visible type="System.Boolean">True</Visible>
                     <CanMove type="System.Boolean">True</CanMove>
                     <CanResize type="System.Boolean">True</CanResize>
