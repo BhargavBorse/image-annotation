@@ -68,8 +68,8 @@ export class AppComponent {
     this.canvas.getImgPolaroid(event);
   }
 
-  public addImageOnCanvas(url,renderInBack) {
-    this.canvas.addImageOnCanvas(url,renderInBack);
+  public addImageOnCanvas(url, renderInBack) {
+    this.canvas.addImageOnCanvas(url, renderInBack);
   }
 
   public xmlJson() {

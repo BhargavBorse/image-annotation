@@ -32,6 +32,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   public textString: string;
   public url: string | ArrayBuffer = '';
+  public urlBack: string | ArrayBuffer = '';
   public size: any = {
     width: 1450,
     height: 700,
@@ -173,7 +174,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   // Block "Upload Image"
 
-  addImageOnCanvas(url,renderInBack) {
+  addImageOnCanvas(url, renderInBack) {
     if(!renderInBack){
     if (url) {
       fabric.Image.fromURL(url, (image) => {
