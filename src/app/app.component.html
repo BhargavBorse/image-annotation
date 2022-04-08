@@ -158,7 +158,7 @@
                         <div class="card-header">Upload Background</div>
                         <div class="card-body text-center">
                             <img id="testImage" *ngIf="canvas.url" class="images-item-upload" [src]="canvas.url" (click)="addImageOnCanvas(canvas.url,true);">
-                            <input type="file" (change)="readUrl($event);">
+                            <input type="file" (change)="readUrlBack($event);">
                             <br/>
                             <br/>
                             <div class="btn-group btn-group-justified" role="group" aria-label="...">

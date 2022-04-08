@@ -2,9 +2,6 @@ import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { fabric } from 'fabric';
 import { Object } from 'fabric/fabric-impl';
-import * as js2xmlparser from 'js2xmlparser';
-
-var backImg = "assets/img/120.gif";
 
 @Component({
   selector: 'angular-editor-fabric-js',
@@ -211,6 +208,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
   readUrl(event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (readerEvent) => {
+        this.url = readerEvent.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  readUrlBack(event) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (readerEvent) => {
