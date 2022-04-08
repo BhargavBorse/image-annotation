@@ -649,8 +649,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.xml = JSON.stringify(this.canvas, null, 2);
     var json = JSON.parse(this.xml);
     // alert(json.objects[0].fill);
-    this.xmlData = `
-    <?xml version="1.0" encoding="utf-8"?>
+    this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
     <x:xmpmeta xmlns:x="adobe:ns:meta/">
         <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
             <rdf:Description rdf:about="" xmlns:xmp="http://ns.abobe.com/xap/1.0/">
@@ -859,6 +858,15 @@ export class FabricjsEditorComponent implements AfterViewInit {
   </rdf:RDF>
 </x:xmpmeta>`;
     
+//create anchor tag and download the card-body content to it as a file with the name "sample.xml" 
+var anchor = document.createElement("a");
+var a_text = document.createTextNode('Download XML File');
+anchor.appendChild(a_text);
+
+anchor.download = "sample.xml";
+anchor.href = "data:text/xml," + encodeURIComponent(this.xmlData);
+
+document.body.appendChild(anchor);
     
         // alert(js2xmlparser.parse("xml", json.objects[0].fill));
     // const creatorTool = json.background;
