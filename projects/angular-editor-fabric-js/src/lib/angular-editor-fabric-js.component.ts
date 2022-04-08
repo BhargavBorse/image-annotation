@@ -647,6 +647,15 @@ export class FabricjsEditorComponent implements AfterViewInit {
     
     xmlJson() {
 
+      // remove anchor if xmlJson function is called again 
+    
+      
+    let hideBtn = document.getElementById('hid');
+    if(hideBtn) {
+      hideBtn.remove();
+    }
+
+
     this.xml = JSON.stringify(this.canvas, null, 2);
     var json = JSON.parse(this.xml);
     // alert(json.objects[0].fill);
@@ -850,8 +859,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             </FreehandData>`;
               }
             }
-            this.xmlData += `
-            </Items>
+            this.xmlData += `</Items>
           </Items>
         </LayerData>
       </LayerDataCollection>
@@ -862,6 +870,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 //Download button for XML file
 let anchor = document.createElement("a");
 anchor.className = "btn btn-outline-dark btn-sm";
+anchor.setAttribute("id", "hid");
 anchor.style.marginLeft = '10px';
 let a_text = document.createTextNode('Download XML File');
 anchor.appendChild(a_text);
