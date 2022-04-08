@@ -80,10 +80,6 @@ export class AppComponent {
     this.canvas.readUrl(event);
   }
 
-  public readUrlBack(event) {
-    this.canvas.readUrlBack(event);
-  }
-
   public removeWhite(url) {
     this.canvas.removeWhite(url);
   }

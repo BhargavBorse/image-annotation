@@ -217,16 +217,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     }
   }
 
-  readUrlBack(event) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (readerEvent) => {
-        this.url = readerEvent.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
-
   removeWhite(url) {
     this.url = '';
   }
