@@ -751,7 +751,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                     <Translucent type="System.Boolean">False</Translucent>
                   </EllipseData>`;   
                   }
-                  else if(json.objects[i].type == "i-text"){
+                  else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic"){
                     this.xmlData += `
                 <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
 								<CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
@@ -770,14 +770,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
 									<ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
 								</ExtraProperties>
 								<Padding type="System.Single">2</Padding>
-								<Text type="System.String"><![CDATA[testing text for fabic]]></Text>
+								<Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
 								<Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-									<Name type="System.String"><![CDATA[Arial]]></Name>
-									<Size type="System.Single">27</Size>
-									<Bold type="System.Boolean">False</Bold>
-									<Italic type="System.Boolean">False</Italic>
-									<Strikeout type="System.Boolean">False</Strikeout>
-									<Underline type="System.Boolean">False</Underline>
+									<Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
+									<Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+									<Bold type="System.Boolean">True</Bold>
+									<Italic type="System.Boolean">True</Italic>
+									<Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
+									<Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
 									<CharSet type="System.Int32">0</CharSet>
 								</Font>
 								<FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -794,7 +794,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 								</Fill>
 								<Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
 									<ctor type="System.Int32">3</ctor>
-									<Alignment type="System.String"><![CDATA[Center]]></Alignment>
+									<Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
 									<Color type="System.Int32">1258291455</Color>
 									<DashCap type="System.String"><![CDATA[Round]]></DashCap>
 									<DashOffset type="System.Single">0</DashOffset>
@@ -804,7 +804,203 @@ export class FabricjsEditorComponent implements AfterViewInit {
 										<Size type="System.String"><![CDATA[15,15]]></Size>
 									</EndCap>
 									<LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-									<MiterLimit type="System.Single">0</MiterLimit>
+									<MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+									<StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+										<Style type="System.String"><![CDATA[None]]></Style>
+										<Size type="System.String"><![CDATA[15,15]]></Size>
+									</StartCap>
+									<Width type="System.Single">4</Width>
+								</Outline>
+								<AutoSize type="System.Boolean">False</AutoSize>
+								<RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+								<Minimized type="System.Boolean">False</Minimized>
+							</TextData>`;
+                  }
+
+                  else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal"){
+                    this.xmlData += `
+                <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+								<CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+								<ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+								<Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+								<Rotation type="System.Single">0</Rotation>
+								<Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+								<Visible type="System.Boolean">True</Visible>
+								<CanMove type="System.Boolean">True</CanMove>
+								<CanResize type="System.Boolean">True</CanResize>
+								<CanRotate type="System.Boolean">True</CanRotate>
+								<CanMirror type="System.Boolean">True</CanMirror>
+								<CanSelect type="System.Boolean">True</CanSelect>
+								<ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+									<ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+									<ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+								</ExtraProperties>
+								<Padding type="System.Single">2</Padding>
+								<Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+								<Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+									<Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
+									<Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+									<Bold type="System.Boolean">False</Bold>
+									<Italic type="System.Boolean">False</Italic>
+									<Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
+									<Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+									<CharSet type="System.Int32">0</CharSet>
+								</Font>
+								<FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+									<ctor type="System.Int32">0</ctor>
+									<Color type="System.Int32">-16777216</Color>
+								</FontBrush>
+								<Alignment type="System.String"><![CDATA[Near]]></Alignment>
+								<LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+								<FormatFlags type="System.Int32">0</FormatFlags>
+								<Trimming type="System.String"><![CDATA[None]]></Trimming>
+								<Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+									<ctor type="System.Int32">0</ctor>
+									<Color type="System.Int32">419430655</Color>
+								</Fill>
+								<Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+									<ctor type="System.Int32">3</ctor>
+									<Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+									<Color type="System.Int32">1258291455</Color>
+									<DashCap type="System.String"><![CDATA[Round]]></DashCap>
+									<DashOffset type="System.Single">0</DashOffset>
+									<DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+									<EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+										<Style type="System.String"><![CDATA[None]]></Style>
+										<Size type="System.String"><![CDATA[15,15]]></Size>
+									</EndCap>
+									<LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+									<MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+									<StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+										<Style type="System.String"><![CDATA[None]]></Style>
+										<Size type="System.String"><![CDATA[15,15]]></Size>
+									</StartCap>
+									<Width type="System.Single">4</Width>
+								</Outline>
+								<AutoSize type="System.Boolean">False</AutoSize>
+								<RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+								<Minimized type="System.Boolean">False</Minimized>
+							</TextData>`;
+                  }
+                  else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic"){
+                    this.xmlData += `
+                <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+								<CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+								<ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+								<Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+								<Rotation type="System.Single">0</Rotation>
+								<Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+								<Visible type="System.Boolean">True</Visible>
+								<CanMove type="System.Boolean">True</CanMove>
+								<CanResize type="System.Boolean">True</CanResize>
+								<CanRotate type="System.Boolean">True</CanRotate>
+								<CanMirror type="System.Boolean">True</CanMirror>
+								<CanSelect type="System.Boolean">True</CanSelect>
+								<ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+									<ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+									<ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+								</ExtraProperties>
+								<Padding type="System.Single">2</Padding>
+								<Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+								<Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+									<Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
+									<Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+									<Bold type="System.Boolean">False</Bold>
+									<Italic type="System.Boolean">True</Italic>
+									<Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
+									<Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+									<CharSet type="System.Int32">0</CharSet>
+								</Font>
+								<FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+									<ctor type="System.Int32">0</ctor>
+									<Color type="System.Int32">-16777216</Color>
+								</FontBrush>
+								<Alignment type="System.String"><![CDATA[Near]]></Alignment>
+								<LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+								<FormatFlags type="System.Int32">0</FormatFlags>
+								<Trimming type="System.String"><![CDATA[None]]></Trimming>
+								<Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+									<ctor type="System.Int32">0</ctor>
+									<Color type="System.Int32">419430655</Color>
+								</Fill>
+								<Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+									<ctor type="System.Int32">3</ctor>
+									<Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+									<Color type="System.Int32">1258291455</Color>
+									<DashCap type="System.String"><![CDATA[Round]]></DashCap>
+									<DashOffset type="System.Single">0</DashOffset>
+									<DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+									<EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+										<Style type="System.String"><![CDATA[None]]></Style>
+										<Size type="System.String"><![CDATA[15,15]]></Size>
+									</EndCap>
+									<LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+									<MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+									<StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+										<Style type="System.String"><![CDATA[None]]></Style>
+										<Size type="System.String"><![CDATA[15,15]]></Size>
+									</StartCap>
+									<Width type="System.Single">4</Width>
+								</Outline>
+								<AutoSize type="System.Boolean">False</AutoSize>
+								<RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+								<Minimized type="System.Boolean">False</Minimized>
+							</TextData>`;
+                  }
+                  else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal"){
+                    this.xmlData += `
+                <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+								<CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+								<ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+								<Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+								<Rotation type="System.Single">0</Rotation>
+								<Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+								<Visible type="System.Boolean">True</Visible>
+								<CanMove type="System.Boolean">True</CanMove>
+								<CanResize type="System.Boolean">True</CanResize>
+								<CanRotate type="System.Boolean">True</CanRotate>
+								<CanMirror type="System.Boolean">True</CanMirror>
+								<CanSelect type="System.Boolean">True</CanSelect>
+								<ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+									<ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+									<ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+								</ExtraProperties>
+								<Padding type="System.Single">2</Padding>
+								<Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+								<Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+									<Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
+									<Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+									<Bold type="System.Boolean">True</Bold>
+									<Italic type="System.Boolean">False</Italic>
+									<Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
+									<Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+									<CharSet type="System.Int32">0</CharSet>
+								</Font>
+								<FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+									<ctor type="System.Int32">0</ctor>
+									<Color type="System.Int32">-16777216</Color>
+								</FontBrush>
+								<Alignment type="System.String"><![CDATA[Near]]></Alignment>
+								<LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+								<FormatFlags type="System.Int32">0</FormatFlags>
+								<Trimming type="System.String"><![CDATA[None]]></Trimming>
+								<Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+									<ctor type="System.Int32">0</ctor>
+									<Color type="System.Int32">419430655</Color>
+								</Fill>
+								<Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+									<ctor type="System.Int32">3</ctor>
+									<Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+									<Color type="System.Int32">1258291455</Color>
+									<DashCap type="System.String"><![CDATA[Round]]></DashCap>
+									<DashOffset type="System.Single">0</DashOffset>
+									<DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+									<EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+										<Style type="System.String"><![CDATA[None]]></Style>
+										<Size type="System.String"><![CDATA[15,15]]></Size>
+									</EndCap>
+									<LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+									<MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
 									<StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
 										<Style type="System.String"><![CDATA[None]]></Style>
 										<Size type="System.String"><![CDATA[15,15]]></Size>
