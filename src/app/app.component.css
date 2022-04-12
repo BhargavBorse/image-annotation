@@ -12,6 +12,7 @@ body{
     cursor: pointer;
     -webkit-transition: .5s ease;
     -webkit-transition: .5s ease;
+    transition: .5s ease;
     padding: 3px;
     max-width: 120px;
   }
@@ -26,6 +27,7 @@ body{
     padding-bottom: 10px;
     -webkit-transition: .5s ease;
     -webkit-transition: .5s ease;
+    transition: .5s ease;
   }
   
   .images-item-upload:hover {
