@@ -31,7 +31,6 @@ export class AppComponent {
   public zoomOutCanvas() {
     this.canvas.zoomOutCanvas();
   }
-
   public freeDraw() {
     this.canvas.freeDraw();
   }
