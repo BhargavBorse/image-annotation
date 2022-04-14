@@ -692,7 +692,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
               <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
-              <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+              <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
               <Rotation type="System.Single">0</Rotation>
               <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
               <Visible type="System.Boolean">True</Visible>
@@ -723,7 +723,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
           <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
-          <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+          <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
           <Rotation type="System.Single">0</Rotation>
           <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
           <Visible type="System.Boolean">True</Visible>
@@ -772,7 +772,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
@@ -846,7 +846,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
@@ -919,7 +919,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
@@ -992,7 +992,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
@@ -1057,7 +1057,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     <FreehandData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
     <CreationTime type="System.String"><![CDATA[2022-04-07T07:18:15]]></CreationTime>
     <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:22]]></ModifiedTime>
-    <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
+    <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
     <Rotation type="System.Single">0</Rotation>
     <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
     <Visible type="System.Boolean">True</Visible>
