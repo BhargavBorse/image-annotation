@@ -760,13 +760,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
         </EllipseData>`;   
         }
         else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
           this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
-      <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -826,13 +834,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
         }
 
         else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
           this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
-      <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -891,13 +907,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
     </TextData>`;
         }
         else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
           this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
-      <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -956,13 +980,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
     </TextData>`;
         }
         else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
           this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
       <Rotation type="System.Single">0</Rotation>
-      <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
