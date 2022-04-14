@@ -678,7 +678,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Items type="System.Collections.ArrayList">
               `; 
           for(let i = 0; i < json.objects.length; i++) {
-            // alert(json.objects[i].type);
+            // alert(json.objects[i].paths[0].path[0].x);
             if(json.objects[i].type == "rect"){ 
               this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
