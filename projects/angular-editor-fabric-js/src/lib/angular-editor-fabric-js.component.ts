@@ -680,13 +680,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
           for(let i = 0; i < json.objects.length; i++) {
             // alert(json.objects[i].paths[0].path[0].x);
             if(json.objects[i].type == "rect"){ 
+              let height = json.objects[i].height;
+              let scaleY = json.objects[i].scaleY;
+              let mergeY = height * scaleY;
+
+              let width = json.objects[i].width;
+              let scaleX = json.objects[i].scaleX;
+              let mergeX = width * scaleX;
+
               this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String"><![CDATA[2022-03-08T02:19:11]]></CreationTime>
               <ModifiedTime type="System.String"><![CDATA[2022-03-08T02:19:12]]></ModifiedTime>
               <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
               <Rotation type="System.Single">0</Rotation>
-              <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+              <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
               <Visible type="System.Boolean">True</Visible>
               <CanMove type="System.Boolean">True</CanMove>
               <CanResize type="System.Boolean">True</CanResize>
@@ -701,14 +709,23 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Translucent type="System.Boolean">False</Translucent>
           </RectangleData>`;   
         }
+        
         else if(json.objects[i].type == "circle"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
           this.xmlData += `
           <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
           <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
           <Location type="System.String"><![CDATA[`+ json.objects[i].top +`, `+ json.objects[i].left +`]]></Location>
           <Rotation type="System.Single">0</Rotation>
-          <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+          <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
           <CanResize type="System.Boolean">True</CanResize>
