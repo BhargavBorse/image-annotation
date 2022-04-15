@@ -680,7 +680,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           for(let i = 0; i < json.objects.length; i++) {
             // alert(json.objects[i].paths[0].path[0].x);
             if(json.objects[i].type == "rect"){ 
-              let height = json.objects[i].height;
+              let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
               let mergeY = height * scaleY;
 
