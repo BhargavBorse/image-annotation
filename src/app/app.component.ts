@@ -23,7 +23,7 @@ export class AppComponent {
   public rasterizeSVG() {
     this.canvas.rasterizeSVG();
   }
-
+ 
   public zoomInCanvas() {
     this.canvas.zoomInCanvas();
   }
