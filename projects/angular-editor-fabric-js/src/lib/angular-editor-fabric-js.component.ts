@@ -387,9 +387,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         case 'circle':
           clone = new fabric.Circle(activeObject.toObject());
           break;
-        case 'triangle':
-          clone = new fabric.Triangle(activeObject.toObject());
-          break;
         case 'i-text':
           clone = new fabric.IText('', activeObject.toObject());
           break;
