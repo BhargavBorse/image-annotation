@@ -230,7 +230,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     switch (figure) {
       case 'rectangle':
         add = new fabric.Rect({
-          width: 200, height: 100, left: 10, top: 10, angle: 0,
+          width: 200, height: 100, left: 100, top: 100, angle: 0,
           fill: '#3f51b5', opacity: 0.5
         });
         break;
