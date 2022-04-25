@@ -696,7 +696,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Location type="System.String">
                   <![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]>
               </Location>
-              <Rotation type="System.Single">0</Rotation>
+              <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
               <Size type="System.String">
                   <![CDATA[`+ mergeX +`, `+ mergeY +`]]>
               </Size>
