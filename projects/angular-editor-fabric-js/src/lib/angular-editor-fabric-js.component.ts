@@ -241,11 +241,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         break;
       case 'rect':
         add = new fabric.Rect({
-          // add border color here
           width: 50, height: 50, left: 10, top: 10, angle: 0, stroke: '#000', strokeWidth: 2, fill: '', opacity: 0.5
-
-          // width: 200, height: 100, left: 100, top: 100, angle: 0,
-          // fill: '#3f51b5', opacity: 0.5
         });
         break;
     }
