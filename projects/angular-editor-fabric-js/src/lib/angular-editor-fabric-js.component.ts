@@ -644,6 +644,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
 
+
+// "419430655" transparent color code for atlasoft
   this.xml = JSON.stringify(this.canvas, null, 2);
   var json = JSON.parse(this.xml);
   // alert(json.objects[0].fill);
@@ -810,7 +812,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">0</Rotation>
+      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
@@ -884,7 +886,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">0</Rotation>
+      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
@@ -957,7 +959,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">0</Rotation>
+      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
@@ -1030,7 +1032,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
       <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">0</Rotation>
+      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
       <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
@@ -1095,7 +1097,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     <CreationTime type="System.String"><![CDATA[2022-04-07T07:18:15]]></CreationTime>
     <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:22]]></ModifiedTime>
     <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-    <Rotation type="System.Single">0</Rotation>
+    <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
     <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
     <Visible type="System.Boolean">True</Visible>
     <CanMove type="System.Boolean">True</CanMove>
