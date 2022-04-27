@@ -222,9 +222,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   removeWhite(url) {
     this.url = '';
   }
-
-  // Block "Add figure"
-
+  
   addFigure(figure) {
     let add: any;
     switch (figure) {
