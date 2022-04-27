@@ -32,13 +32,16 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 ### Features
 * Clean workspace
-* Resize workspace
 * Add text
 * Add Images
 * Upload Images
 * Upload Canvas Background Image
 * Add figures (Rectangle, Circle)
+* Free Hand Drawing
+* Zoom In/Out
 * Render to JSON
+* Render to XML
+* Download XML File
 * Clone Object
 * Send Object to Front
 * Send Object back
