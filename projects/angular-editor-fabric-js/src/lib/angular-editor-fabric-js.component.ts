@@ -544,12 +544,23 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.forEachObject((object) => {
       object.selectable = false;
     });
+    let unlockButton = document.getElementById('canvasWrite');
+    unlockButton.style.display = 'inline';
+
+    let lockButton = document.getElementById('canvasRead');
+    lockButton.style.display = 'none';
   }
 
   canvasWrite() {
     this.canvas.forEachObject((object) => {
       object.selectable = true;
     });
+
+    let unlockButton = document.getElementById('canvasWrite');
+    unlockButton.style.display = 'none';
+
+    let lockButton = document.getElementById('canvasRead');
+    lockButton.style.display = 'inline';
   }
 
   zoomInCanvas() {
