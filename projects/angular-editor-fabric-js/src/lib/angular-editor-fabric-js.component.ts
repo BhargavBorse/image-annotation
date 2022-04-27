@@ -544,6 +544,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.forEachObject((object) => {
       object.selectable = false;
     });
+
+    let button = document.getElementsByTagName('button');
+    for (let i = 0; i < button.length; i++) {
+      button[i].style.display = 'none';
+    }
+
     let unlockButton = document.getElementById('canvasWrite');
     unlockButton.style.display = 'inline';
 
@@ -555,6 +561,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.forEachObject((object) => {
       object.selectable = true;
     });
+
+    let button = document.getElementsByTagName('button');
+    for (let i = 0; i < button.length; i++) {
+      button[i].style.display = 'inline';
+    }
 
     let unlockButton = document.getElementById('canvasWrite');
     unlockButton.style.display = 'none';
