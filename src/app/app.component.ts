@@ -128,6 +128,14 @@ export class AppComponent {
     this.canvas.setFill();
   }
 
+  public setBorderFill() {
+    this.canvas.setBorderFill();
+  }
+
+  public canvasRead() {
+    this.canvas.canvasRead();
+  }
+
   public setFontFamily() {
     this.canvas.setFontFamily();
   }

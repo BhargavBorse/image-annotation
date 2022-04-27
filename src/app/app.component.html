@@ -55,7 +55,8 @@
           <i class="fa fa-remove" aria-hidden="true"></i>
         </button>
       </div> &nbsp;
-
+      <button type="button" class="btn btn-outline-dark" (click)="canvasRead();">
+        <i class="fa fa-lock" aria-hidden="true"></i> Lock Canvas</button>&nbsp;
 
       <!-- <button data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" (click)="confirmClear();">
                 <i class="fa fa-ban" aria-hidden="true"></i> Clean</button> -->
@@ -152,6 +153,16 @@
                 [style.background]="canvas.props.fill" [value]="canvas.props.fill" (colorPickerChange)="setFill()">
             </div>
           </div>
+
+          <div class="custom-item"
+            *ngIf="canvas.selected && canvas.textEditor || canvas.selected && canvas.figureEditor">
+            <div class="custom-item-title">Fill Border</div>
+            <div class="custom-item-body">
+              <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="canvas.props.fill"
+                [style.background]="canvas.props.fill" [value]="canvas.props.fill" (colorPickerChange)="setBorderFill()">
+            </div>
+          </div>
+
           <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
             <div class="custom-item-title">Font family</div>
             <div class="custom-item-body">

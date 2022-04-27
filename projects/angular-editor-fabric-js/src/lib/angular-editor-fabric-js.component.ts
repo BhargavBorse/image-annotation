@@ -435,6 +435,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.setActiveStyle('fill', this.props.fill, null);
   }
 
+  getBorderFill() {
+    this.props.fill = this.getActiveStyle('stroke', null);
+  }
+
+  setBorderFill() {
+    this.setActiveStyle('stroke', this.props.fill, null);
+  }
+
   getLineHeight() {
     this.props.lineHeight = this.getActiveStyle('lineHeight', null);
   }
@@ -530,6 +538,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
         self.canvas.remove(object);
       });
     }
+  }
+
+  canvasRead() {
+    this.canvas.forEachObject((object) => {
+      object.selectable = false;
+    });
   }
 
   zoomInCanvas() {
