@@ -30,11 +30,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
-| Left-Aligned  | Center Aligned  | Right Aligned |
-| :------------ |:---------------:| -----:|
-| * col 3 is      | some wordy text | $1600 |
-| col 2 is      | centered        |   $12 |
-| zebra stripes | are neat        |    $1 |
+| Left-Aligned  | Center Aligned  | Right Aligned | Align |
+| col 3 is      | some wordy text | $1600 | sdsd |
+| col 2 is      | centered        |   $12 | sdsdsd |
+| zebra stripes | are neat        |    $1 | dsfdsfdsf |
 
 ### Features
 * Clean workspace
