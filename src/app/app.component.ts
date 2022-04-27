@@ -136,6 +136,10 @@ export class AppComponent {
     this.canvas.canvasRead();
   }
 
+  public canvasWrite() {
+    this.canvas.canvasWrite();
+  }
+
   public setFontFamily() {
     this.canvas.setFontFamily();
   }

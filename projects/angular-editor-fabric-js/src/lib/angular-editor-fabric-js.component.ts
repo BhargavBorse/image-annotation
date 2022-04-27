@@ -546,6 +546,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
     });
   }
 
+  canvasWrite() {
+    this.canvas.forEachObject((object) => {
+      object.selectable = true;
+    });
+  }
+
   zoomInCanvas() {
     //alert(this.canvas.getHeight() + ' AND ' + this.canvas.getWidth());
     this.canvas.setZoom(this.canvas.getZoom() * 1.1 );
