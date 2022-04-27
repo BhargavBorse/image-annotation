@@ -542,6 +542,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   canvasRead() {
     this.canvas.forEachObject((object) => {
+      this.canvas.isDrawingMode = false;
       object.selectable = false;
     });
 
