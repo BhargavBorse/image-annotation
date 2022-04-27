@@ -30,26 +30,27 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
-| Left-Aligned  | Center Aligned  | Right Aligned | Right Aligned |
-| :------------ |:---------------:| -----:| -----:|
-| col 3 is      | some wordy text | $1600 | $1600 |
+### Features
+| Clean workspace  | Add text  | Upload Images | Upload Canvas Background Image |
+| Add figures (Rectangle, Circle) | Free Hand Drawing | Zoom In/Out | Render to JSON |
+| Render to XML      | Download XML File | Clone Object | Send Object to Front |
 | col 2 is      | centered        |   $12 |   $12 |
 | zebra stripes | are neat        |    $1 |    $1 |
 
-### Features
-* Clean workspace
-* Add text
-* Add Images
-* Upload Images
-* Upload Canvas Background Image
-* Add figures (Rectangle, Circle)
-* Free Hand Drawing
-* Zoom In/Out
-* Render to JSON
-* Render to XML
-* Download XML File
-* Clone Object
-* Send Object to Front
+
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+* 
 * Send Object back
 * Delete Object
 * Unselect Object
