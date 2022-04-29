@@ -689,12 +689,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
     hideBtn.remove();
   }
 
-
-
 // "419430655" transparent color code for atlasoft
   this.xml = JSON.stringify(this.canvas, null, 2);
   var json = JSON.parse(this.xml);
-  // alert(json.objects[0].fill);
+
   this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
   <x:xmpmeta xmlns:x="adobe:ns:meta/">
   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -723,7 +721,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Items type="System.Collections.ArrayList">
               `; 
           for(let i = 0; i < json.objects.length; i++) {
-            // alert(json.objects[i].paths[0].path[0].x);
             if(json.objects[i].type == "rect" && json.objects[i].stroke == "#000") { 
               let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
