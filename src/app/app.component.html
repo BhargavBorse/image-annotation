@@ -164,7 +164,7 @@
           </div>
 
           <div class="custom-item"
-            *ngIf="canvas.selected && canvas.textEditor || canvas.selected && canvas.figureEditor">
+            *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect'">
             <div class="custom-item-title">Fill Background</div>
             <div class="custom-item-body">
               <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="canvas.props.backgroundColor"
@@ -172,7 +172,7 @@
             </div>
           </div>
 
-          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
+          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect' && canvas.selected.type != 'circle'">
             <div class="custom-item-title">Font family</div>
             <div class="custom-item-body">
               <select [(ngModel)]="canvas.props.fontFamily" class="form-control" (change)="setFontFamily()">
@@ -196,7 +196,7 @@
               </select>
             </div>
           </div>
-          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
+          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect' && canvas.selected.type != 'circle'">
             <div class="custom-item-title">Text Align</div>
             <div class="custom-item-body text-center">
               <div class="btn-group" role="group" aria-label="...">
@@ -219,7 +219,7 @@
               </div>
             </div>
           </div>
-          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
+          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect' && canvas.selected.type != 'circle'">
             <div class="custom-item-title">Style</div>
             <div class="custom-item-body text-center">
               <div class="btn-group" role="group" aria-label="...">
@@ -247,19 +247,19 @@
               </div>
             </div>
           </div>
-          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
+          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect' && canvas.selected.type != 'circle'">
             <div class="custom-item-title">Font Size</div>
             <div class="custom-item-body">
               <input type="range" [(ngModel)]="canvas.props.fontSize" (change)="setFontSize()" step="1" min="1"
                 max="120">{{canvas.props.fontSize}}</div>
           </div>
-          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
+          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect' && canvas.selected.type != 'circle'">
             <div class="custom-item-title">Line Height</div>
             <div class="custom-item-body">
               <input type="range" [(ngModel)]="canvas.props.lineHeight" (change)="setLineHeight()" step="0.1" min="0"
                 max="10">{{canvas.props.lineHeight}}</div>
           </div>
-          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor">
+          <div class="custom-item" *ngIf="canvas.selected && canvas.textEditor && canvas.selected.type != 'rect' && canvas.selected.type != 'circle'">
             <div class="custom-item-title">Char Spacing</div>
             <div class="custom-item-body">
               <input type="range" [(ngModel)]="canvas.props.charSpacing" (change)="setCharSpacing()" step="10"
