@@ -132,6 +132,10 @@ export class AppComponent {
     this.canvas.setBorderFill();
   }
 
+  public setBgFill() {
+    this.canvas.setBgFill();
+  }
+
   public canvasRead() {
     this.canvas.canvasRead();
   }
