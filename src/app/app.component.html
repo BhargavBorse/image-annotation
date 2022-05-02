@@ -158,8 +158,17 @@
             *ngIf="canvas.selected && canvas.textEditor || canvas.selected && canvas.figureEditor">
             <div class="custom-item-title">Fill Border</div>
             <div class="custom-item-body">
-              <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="canvas.props.fill"
-                [style.background]="canvas.props.fill" [value]="canvas.props.fill" (colorPickerChange)="setBorderFill()">
+              <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="canvas.props.borderColor"
+                [style.background]="canvas.props.borderColor" [value]="canvas.props.borderColor" (colorPickerChange)="setBorderFill()">
+            </div>
+          </div>
+
+          <div class="custom-item"
+            *ngIf="canvas.selected && canvas.textEditor || canvas.selected && canvas.figureEditor">
+            <div class="custom-item-title">Fill Background</div>
+            <div class="custom-item-body">
+              <input type="text" class="form-control" [cpPosition]="'bottom'" [(colorPicker)]="canvas.props.backgroundColor"
+                [style.background]="canvas.props.backgroundColor" [value]="canvas.props.backgroundColor" (colorPickerChange)="setBgFill()">
             </div>
           </div>
 
