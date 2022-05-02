@@ -20,6 +20,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
     id: null,
     opacity: null,
     fill: null,
+    backgroundColor: null,
+    borderColor: null,
     fontSize: null,
     lineHeight: null,
     charSpacing: null,
@@ -432,11 +434,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
   getBorderFill() {
-    this.props.fill = this.getActiveStyle('stroke', null);
+    this.props.borderColor = this.getActiveStyle('stroke', null);
   }
 
   setBorderFill() {
-    this.setActiveStyle('stroke', this.props.fill, null);
+    this.setActiveStyle('stroke', this.props.borderColor, null);
+  }
+
+  setBgFill() {
+    this.setActiveStyle('backgroundColor', this.props.backgroundColor, null);
+  }
+
+  getBgFill() {
+    this.props.backgroundColor = this.getActiveStyle('backgroundColor', null);
   }
 
   getLineHeight() {
