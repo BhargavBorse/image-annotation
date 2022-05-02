@@ -83,10 +83,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
           switch (selectedObject.type) {
             case 'rect':
             case 'circle':
-            case 'triangle':
-              this.figureEditor = true;
-              this.getFill();
-              break;
             case 'i-text':
               this.textEditor = true;
               this.getLineHeight();
