@@ -59,9 +59,12 @@
 
       <button type="button" class="btn btn-outline-dark" (click)="saveCanvasToJSON();">
         <i class="fa fa-save" aria-hidden="true"></i>Save Canvas</button>&nbsp;
-      
+        
       <button type="button" class="btn btn-outline-dark" (click)="loadCanvasFromJSON();">
         <i class="fa fa-upload" aria-hidden="true"></i>Load Canvas</button>&nbsp;
+        
+      <input type="file" class="btn btn-outline-dark" (change)="readJson($event);">
+
 
       <!-- <button data-toggle="tooltip" data-placement="bottom" title="Clean Canvas" type="button" class="btn btn-danger" (click)="confirmClear();">
                 <i class="fa fa-ban" aria-hidden="true"></i> Clean</button> -->
@@ -284,7 +287,7 @@
           </button>
         </div>
         <div class="card-body">
-          <pre contenteditable="true">{{canvas.json}}</pre>
+          <pre>{{canvas.json}}</pre>
         </div>
       </div>
     </div>
