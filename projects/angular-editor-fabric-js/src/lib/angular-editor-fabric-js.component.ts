@@ -660,7 +660,27 @@ export class FabricjsEditorComponent implements AfterViewInit {
     // alert(json.objects[0].fill);
   }
 
+  readJson(event) {
+    if (event.target.files.length !== 1) {
+      console.error('No file selected');
+    } else {
+      const reader = new FileReader();
+      reader.onloadend = (e) => {
+        const textJson = reader.result.toString();
+        localStorage.setItem('jsonData', textJson);
+        this.json = textJson;
+        console.log('json');
+        console.log(textJson);
+        // handle data processing
+      };
+      reader.readAsText(event.target.files[0]);
+    }
+  }
+
+
   saveCanvasToJSON() {
+    // replace "JSON.stringify(this.canvas)" with converted JSON data
+    
     const json = JSON.stringify(this.canvas);
     localStorage.setItem('Kanvas', json);
     console.log('json');
