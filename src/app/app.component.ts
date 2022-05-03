@@ -45,9 +45,9 @@ export class AppComponent {
   //   this.canvas.saveCanvasToJSON();
   // }
 
-  public loadCanvasFromJSON() {
-    this.canvas.loadCanvasFromJSON();
-  }
+  // public loadCanvasFromJSON() {
+  //   this.canvas.loadCanvasFromJSON();
+  // }
 
   public confirmClear() {
     this.canvas.confirmClear();
