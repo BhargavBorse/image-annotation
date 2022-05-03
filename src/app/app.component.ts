@@ -41,9 +41,9 @@ export class AppComponent {
     this.canvas.UploadImg();
   }
 
-  public saveCanvasToJSON() {
-    this.canvas.saveCanvasToJSON();
-  }
+  // public saveCanvasToJSON() {
+  //   this.canvas.saveCanvasToJSON();
+  // }
 
   public loadCanvasFromJSON() {
     this.canvas.loadCanvasFromJSON();
