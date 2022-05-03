@@ -678,12 +678,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
 
-  saveCanvasToJSON() {
-    const json = JSON.stringify(this.canvas);
-    localStorage.setItem('Kanvas', json);
-    console.log('json');
-    console.log(json);
-  }
+  // saveCanvasToJSON() {
+  //   const json = JSON.stringify(this.canvas);
+  //   localStorage.setItem('Kanvas', json);
+  //   console.log('json');
+  //   console.log(json);
+  // }
   
   loadCanvasFromJSON() {
     const CANVAS = localStorage.getItem('jsonData');
