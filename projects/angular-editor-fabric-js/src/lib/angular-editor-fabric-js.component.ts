@@ -653,6 +653,13 @@ export class FabricjsEditorComponent implements AfterViewInit {
     return 'data:image/svg+xml;utf8,' + encodeURIComponent(this.canvas.toSVG());
   }
 
+  rasterizeJSON() {
+    this.json = JSON.stringify(this.canvas, null, 2);
+    // var json = JSON.parse(this.json);
+    // console.log(js2xmlparser.parse("xml", json));
+    // alert(json.objects[0].fill);
+  }
+
   saveCanvasToJSON() {
     const json = JSON.stringify(this.canvas);
     localStorage.setItem('Kanvas', json);
@@ -678,13 +685,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
       console.log(this.canvas);
     });
 
-  }
-
-  rasterizeJSON() {
-    this.json = JSON.stringify(this.canvas, null, 2);
-    // var json = JSON.parse(this.json);
-    // console.log(js2xmlparser.parse("xml", json));
-    // alert(json.objects[0].fill);
   }
     
   xmlJson() {
