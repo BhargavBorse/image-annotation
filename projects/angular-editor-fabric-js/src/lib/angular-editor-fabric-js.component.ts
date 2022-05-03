@@ -670,26 +670,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
         localStorage.setItem('jsonData', textJson);
 
         const CANVAS = localStorage.getItem('jsonData');
-        console.log('CANVAS');
-        console.log(CANVAS);
-
-        // and load everything from the same json
         this.canvas.loadFromJSON(CANVAS, () => {
           console.log('CANVAS untar');
           console.log(CANVAS);
-
-          // making sure to render canvas at the end
           this.canvas.renderAll();
-
-          // and checking if object's "name" is preserved
-          // console.log('this.canvas.item(0).name');
-          // console.log(this.canvas);
         });
-
-        this.json = textJson;
-        // console.log('json');
-        // console.log(textJson);
-        // handle data processing
       };
       reader.readAsText(event.target.files[0]);
     }
