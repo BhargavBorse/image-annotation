@@ -76,7 +76,11 @@ export class AppComponent {
   public readUrl(event) {
     this.canvas.readUrl(event);
   }
-  
+
+  public readJson(event) {
+    this.canvas.readJson(event);
+  }
+
   public removeWhite(url) {
     this.canvas.removeWhite(url);
   }
