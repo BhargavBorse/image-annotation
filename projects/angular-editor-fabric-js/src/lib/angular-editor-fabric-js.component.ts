@@ -264,7 +264,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           left: 10,
           top: 10,
           angle: 0,
-          stroke: '#000',
+          stroke: '#ff0000',
           strokeWidth: 2,
           fill: '',
           opacity: 0.5
@@ -924,7 +924,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
         let stroke = '4B' + json.objects[i].stroke;
         var strokeColor = stroke.replace('#', '');
-        // alert(this.convertHex(strokeColor));
+        alert(this.convertHex(strokeColor));
 
         this.xmlData += `
           <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
