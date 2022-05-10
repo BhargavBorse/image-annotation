@@ -227,7 +227,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       case 'rectangle':
         add = new fabric.Rect({
           width: 200, height: 100, left: 100, top: 100, angle: 0,
-          fill: '#3f51b5', opacity: 0.5
+          fill: '#3f51b5', opacity: 0.5, rx: 1
         });
         break;
       case 'circle':
@@ -775,11 +775,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Items type="System.Collections.ArrayList">
               `; 
           for(let i = 0; i < json.objects.length; i++) {
-            if(json.objects[i].type == "rect" && json.objects[i].stroke == "#000") { 
+            if(json.objects[i].type == "rect" && json.objects[i].rx == "0") { 
               let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
               let mergeY = height * scaleY;
-
+              alert('inside border one');
               let width = json.objects[i].width;
               let scaleX = json.objects[i].scaleX;
               let mergeX = width * scaleX;
@@ -845,8 +845,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Translucent type="System.Boolean">False</Translucent>
           </RectangleData>`;   
         }
-        else if(json.objects[i].type == "rect" && json.objects[i].stroke == null) {
-          alert(json.objects[i].stroke);
+        else if(json.objects[i].type == "rect" && json.objects[i].rx == 1) {
+          
           let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
               let mergeY = height * scaleY;
@@ -854,7 +854,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               let width = json.objects[i].width;
               let scaleX = json.objects[i].scaleX;
               let mergeX = width * scaleX;
-
+              alert('inside color rect');
               this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String">
