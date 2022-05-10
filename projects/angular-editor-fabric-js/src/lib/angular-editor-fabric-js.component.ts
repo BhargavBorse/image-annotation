@@ -789,10 +789,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     });
     return dec;
   }
-  h2d() {
-    let t = '4B' + '3f51b5';
-    alert(this.convertHex(t));
-  }
 
   xmlJson() {
 
