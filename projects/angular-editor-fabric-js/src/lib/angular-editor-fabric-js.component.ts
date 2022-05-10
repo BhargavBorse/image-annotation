@@ -731,7 +731,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       return dec;
   }
   h2d() {
-    let t = '4B'+'EC994B';
+    let t = '4B'+'3f51b5';
     alert(this.convertHex(t)); 
   }
 
@@ -783,7 +783,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               let width = json.objects[i].width;
               let scaleX = json.objects[i].scaleX;
               let mergeX = width * scaleX;
-
+              
               this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String">
