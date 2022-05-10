@@ -227,7 +227,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       case 'rectangle':
         add = new fabric.Rect({
           width: 200, height: 100, left: 100, top: 100, angle: 0,
-          fill: '#3f51b5', opacity: 0.5
+          fill: '#3f51b5', opacity: 0.5, rx: 1
         });
         break;
       case 'circle':
@@ -775,11 +775,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Items type="System.Collections.ArrayList">
               `; 
           for(let i = 0; i < json.objects.length; i++) {
-            if(json.objects[i].type == "rect") { 
+            if(json.objects[i].type == "rect" && json.objects[i].rx == "1" && json.objects[i].fill != "" ) { 
               let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
               let mergeY = height * scaleY;
-              alert('inside rect');
+              alert('inside colored rect');
               let width = json.objects[i].width;
               let scaleX = json.objects[i].scaleX;
               let mergeX = width * scaleX;
@@ -787,10 +787,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
               //color: hex to dec | for fill and stroke
               let fill = '4B'+json.objects[i].fill;
               var color = fill.replace('#','');
-
+              alert(this.convertHex(color));
               let stroke = '4B'+json.objects[i].stroke;
               var strokeColor = stroke.replace('#','');
-
+              alert(this.convertHex(strokeColor));
               // alert(this.convertHex(color));
               
               this.xmlData += `
@@ -854,7 +854,160 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Translucent type="System.Boolean">False</Translucent>
           </RectangleData>`;   
         }
-        
+        else if(json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill == "") { 
+          let height = json.objects[i].height; 
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          alert('inside border');
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
+          let stroke = '4B'+json.objects[i].stroke;
+          var strokeColor = stroke.replace('#','');
+          // alert(this.convertHex(strokeColor));
+
+          this.xmlData += `
+          <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+          <CreationTime type="System.String">
+              <![CDATA[2022-04-18T02:31:30]]>
+          </CreationTime>
+          <ModifiedTime type="System.String">
+              <![CDATA[2022-04-18T02:32:07]]>
+          </ModifiedTime>
+          <Location type="System.String">
+              <![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]>
+          </Location>
+          <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
+          <Size type="System.String">
+              <![CDATA[`+ mergeX +`, `+ mergeY +`]]>
+          </Size>
+          <Visible type="System.Boolean">True</Visible>
+          <CanMove type="System.Boolean">True</CanMove>
+          <CanResize type="System.Boolean">True</CanResize>
+          <CanRotate type="System.Boolean">True</CanRotate>
+          <CanMirror type="System.Boolean">True</CanMirror>
+          <CanSelect type="System.Boolean">True</CanSelect>
+          <ExtraProperties assembly="System"
+              type="System.Collections.Specialized.StringCollection" />
+          <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+              <ctor type="System.Int32">0</ctor>
+              <Color type="System.Int32">16777215</Color>
+          </Fill>
+          <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+              <ctor type="System.Int32">3</ctor>
+              <Alignment type="System.String">
+                  <![CDATA[Center]]>
+              </Alignment>
+              <Color type="System.Int32">`+ this.convertHex(strokeColor) +`</Color>
+              <DashCap type="System.String">
+                  <![CDATA[Round]]>
+              </DashCap>
+              <DashOffset type="System.Single">0</DashOffset>
+              <DashStyle type="System.String">
+                  <![CDATA[Solid]]>
+              </DashStyle>
+              <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                  <Style type="System.String"><![CDATA[None]]></Style>
+                  <Size type="System.String">
+                      <![CDATA[15,15]]>
+                  </Size>
+              </EndCap>
+              <LineJoin type="System.String">
+                  <![CDATA[Round]]>
+              </LineJoin>
+              <MiterLimit type="System.Single">0</MiterLimit>
+              <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                  <Style type="System.String"><![CDATA[None]]></Style>
+                  <Size type="System.String">
+                      <![CDATA[15,15]]>
+                  </Size>
+              </StartCap>
+              <Width type="System.Single">4</Width>
+          </Outline>
+          <Translucent type="System.Boolean">False</Translucent>
+      </RectangleData>`;   
+    }
+    else if(json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill != "" ) { 
+      let height = json.objects[i].height; 
+      let scaleY = json.objects[i].scaleY;
+      let mergeY = height * scaleY;
+      alert('inside colored rect');
+      let width = json.objects[i].width;
+      let scaleX = json.objects[i].scaleX;
+      let mergeX = width * scaleX;
+
+      //color: hex to dec | for fill and stroke
+      let fill = '4B'+json.objects[i].fill;
+      var color = fill.replace('#','');
+      alert(this.convertHex(color));
+      let stroke = '4B'+json.objects[i].stroke;
+      var strokeColor = stroke.replace('#','');
+      alert(this.convertHex(strokeColor));
+      // alert(this.convertHex(color));
+      
+      this.xmlData += `
+      <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+      <CreationTime type="System.String">
+          <![CDATA[2022-04-18T02:31:30]]>
+      </CreationTime>
+      <ModifiedTime type="System.String">
+          <![CDATA[2022-04-18T02:32:07]]>
+      </ModifiedTime>
+      <Location type="System.String">
+          <![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]>
+      </Location>
+      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
+      <Size type="System.String">
+          <![CDATA[`+ mergeX +`, `+ mergeY +`]]>
+      </Size>
+      <Visible type="System.Boolean">True</Visible>
+      <CanMove type="System.Boolean">True</CanMove>
+      <CanResize type="System.Boolean">True</CanResize>
+      <CanRotate type="System.Boolean">True</CanRotate>
+      <CanMirror type="System.Boolean">True</CanMirror>
+      <CanSelect type="System.Boolean">True</CanSelect>
+      <ExtraProperties assembly="System"
+          type="System.Collections.Specialized.StringCollection" />
+      <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32">`+ this.convertHex(color) +`</Color>
+      </Fill>
+      <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+          <ctor type="System.Int32">3</ctor>
+          <Alignment type="System.String">
+              <![CDATA[Center]]>
+          </Alignment>
+          <Color type="System.Int32">`+ this.convertHex(strokeColor) +`</Color>
+          <DashCap type="System.String">
+              <![CDATA[Round]]>
+          </DashCap>
+          <DashOffset type="System.Single">0</DashOffset>
+          <DashStyle type="System.String">
+              <![CDATA[Solid]]>
+          </DashStyle>
+          <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+              <Style type="System.String"><![CDATA[None]]></Style>
+              <Size type="System.String">
+                  <![CDATA[15,15]]>
+              </Size>
+          </EndCap>
+          <LineJoin type="System.String">
+              <![CDATA[Round]]>
+          </LineJoin>
+          <MiterLimit type="System.Single">0</MiterLimit>
+          <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+              <Style type="System.String"><![CDATA[None]]></Style>
+              <Size type="System.String">
+                  <![CDATA[15,15]]>
+              </Size>
+          </StartCap>
+          <Width type="System.Single">4</Width>
+      </Outline>
+      <Translucent type="System.Boolean">False</Translucent>
+  </RectangleData>`;   
+}
         else if(json.objects[i].type == "circle"){
           let height = json.objects[i].height;
           let scaleY = json.objects[i].scaleY;
