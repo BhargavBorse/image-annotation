@@ -1,8 +1,21 @@
-import { style } from '@angular/animations';
-import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { fabric } from 'fabric';
-import { Object } from 'fabric/fabric-impl';
+import {
+  style
+} from '@angular/animations';
+import {
+  CONTEXT_NAME
+} from '@angular/compiler/src/render3/view/util';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewInit
+} from '@angular/core';
+import {
+  fabric
+} from 'fabric';
+import {
+  Object
+} from 'fabric/fabric-impl';
 
 @Component({
   selector: 'angular-editor-fabric-js',
@@ -12,7 +25,7 @@ import { Object } from 'fabric/fabric-impl';
 
 export class FabricjsEditorComponent implements AfterViewInit {
   @ViewChild('htmlCanvas') htmlCanvas: ElementRef;
-  
+
   private canvas: fabric.Canvas;
   public props = {
     canvasFill: '#ffffff',
@@ -43,17 +56,17 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   public json: any;
   public xml: any;
-  public xmlData : any;
+  public xmlData: any;
   private globalEditor = false;
   public textEditor = false;
   private imageEditor = false;
   public figureEditor = false;
   public selected: any;
 
-  constructor() { }
-  
+  constructor() {}
+
   ngAfterViewInit(): void {
-    
+
 
     // setup front side canvas
     this.canvas = new fabric.Canvas('canvas', {
@@ -63,10 +76,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
       // backgroundImage: backImg,
       backgroundColor: 'white',
     });
-    
+
     this.canvas.on({
-      'object:moving': (e) => { },
-      'object:modified': (e) => { },
+      'object:moving': (e) => {},
+      'object:modified': (e) => {},
       'object:selected': (e) => {
 
         const selectedObject = e.target;
@@ -74,7 +87,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         selectedObject.hasRotatingPoint = true;
         selectedObject.transparentCorners = false;
         selectedObject.cornerColor = 'rgba(255, 87, 34, 0.7)';
-        
+
         this.resetPanels();
 
         if (selectedObject.type !== 'group' && selectedObject) {
@@ -174,28 +187,27 @@ export class FabricjsEditorComponent implements AfterViewInit {
   // Block "Upload Image"
 
   addImageOnCanvas(url, renderInBack) {
-    if(!renderInBack){
-    if (url) {
-      fabric.Image.fromURL(url, (image) => {
-        image.set({
-          left: 10,
-          top: 10,
-          angle: 0,
-          padding: 10,
-          cornerSize: 10,
-          hasRotatingPoint: true
+    if (!renderInBack) {
+      if (url) {
+        fabric.Image.fromURL(url, (image) => {
+          image.set({
+            left: 10,
+            top: 10,
+            angle: 0,
+            padding: 10,
+            cornerSize: 10,
+            hasRotatingPoint: true
+          });
+          image.scaleToWidth(200);
+          image.scaleToHeight(200);
+          this.extend(image, this.randomId());
+          this.canvas.add(image);
+          this.selectItemAfterAdded(image);
         });
-        image.scaleToWidth(200);
-        image.scaleToHeight(200);
-        this.extend(image, this.randomId());
-        this.canvas.add(image);
-        this.selectItemAfterAdded(image);
-      });
-    }
-  }
-  else{
-    fabric.Image.fromURL(url, (image) => {
-      
+      }
+    } else {
+      fabric.Image.fromURL(url, (image) => {
+
         this.canvas.setBackgroundImage(image, this.canvas.renderAll.bind(this.canvas), {
           // scaleX: canvas.width / img.width,
           // scaleY: canvas.height / img.height           
@@ -204,7 +216,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         this.canvas.setHeight(image.getScaledHeight());
         this.canvas.renderAll();
       });
-  }
+    }
   }
 
   readUrl(event) {
@@ -220,24 +232,42 @@ export class FabricjsEditorComponent implements AfterViewInit {
   removeWhite(url) {
     this.url = '';
   }
-  
+
   addFigure(figure) {
     let add: any;
     switch (figure) {
       case 'rectangle':
         add = new fabric.Rect({
-          width: 200, height: 100, left: 100, top: 100, angle: 0,
-          fill: '#3f51b5', opacity: 0.5, rx: 1
+          width: 200,
+          height: 100,
+          left: 100,
+          top: 100,
+          angle: 0,
+          fill: '#3f51b5',
+          opacity: 0.5,
+          rx: 1
         });
         break;
       case 'circle':
         add = new fabric.Circle({
-          radius: 50, left: 10, top: 10, fill: '#ff5722', opacity: 0.5
+          radius: 50,
+          left: 10,
+          top: 10,
+          fill: '#ff5722',
+          opacity: 0.5
         });
         break;
       case 'rect':
         add = new fabric.Rect({
-          width: 50, height: 50, left: 10, top: 10, angle: 0, stroke: '#000', strokeWidth: 2, fill: '', opacity: 0.5
+          width: 50,
+          height: 50,
+          left: 10,
+          top: 10,
+          angle: 0,
+          stroke: '#000',
+          strokeWidth: 2,
+          fill: '',
+          opacity: 0.5
         });
         break;
     }
@@ -266,7 +296,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   extend(obj, id) {
     obj.toObject = ((toObject) => {
-      return function() {
+      return function () {
         return fabric.util.object.extend(toObject.call(this), {
           id
         });
@@ -277,7 +307,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
   setCanvasImage() {
     const self = this;
     if (this.props.canvasImage) {
-      this.canvas.setBackgroundColor(new fabric.Pattern({ source: this.props.canvasImage, repeat: 'repeat' }), () => {
+      this.canvas.setBackgroundColor(new fabric.Pattern({
+        source: this.props.canvasImage,
+        repeat: 'repeat'
+      }), () => {
         self.props.canvasFill = '';
         self.canvas.renderAll();
       });
@@ -292,7 +325,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   getActiveStyle(styleName, object) {
     object = object || this.canvas.getActiveObject();
-    if (!object) { return ''; }
+    if (!object) {
+      return '';
+    }
 
     if (object.getSelectionStyles && object.isEditing) {
       return (object.getSelectionStyles()[styleName] || '');
@@ -303,7 +338,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   setActiveStyle(styleName, value: string | number, object: fabric.IText) {
     object = object || this.canvas.getActiveObject() as fabric.IText;
-    if (!object) { return; }
+    if (!object) {
+      return;
+    }
 
     if (object.setSelectionStyles && object.isEditing) {
       const style = {};
@@ -311,21 +348,33 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
       if (typeof value === 'string') {
         if (value.includes('underline')) {
-          object.setSelectionStyles({underline: true});
+          object.setSelectionStyles({
+            underline: true
+          });
         } else {
-          object.setSelectionStyles({underline: false});
+          object.setSelectionStyles({
+            underline: false
+          });
         }
 
         if (value.includes('overline')) {
-          object.setSelectionStyles({overline: true});
+          object.setSelectionStyles({
+            overline: true
+          });
         } else {
-          object.setSelectionStyles({overline: false});
+          object.setSelectionStyles({
+            overline: false
+          });
         }
 
         if (value.includes('line-through')) {
-          object.setSelectionStyles({linethrough: true});
+          object.setSelectionStyles({
+            linethrough: true
+          });
         } else {
-          object.setSelectionStyles({linethrough: false});
+          object.setSelectionStyles({
+            linethrough: false
+          });
         }
       }
 
@@ -335,7 +384,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
     } else {
       if (typeof value === 'string') {
         if (value.includes('underline')) {
-        object.set('underline', true);
+          object.set('underline', true);
         } else {
           object.set('underline', false);
         }
@@ -363,14 +412,18 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   getActiveProp(name) {
     const object = this.canvas.getActiveObject();
-    if (!object) { return ''; }
+    if (!object) {
+      return '';
+    }
 
     return object[name] || '';
   }
 
   setActiveProp(name, value) {
     const object = this.canvas.getActiveObject();
-    if (!object) { return; }
+    if (!object) {
+      return;
+    }
     object.set(name, value).setCoords();
     this.canvas.renderAll();
   }
@@ -396,7 +449,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
           break;
       }
       if (clone) {
-        clone.set({ left: 10, top: 10 });
+        clone.set({
+          left: 10,
+          top: 10
+        });
         this.canvas.add(clone);
         this.selectItemAfterAdded(clone);
       }
@@ -583,13 +639,13 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   zoomInCanvas() {
     //alert(this.canvas.getHeight() + ' AND ' + this.canvas.getWidth());
-    this.canvas.setZoom(this.canvas.getZoom() * 1.1 );
+    this.canvas.setZoom(this.canvas.getZoom() * 1.1);
     this.canvas.setHeight(this.canvas.getHeight() * 1.1);
     this.canvas.setWidth(this.canvas.getWidth() * 1.1);
   }
 
   zoomOutCanvas() {
-    this.canvas.setZoom(this.canvas.getZoom() / 1.1 );
+    this.canvas.setZoom(this.canvas.getZoom() / 1.1);
     this.canvas.setHeight(this.canvas.getHeight() / 1.1);
     this.canvas.setWidth(this.canvas.getWidth() / 1.1);
   }
@@ -625,7 +681,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       activeObject.sendToBack();
       activeObject.opacity = 0.5;
     } else if (activeGroup) {
-      this.canvas.discardActiveObject();  
+      this.canvas.discardActiveObject();
       activeGroup.forEach((object) => {
         object.sendToBack();
       });
@@ -634,15 +690,17 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   confirmClear() {
     this.canvas.getObjects().forEach((o) => {
-      if(o !== this.canvas.backgroundImage) {
-          this.canvas.remove(o)
+      if (o !== this.canvas.backgroundImage) {
+        this.canvas.remove(o)
       }
-  })
+    })
   }
 
   rasterize() {
     const image = new Image();
-    image.src = this.canvas.toDataURL({format: 'png'});
+    image.src = this.canvas.toDataURL({
+      format: 'png'
+    });
     const w = window.open('');
     w.document.write(image.outerHTML);
   }
@@ -684,7 +742,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   //   console.log('json');
   //   console.log(json);
   // }
-  
+
   // loadCanvasFromJSON() {
   //   const CANVAS = localStorage.getItem('jsonData');
   //   console.log('CANVAS');
@@ -704,50 +762,51 @@ export class FabricjsEditorComponent implements AfterViewInit {
   //   });
 
   // }
-    
+
   convertHex(s) {
 
     function add(x, y) {
-        var c = 0, r = [];
-        var x = x.split('').map(Number);
-        var y = y.split('').map(Number);
-          while(x.length || y.length) {
-              var s = (x.pop() || 0) + (y.pop() || 0) + c;
-              r.unshift(s < 10 ? s : s - 10); 
-              c = s < 10 ? 0 : 1;
-          }
-          if(c) r.unshift(c);
-          return r.join('');
+      var c = 0,
+        r = [];
+      var x = x.split('').map(Number);
+      var y = y.split('').map(Number);
+      while (x.length || y.length) {
+        var s = (x.pop() || 0) + (y.pop() || 0) + c;
+        r.unshift(s < 10 ? s : s - 10);
+        c = s < 10 ? 0 : 1;
       }
+      if (c) r.unshift(c);
+      return r.join('');
+    }
 
-      var dec = '0';
-      s.split('').forEach(function(chr) {
-          var n = parseInt(chr, 16);
-          for(var t = 8; t; t >>= 1) {
-            dec = add(dec, dec);
-            if(n & t) dec = add(dec, '1');
-          }
-      });
-      return dec;
+    var dec = '0';
+    s.split('').forEach(function (chr) {
+      var n = parseInt(chr, 16);
+      for (var t = 8; t; t >>= 1) {
+        dec = add(dec, dec);
+        if (n & t) dec = add(dec, '1');
+      }
+    });
+    return dec;
   }
   h2d() {
-    let t = '4B'+'3f51b5';
-    alert(this.convertHex(t)); 
+    let t = '4B' + '3f51b5';
+    alert(this.convertHex(t));
   }
 
   xmlJson() {
 
-  // remove anchor if xmlJson function is called again 
-  let hideBtn = document.getElementById('hid');
-  if(hideBtn) {
-    hideBtn.remove();
-  }
+    // remove anchor if xmlJson function is called again 
+    let hideBtn = document.getElementById('hid');
+    if (hideBtn) {
+      hideBtn.remove();
+    }
 
-// "419430655" transparent color code for atlasoft
-  this.xml = JSON.stringify(this.canvas, null, 2);
-  var json = JSON.parse(this.xml);
+    // "419430655" transparent color code for atlasoft
+    this.xml = JSON.stringify(this.canvas, null, 2);
+    var json = JSON.parse(this.xml);
 
-  this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
+    this.xmlData = `<?xml version="1.0" encoding="utf-8"?>
   <x:xmpmeta xmlns:x="adobe:ns:meta/">
   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about="" xmlns:xmp="http://ns.abobe.com/xap/1.0/">
@@ -773,27 +832,27 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <GroupAnnotation type="System.Boolean">False</GroupAnnotation>
               <Items assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationDataCollection">
               <Items type="System.Collections.ArrayList">
-              `; 
-          for(let i = 0; i < json.objects.length; i++) {
-            if(json.objects[i].type == "rect" && json.objects[i].rx == "1" && json.objects[i].fill != "" ) { 
-              let height = json.objects[i].height; 
-              let scaleY = json.objects[i].scaleY;
-              let mergeY = height * scaleY;
-              alert('inside colored rect');
-              let width = json.objects[i].width;
-              let scaleX = json.objects[i].scaleX;
-              let mergeX = width * scaleX;
+              `;
+    for (let i = 0; i < json.objects.length; i++) {
+      if (json.objects[i].type == "rect" && json.objects[i].rx == "1" && json.objects[i].fill != "") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
+        alert('inside colored rect');
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-              //color: hex to dec | for fill and stroke
-              let fill = '4B'+json.objects[i].fill;
-              var color = fill.replace('#','');
-              alert(this.convertHex(color));
-              let stroke = '4B'+json.objects[i].stroke;
-              var strokeColor = stroke.replace('#','');
-              alert(this.convertHex(strokeColor));
-              // alert(this.convertHex(color));
-              
-              this.xmlData += `
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        alert(this.convertHex(color));
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+        alert(this.convertHex(strokeColor));
+        // alert(this.convertHex(color));
+
+        this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String">
                   <![CDATA[2022-04-18T02:31:30]]>
@@ -802,11 +861,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   <![CDATA[2022-04-18T02:32:07]]>
               </ModifiedTime>
               <Location type="System.String">
-                  <![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]>
+                  <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
               </Location>
-              <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
+              <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
               <Size type="System.String">
-                  <![CDATA[`+ mergeX +`, `+ mergeY +`]]>
+                  <![CDATA[` + mergeX + `, ` + mergeY + `]]>
               </Size>
               <Visible type="System.Boolean">True</Visible>
               <CanMove type="System.Boolean">True</CanMove>
@@ -818,14 +877,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   type="System.Collections.Specialized.StringCollection" />
               <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
                   <ctor type="System.Int32">0</ctor>
-                  <Color type="System.Int32">`+ this.convertHex(color) +`</Color>
+                  <Color type="System.Int32">` + this.convertHex(color) + `</Color>
               </Fill>
               <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
                   <ctor type="System.Int32">3</ctor>
                   <Alignment type="System.String">
                       <![CDATA[Center]]>
                   </Alignment>
-                  <Color type="System.Int32">`+ this.convertHex(strokeColor) +`</Color>
+                  <Color type="System.Int32">` + this.convertHex(strokeColor) + `</Color>
                   <DashCap type="System.String">
                       <![CDATA[Round]]>
                   </DashCap>
@@ -852,23 +911,22 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   <Width type="System.Single">4</Width>
               </Outline>
               <Translucent type="System.Boolean">False</Translucent>
-          </RectangleData>`;   
-        }
-        else if(json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill == "") { 
-          let height = json.objects[i].height; 
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+          </RectangleData>`;
+      } else if (json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill == "") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-          alert('inside border');
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
+        alert('inside border');
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          let stroke = '4B'+json.objects[i].stroke;
-          var strokeColor = stroke.replace('#','');
-          // alert(this.convertHex(strokeColor));
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+        // alert(this.convertHex(strokeColor));
 
-          this.xmlData += `
+        this.xmlData += `
           <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String">
               <![CDATA[2022-04-18T02:31:30]]>
@@ -877,11 +935,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <![CDATA[2022-04-18T02:32:07]]>
           </ModifiedTime>
           <Location type="System.String">
-              <![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]>
+              <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
           </Location>
-          <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
+          <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
           <Size type="System.String">
-              <![CDATA[`+ mergeX +`, `+ mergeY +`]]>
+              <![CDATA[` + mergeX + `, ` + mergeY + `]]>
           </Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
@@ -900,7 +958,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Alignment type="System.String">
                   <![CDATA[Center]]>
               </Alignment>
-              <Color type="System.Int32">`+ this.convertHex(strokeColor) +`</Color>
+              <Color type="System.Int32">` + this.convertHex(strokeColor) + `</Color>
               <DashCap type="System.String">
                   <![CDATA[Round]]>
               </DashCap>
@@ -927,27 +985,26 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Width type="System.Single">4</Width>
           </Outline>
           <Translucent type="System.Boolean">False</Translucent>
-      </RectangleData>`;   
-    }
-    else if(json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill != "" ) { 
-      let height = json.objects[i].height; 
-      let scaleY = json.objects[i].scaleY;
-      let mergeY = height * scaleY;
-      alert('inside colored rect');
-      let width = json.objects[i].width;
-      let scaleX = json.objects[i].scaleX;
-      let mergeX = width * scaleX;
+      </RectangleData>`;
+      } else if (json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill != "") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
+        alert('inside colored rect');
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-      //color: hex to dec | for fill and stroke
-      let fill = '4B'+json.objects[i].fill;
-      var color = fill.replace('#','');
-      alert(this.convertHex(color));
-      let stroke = '4B'+json.objects[i].stroke;
-      var strokeColor = stroke.replace('#','');
-      alert(this.convertHex(strokeColor));
-      // alert(this.convertHex(color));
-      
-      this.xmlData += `
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        alert(this.convertHex(color));
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+        alert(this.convertHex(strokeColor));
+        // alert(this.convertHex(color));
+
+        this.xmlData += `
       <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String">
           <![CDATA[2022-04-18T02:31:30]]>
@@ -956,11 +1013,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <![CDATA[2022-04-18T02:32:07]]>
       </ModifiedTime>
       <Location type="System.String">
-          <![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]>
+          <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
       </Location>
-      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
+      <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
       <Size type="System.String">
-          <![CDATA[`+ mergeX +`, `+ mergeY +`]]>
+          <![CDATA[` + mergeX + `, ` + mergeY + `]]>
       </Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
@@ -972,14 +1029,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
           type="System.Collections.Specialized.StringCollection" />
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
           <ctor type="System.Int32">0</ctor>
-          <Color type="System.Int32">`+ this.convertHex(color) +`</Color>
+          <Color type="System.Int32">` + this.convertHex(color) + `</Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
           <ctor type="System.Int32">3</ctor>
           <Alignment type="System.String">
               <![CDATA[Center]]>
           </Alignment>
-          <Color type="System.Int32">`+ this.convertHex(strokeColor) +`</Color>
+          <Color type="System.Int32">` + this.convertHex(strokeColor) + `</Color>
           <DashCap type="System.String">
               <![CDATA[Round]]>
           </DashCap>
@@ -1006,24 +1063,23 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Width type="System.Single">4</Width>
       </Outline>
       <Translucent type="System.Boolean">False</Translucent>
-  </RectangleData>`;   
-}
-        else if(json.objects[i].type == "circle"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+  </RectangleData>`;
+      } else if (json.objects[i].type == "circle") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          this.xmlData += `
+        this.xmlData += `
           <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
           <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
-          <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
+          <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
           <Rotation type="System.Single">0</Rotation>
-          <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
+          <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
           <CanResize type="System.Boolean">True</CanResize>
@@ -1055,24 +1111,23 @@ export class FabricjsEditorComponent implements AfterViewInit {
             <Width type="System.Single">4</Width>
           </Outline>
           <Translucent type="System.Boolean">False</Translucent>
-        </EllipseData>`;   
-        }
-        else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+        </EllipseData>`;
+      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          this.xmlData += `
+        this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
-      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
+      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
+      <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1084,14 +1139,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
-        <Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
+        <Size type="System.Single">` + json.objects[i].fontSize + `</Size>
         <Bold type="System.Boolean">True</Bold>
         <Italic type="System.Boolean">True</Italic>
-        <Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
-        <Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+        <Strikeout type="System.Boolean">` + json.objects[i].linethrough + `</Strikeout>
+        <Underline type="System.Boolean">` + json.objects[i].underline + `</Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1108,7 +1163,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1118,7 +1173,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+        <MiterLimit type="System.Single">` + json.objects[i].strokeMiterLimit + `</MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1129,24 +1184,22 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
-        }
+      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-        else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          this.xmlData += `
+        this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
-      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
+      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
+      <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1158,14 +1211,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
-        <Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
+        <Size type="System.Single">` + json.objects[i].fontSize + `</Size>
         <Bold type="System.Boolean">False</Bold>
         <Italic type="System.Boolean">False</Italic>
-        <Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
-        <Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+        <Strikeout type="System.Boolean">` + json.objects[i].linethrough + `</Strikeout>
+        <Underline type="System.Boolean">` + json.objects[i].underline + `</Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1182,7 +1235,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1192,7 +1245,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+        <MiterLimit type="System.Single">` + json.objects[i].strokeMiterLimit + `</MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1203,23 +1256,22 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
-        }
-        else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          this.xmlData += `
+        this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
-      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
+      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
+      <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1231,14 +1283,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
-        <Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
+        <Size type="System.Single">` + json.objects[i].fontSize + `</Size>
         <Bold type="System.Boolean">False</Bold>
         <Italic type="System.Boolean">True</Italic>
-        <Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
-        <Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+        <Strikeout type="System.Boolean">` + json.objects[i].linethrough + `</Strikeout>
+        <Underline type="System.Boolean">` + json.objects[i].underline + `</Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1255,7 +1307,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1265,7 +1317,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+        <MiterLimit type="System.Single">` + json.objects[i].strokeMiterLimit + `</MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1276,23 +1328,22 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
-        }
-        else if(json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          this.xmlData += `
+        this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-      <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
-      <Size type="System.String"><![CDATA[`+ mergeX +`, `+ mergeY +`]]></Size>
+      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
+      <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1304,14 +1355,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+ json.objects[i].text +`]]></Text>
+      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+ json.objects[i].fontFamily +`]]></Name>
-        <Size type="System.Single">`+ json.objects[i].fontSize +`</Size>
+        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
+        <Size type="System.Single">` + json.objects[i].fontSize + `</Size>
         <Bold type="System.Boolean">True</Bold>
         <Italic type="System.Boolean">False</Italic>
-        <Strikeout type="System.Boolean">`+ json.objects[i].linethrough +`</Strikeout>
-        <Underline type="System.Boolean">`+ json.objects[i].underline +`</Underline>
+        <Strikeout type="System.Boolean">` + json.objects[i].linethrough + `</Strikeout>
+        <Underline type="System.Boolean">` + json.objects[i].underline + `</Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1328,7 +1379,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+ json.objects[i].textAlign +`]]></Alignment>
+        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1338,7 +1389,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single">`+ json.objects[i].strokeMiterLimit +`</MiterLimit>
+        <MiterLimit type="System.Single">` + json.objects[i].strokeMiterLimit + `</MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1349,15 +1400,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
-        }
-        else if (json.objects[i].type == "path") {
-          this.xmlData += `
+      } else if (json.objects[i].type == "path") {
+        this.xmlData += `
     <FreehandData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
     <CreationTime type="System.String"><![CDATA[2022-04-07T07:18:15]]></CreationTime>
     <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:22]]></ModifiedTime>
-    <Location type="System.String"><![CDATA[`+ json.objects[i].left +`, `+ json.objects[i].top +`]]></Location>
-    <Rotation type="System.Single">`+ json.objects[i].angle +`</Rotation>
-    <Size type="System.String"><![CDATA[`+ json.objects[i].width +`, `+ json.objects[i].height +`]]></Size>
+    <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
+    <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+    <Size type="System.String"><![CDATA[` + json.objects[i].width + `, ` + json.objects[i].height + `]]></Size>
     <Visible type="System.Boolean">True</Visible>
     <CanMove type="System.Boolean">True</CanMove>
     <CanResize type="System.Boolean">True</CanResize>
@@ -1391,9 +1441,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
     <ClosedShape type="System.Boolean">False</ClosedShape>
     <LineType type="System.String"><![CDATA[Straight]]></LineType>
   </FreehandData>`;
+      }
     }
-  }
-  this.xmlData += `</Items>
+    this.xmlData += `</Items>
   </Items>
   </LayerData>
   </LayerDataCollection>
@@ -1401,51 +1451,51 @@ export class FabricjsEditorComponent implements AfterViewInit {
   </rdf:RDF>
   </x:xmpmeta>`;
 
-  //Download button for XML file
-  let anchor = document.createElement("a");
-  anchor.className = "btn btn-outline-dark btn-sm";
-  anchor.setAttribute("id", "hid");
-  anchor.style.marginLeft = '10px';
-  let a_text = document.createTextNode('Download XML File');
-  anchor.appendChild(a_text);
+    //Download button for XML file
+    let anchor = document.createElement("a");
+    anchor.className = "btn btn-outline-dark btn-sm";
+    anchor.setAttribute("id", "hid");
+    anchor.style.marginLeft = '10px';
+    let a_text = document.createTextNode('Download XML File');
+    anchor.appendChild(a_text);
 
-  let iTag = document.createElement("i");
-  iTag.setAttribute("class", "fa fa-download");
-  iTag.style.marginLeft = "5px";
+    let iTag = document.createElement("i");
+    iTag.setAttribute("class", "fa fa-download");
+    iTag.style.marginLeft = "5px";
 
-  anchor.appendChild(iTag);
+    anchor.appendChild(iTag);
 
-  anchor.download = "sample.xml";
-  anchor.href = "data:text/xml," + encodeURIComponent(this.xmlData);
+    anchor.download = "sample.xml";
+    anchor.href = "data:text/xml," + encodeURIComponent(this.xmlData);
 
-  let divCont = document.getElementById('card-header');
-  divCont.appendChild(anchor);
+    let divCont = document.getElementById('card-header');
+    divCont.appendChild(anchor);
 
-  // alert(js2xmlparser.parse("xml", json.objects[0].fill));
-  // const creatorTool = json.background;
+    // alert(js2xmlparser.parse("xml", json.objects[0].fill));
+    // const creatorTool = json.background;
 
-  // document.getElementById('creatorTool').innerHTML = creatorTool;
-  // const data = "in xmlJson";
-  // this.xml = data;
-  // var json = JSON.parse(this.json);
-  // console.log(js2xmlparser.parse("xml", json));
-  // console.log(json.objects[0].fill);
-  // let obj = {
-  //   "firstName": "John",
-  //   "lastName": "Smith",
-  //   "dateOfBirth": new Date(1964, 7, 26),
-  //   "address": {
-  //     "@": {
-  //       "type": "home"
-  //     },
-  //     "streetAddress": "3212 22nd St",
-  //     "city": "Chicago",
-  //     "state": "Illinois",
-  //     "zip": 10000
-  //   }
-  // };
+    // document.getElementById('creatorTool').innerHTML = creatorTool;
+    // const data = "in xmlJson";
+    // this.xml = data;
+    // var json = JSON.parse(this.json);
+    // console.log(js2xmlparser.parse("xml", json));
+    // console.log(json.objects[0].fill);
+    // let obj = {
+    //   "firstName": "John",
+    //   "lastName": "Smith",
+    //   "dateOfBirth": new Date(1964, 7, 26),
+    //   "address": {
+    //     "@": {
+    //       "type": "home"
+    //     },
+    //     "streetAddress": "3212 22nd St",
+    //     "city": "Chicago",
+    //     "state": "Illinois",
+    //     "zip": 10000
+    //   }
+    // };
 
-  // console.log(js2xmlparser.parse("person", obj));
+    // console.log(js2xmlparser.parse("person", obj));
   }
 
   resetPanels() {
