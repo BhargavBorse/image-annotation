@@ -1,5 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { FabricjsEditorComponent } from 'projects/angular-editor-fabric-js/src/public-api';
+import {
+  Component,
+  ViewChild
+} from '@angular/core';
+import {
+  FabricjsEditorComponent
+} from 'projects/angular-editor-fabric-js/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +13,10 @@ import { FabricjsEditorComponent } from 'projects/angular-editor-fabric-js/src/p
 })
 export class AppComponent {
   title = 'angular-editor-fabric-js';
-  
-  @ViewChild('canvas', {static: false}) canvas: FabricjsEditorComponent;
+
+  @ViewChild('canvas', {
+    static: false
+  }) canvas: FabricjsEditorComponent;
 
   router: any;
 
@@ -20,7 +27,7 @@ export class AppComponent {
   public rasterizeSVG() {
     this.canvas.rasterizeSVG();
   }
- 
+
   public zoomInCanvas() {
     this.canvas.zoomInCanvas();
   }
@@ -28,7 +35,7 @@ export class AppComponent {
   public zoomOutCanvas() {
     this.canvas.zoomOutCanvas();
   }
-  
+
   public freeDraw() {
     this.canvas.freeDraw();
   }
@@ -48,6 +55,10 @@ export class AppComponent {
   // public loadCanvasFromJSON() {
   //   this.canvas.loadCanvasFromJSON();
   // }
+
+  public convertHex(s) {
+    this.canvas.convertHex(s);
+  }
 
   public confirmClear() {
     this.canvas.confirmClear();
