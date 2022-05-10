@@ -60,10 +60,6 @@ export class AppComponent {
     this.canvas.convertHex(s);
   }
 
-  public h2d() {
-    this.canvas.h2d();
-  }
-
   public confirmClear() {
     this.canvas.confirmClear();
   }
