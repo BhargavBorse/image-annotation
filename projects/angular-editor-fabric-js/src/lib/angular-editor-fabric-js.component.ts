@@ -834,7 +834,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
-        alert('inside colored rect');
+        
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
@@ -842,11 +842,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
         //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
-        alert(this.convertHex(color));
+        
         let stroke = '4B' + json.objects[i].stroke;
         var strokeColor = stroke.replace('#', '');
-        alert(this.convertHex(strokeColor));
-        // alert(this.convertHex(color));
 
         this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -913,14 +911,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
 
-        alert('inside border');
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
         let stroke = '4B' + json.objects[i].stroke;
         var strokeColor = stroke.replace('#', '');
-        alert(this.convertHex(strokeColor));
 
         this.xmlData += `
           <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -986,7 +982,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
-        alert('inside colored rect');
+        
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
@@ -994,11 +990,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
         //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
-        alert(this.convertHex(color));
+        
         let stroke = '4B' + json.objects[i].stroke;
         var strokeColor = stroke.replace('#', '');
-        alert(this.convertHex(strokeColor));
-        // alert(this.convertHex(color));
 
         this.xmlData += `
       <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
