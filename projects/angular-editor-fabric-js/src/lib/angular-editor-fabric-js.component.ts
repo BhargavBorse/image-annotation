@@ -775,14 +775,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Items type="System.Collections.ArrayList">
               `; 
           for(let i = 0; i < json.objects.length; i++) {
-            if(json.objects[i].type == "rect" && json.objects[i].rx == "0") { 
+            if(json.objects[i].type == "rect") { 
               let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
               let mergeY = height * scaleY;
-              alert('inside border one');
+              
               let width = json.objects[i].width;
               let scaleX = json.objects[i].scaleX;
               let mergeX = width * scaleX;
+
+              //color: hex to dec | for fill and stroke
+              let t = '4B'+json.objects[i].fill;
+              // alert(this.convertHex(t));
+              alert(t); 
               
               this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
