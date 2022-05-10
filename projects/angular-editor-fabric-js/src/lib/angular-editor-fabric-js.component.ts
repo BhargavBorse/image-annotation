@@ -227,7 +227,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       case 'rectangle':
         add = new fabric.Rect({
           width: 200, height: 100, left: 100, top: 100, angle: 0,
-          fill: '#3f51b5', opacity: 0.5, rx: 1
+          fill: '#3f51b5', opacity: 0.5
         });
         break;
       case 'circle':
@@ -779,15 +779,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
               let height = json.objects[i].height; 
               let scaleY = json.objects[i].scaleY;
               let mergeY = height * scaleY;
-              
+              alert('inside rect');
               let width = json.objects[i].width;
               let scaleX = json.objects[i].scaleX;
               let mergeX = width * scaleX;
 
               //color: hex to dec | for fill and stroke
-              let t = '4B'+json.objects[i].fill;
-              // alert(this.convertHex(t));
-              alert(t); 
+              let fill = '4B'+json.objects[i].fill;
+              var color = fill.replace('#','');
+
+              let stroke = '4B'+json.objects[i].stroke;
+              var strokeColor = stroke.replace('#','');
+
+              // alert(this.convertHex(color));
               
               this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -814,14 +818,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   type="System.Collections.Specialized.StringCollection" />
               <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
                   <ctor type="System.Int32">0</ctor>
-                  <Color type="System.Int32">16777215</Color>
+                  <Color type="System.Int32">`+ this.convertHex(color) +`</Color>
               </Fill>
               <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
                   <ctor type="System.Int32">3</ctor>
                   <Alignment type="System.String">
                       <![CDATA[Center]]>
                   </Alignment>
-                  <Color type="System.Int32">-16777216</Color>
+                  <Color type="System.Int32">`+ this.convertHex(strokeColor) +`</Color>
                   <DashCap type="System.String">
                       <![CDATA[Round]]>
                   </DashCap>
