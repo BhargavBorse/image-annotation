@@ -731,7 +731,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       return dec;
   }
   h2d() {
-    let t = 'EC994B';
+    let t = '4B'+'EC994B';
     alert(this.convertHex(t)); 
   }
 
