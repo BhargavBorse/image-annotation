@@ -744,7 +744,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
 
         var rect = xmlDoc.getElementsByTagName('RectangleData')[0];
-        var visible = rect.getElementsByTagName('Location')[0].firstChild.textContent;
+        var location = rect.getElementsByTagName('Location')[0].firstChild.textContent;
         
       };
       reader.readAsText(event.target.files[0]);
