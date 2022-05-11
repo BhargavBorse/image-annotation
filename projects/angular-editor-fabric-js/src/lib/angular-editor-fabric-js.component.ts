@@ -718,7 +718,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
   readJson(event) {
     if (event.target.files.length !== 1) {
       console.error('No file selected');
-    } else {
+    } else if (event.target.files[0].type == 'application/json') {
       const reader = new FileReader();
       reader.onloadend = (e) => {
         const textJson = reader.result.toString();
@@ -732,6 +732,46 @@ export class FabricjsEditorComponent implements AfterViewInit {
         });
       };
       reader.readAsText(event.target.files[0]);
+    }
+    else if (event.target.files[0].name.match(/.(xml)$/i)) {
+      
+      const reader = new FileReader();
+      reader.onloadend = (e) => {
+        // alert("file loaded");
+        const textJson = reader.result.toString();
+        localStorage.setItem('xmlUpdated', textJson);
+
+        const CANVAS = localStorage.getItem('xmlUpdated');
+        var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
+        console.log(xmlDoc);
+
+        var svg = xmlDoc.getElementsByTagName('RectangleData')[0];
+        var visible = svg.getElementsByTagName('Location')[0];
+
+      };
+      reader.readAsText(event.target.files[0]);
+      
+     // var svg = xmlDoc.getElementsByTagName('RectangleData')[0];
+     // var visible = svg.getElementsByTagName('visible')[0];
+     // alert(visible);
+
+      // const reader = new FileReader();
+      // reader.onloadend = (e) => {
+      //   const textJson = reader.result.toString();
+      //   localStorage.setItem('jsonData', textJson);
+
+      //   const CANVAS = localStorage.getItem('jsonData');
+      //   this.canvas.loadFromJSON(CANVAS, () => {
+      //     console.log('CANVAS untar');
+      //     console.log(CANVAS);
+      //     this.canvas.renderAll();
+      //   });
+      // };
+      // reader.readAsText(event.target.files[0]);
+    }
+    else
+    {
+      alert('Please select JSON or XML File');
     }
   }
 
