@@ -734,10 +734,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
       reader.readAsText(event.target.files[0]);
     }
     else if (event.target.files[0].name.match(/.(xml)$/i)) {
-      
+
       const reader = new FileReader();
       reader.onloadend = (e) => {
-        // alert("file loaded");
         const textJson = reader.result.toString();
         localStorage.setItem('xmlUpdated', textJson);
 
@@ -745,8 +744,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
         console.log(xmlDoc);
 
-        var svg = xmlDoc.getElementsByTagName('RectangleData')[0];
-        var visible = svg.getElementsByTagName('Location')[0];
+        var rect = xmlDoc.getElementsByTagName('RectangleData')[0];
+        var visible = rect.getElementsByTagName('Location')[0];
 
       };
       reader.readAsText(event.target.files[0]);
