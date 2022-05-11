@@ -742,30 +742,99 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
         const CANVAS = localStorage.getItem('xmlUpdated');
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
-
-        var rect = xmlDoc.getElementsByTagName('RectangleData')[0];
-        var location = rect.getElementsByTagName('Location')[0].firstChild.textContent;
         
+        var items = xmlDoc.getElementsByTagName('Items')[1];
+        this.json = `{
+          "version": "3.6.6",
+          "objects": [
+            {`;
+        for(var i = 0; i < items.childNodes.length; i++) {
+          console.log(items.childNodes[i].nodeName);
+          if(items.childNodes[i].nodeName == 'RectangleData') {
+            this.json += `"type": "rect",
+            "version": "3.6.6",
+            "originX": "left",
+            "originY": "top",
+            "left": 10,
+            "top": 10,
+            "width": 50,
+            "height": 50,
+            "fill": "",
+            "stroke": "#ff0000",
+            "strokeWidth": 2,
+            "strokeDashArray": null,
+            "strokeLineCap": "butt",
+            "strokeDashOffset": 0,
+            "strokeLineJoin": "miter",
+            "strokeMiterLimit": 4,
+            "scaleX": 1,
+            "scaleY": 1,
+            "angle": 0,
+            "flipX": false,
+            "flipY": false,
+            "opacity": 0.5,
+            "shadow": null,
+            "visible": true,
+            "clipTo": null,
+            "backgroundColor": "",
+            "fillRule": "nonzero",
+            "paintFirst": "fill",
+            "globalCompositeOperation": "source-over",
+            "transformMatrix": null,
+            "skewX": 0,
+            "skewY": 0,
+            "rx": 0,
+            "ry": 0,
+            "id": 808065
+          },`;
+          }
+          else if(items.childNodes[i].nodeName == 'EllipseData') {
+            this.json += `{"type": "circle",
+            "version": "3.6.6",
+            "originX": "left",
+            "originY": "top",
+            "left": 10,
+            "top": 10,
+            "width": 100,
+            "height": 100,
+            "fill": "#ff5722",
+            "stroke": null,
+            "strokeWidth": 1,
+            "strokeDashArray": null,
+            "strokeLineCap": "butt",
+            "strokeDashOffset": 0,
+            "strokeLineJoin": "miter",
+            "strokeMiterLimit": 4,
+            "scaleX": 1,
+            "scaleY": 1,
+            "angle": 0,
+            "flipX": false,
+            "flipY": false,
+            "opacity": 0.5,
+            "shadow": null,
+            "visible": true,
+            "clipTo": null,
+            "backgroundColor": "",
+            "fillRule": "nonzero",
+            "paintFirst": "fill",
+            "globalCompositeOperation": "source-over",
+            "transformMatrix": null,
+            "skewX": 0,
+            "skewY": 0,
+            "radius": 50,
+            "startAngle": 0,
+            "endAngle": 6.283185307179586,
+            "id": 302050
+          }`;
+          }
+        }
+        this.json += `],
+        "background": "white"
+      }`;
+        // this.json = `{"objects": [${rect.innerHTML}]}`;
+        // var location = rect.getElementsByTagName('Location')[0].firstChild.textContent;
       };
       reader.readAsText(event.target.files[0]);
-      
-     // var svg = xmlDoc.getElementsByTagName('RectangleData')[0];
-     // var visible = svg.getElementsByTagName('visible')[0];
-     // alert(visible);
-
-      // const reader = new FileReader();
-      // reader.onloadend = (e) => {
-      //   const textJson = reader.result.toString();
-      //   localStorage.setItem('jsonData', textJson);
-
-      //   const CANVAS = localStorage.getItem('jsonData');
-      //   this.canvas.loadFromJSON(CANVAS, () => {
-      //     console.log('CANVAS untar');
-      //     console.log(CANVAS);
-      //     this.canvas.renderAll();
-      //   });
-      // };
-      // reader.readAsText(event.target.files[0]);
     }
     else
     {
