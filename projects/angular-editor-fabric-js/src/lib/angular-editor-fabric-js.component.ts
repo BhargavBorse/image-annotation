@@ -744,13 +744,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
         
         var items = xmlDoc.getElementsByTagName('Items')[1];
+        // console.log(items.childNodes[0].nextSibling);
         this.json = `{
           "version": "3.6.6",
           "objects": [
             {`;
         for(var i = 0; i < items.childNodes.length; i++) {
-          console.log(items.childNodes[i].nodeName);
           if(items.childNodes[i].nodeName == 'RectangleData') {
+            console.log(items.childNodes);
             this.json += `"type": "rect",
             "version": "3.6.6",
             "originX": "left",
