@@ -259,13 +259,13 @@ export class FabricjsEditorComponent implements AfterViewInit {
         break;
       case 'rect':
         add = new fabric.Rect({
-          width: 50,
-          height: 50,
-          left: 10,
-          top: 10,
+          width: 200,
+          height: 100,
+          left: 100,
+          top: 100,
           angle: 0,
           stroke: '#ff0000',
-          strokeWidth: 2,
+          // strokeWidth: 2,
           fill: '',
           opacity: 0.5
         });
@@ -746,7 +746,15 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var items = xmlDoc.getElementsByTagName('Items')[1];
         var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
         var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent;
+        var rectLocArray = rectLoc.split(',');
+        var rectLocX = rectLocArray[0];
+        var rectLocY = rectLocArray[1];
+
         var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
+        var rectSizeArray = rectSize.split(',');
+        var rectSizeX = rectSizeArray[0];
+        var rectSizeY = rectSizeArray[1];
+
 
         var fillData = xmlDoc.getElementsByTagName('Fill')[0];
         var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
@@ -754,10 +762,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
         var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
 
+        var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+        
         // var rectLocArray = rectLoc.split(',');
         // console.warn(rectLocArray[0]);
         // console.warn(rectLocArray[1]);
-        // loc, size, color, stroke
+        
         this.json = `{
           "version": "3.6.6",
           "objects": [
@@ -769,10 +779,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "version": "3.6.6",
             "originX": "left",
             "originY": "top",
-            "left": `+ rectLoc +`,
-            "top": `+ rectLoc +`,
-            "width": `+ rectSize +`,
-            "height": `+ rectSize +`,
+            "left": `+ rectLocX +`,
+            "top": `+ rectLocY +`,
+            "width": "200",
+            "height": "100",
             "fill": `+ fillColor +`,
             "stroke": `+ outlineStroke +`,
             "strokeWidth": 2,
@@ -781,9 +791,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "strokeDashOffset": 0,
             "strokeLineJoin": "miter",
             "strokeMiterLimit": 4,
-            "scaleX": 1,
-            "scaleY": 1,
-            "angle": 0,
+            "scaleX": `+ rectSizeX +`,
+            "scaleY": `+ rectSizeY +`,
+            "angle": `+ rotationData +`,
             "flipX": false,
             "flipY": false,
             "opacity": 0.5,
