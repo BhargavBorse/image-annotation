@@ -60,6 +60,10 @@ export class AppComponent {
     this.canvas.convertHextoDec(s);
   }
 
+  public convertDectoHex(s) {
+    this.canvas.convertDectoHex(s);
+  }
+
   public confirmClear() {
     this.canvas.confirmClear();
   }
