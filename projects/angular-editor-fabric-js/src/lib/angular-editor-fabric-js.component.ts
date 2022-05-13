@@ -779,7 +779,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            // console.log(items.childNodes);
             this.json += `"type": "rect",
             "version": "3.6.6",
             "originX": "left",
