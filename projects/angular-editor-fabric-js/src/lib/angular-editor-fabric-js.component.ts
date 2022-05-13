@@ -764,17 +764,17 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
             var rectSizeArray = rectSize.split(',');
-            var rectSizeX = rectSizeArray[0];
-            var rectSizeY = rectSizeArray[1];
-            let sizeX = parseInt(rectSizeX);
-            let sizeY = parseInt(rectSizeY);
-            let height = 100;
-            let mergeY = sizeY / height;
-            let width = 200;
-            let mergeX = sizeX / width;
+            let sizeX = parseInt(rectSizeArray[0]);
+            let sizeY = parseInt(rectSizeArray[1]);
+            let mergeY = sizeY / 100;
+            let mergeX = sizeX / 200;
 
             var fillData = xmlDoc.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+
+            // convet fillColor from decimal to hex
+            var fillColorHex = parseInt(fillColor).toString(16);
+            alert(fillColorHex);
 
             var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
