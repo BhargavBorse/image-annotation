@@ -744,25 +744,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
         
         var items = xmlDoc.getElementsByTagName('Items')[1];
-        var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
-        var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent;
-        var rectLocArray = rectLoc.split(',');
-        var rectLocX = rectLocArray[0];
-        var rectLocY = rectLocArray[1];
-
-        var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
-        var rectSizeArray = rectSize.split(',');
-        var rectSizeX = rectSizeArray[0];
-        var rectSizeY = rectSizeArray[1];
-
-
-        var fillData = xmlDoc.getElementsByTagName('Fill')[0];
-        var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
-
-        var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
-        var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
-
-        var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
         
         // var rectLocArray = rectLoc.split(',');
         // console.warn(rectLocArray[0]);
@@ -774,6 +755,27 @@ export class FabricjsEditorComponent implements AfterViewInit {
             {`;
         for(var i = 0; i < items.childNodes.length; i++) {
           if(items.childNodes[i].nodeName == 'RectangleData') {
+
+            var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
+            var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent;
+            var rectLocArray = rectLoc.split(',');
+            var rectLocX = rectLocArray[0];
+            var rectLocY = rectLocArray[1];
+
+            var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
+            var rectSizeArray = rectSize.split(',');
+            var rectSizeX = rectSizeArray[0];
+            var rectSizeY = rectSizeArray[1];
+
+
+            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+
+            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+
+            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+
             // console.log(items.childNodes);
             this.json += `"type": "rect",
             "version": "3.6.6",
