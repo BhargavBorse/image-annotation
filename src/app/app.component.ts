@@ -56,8 +56,8 @@ export class AppComponent {
   //   this.canvas.loadCanvasFromJSON();
   // }
 
-  public convertHex(s) {
-    this.canvas.convertHex(s);
+  public convertHextoDec(s) {
+    this.canvas.convertHextoDec(s);
   }
 
   public confirmClear() {

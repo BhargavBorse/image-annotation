@@ -772,9 +772,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fillData = xmlDoc.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
 
-            // convet fillColor from decimal to hex
-            var fillColorHex = parseInt(fillColor).toString(16);
-            alert(fillColorHex);
+            // convert fillColor from decimal to hex
+            // alert((1262440885).toString(16));
 
             var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
@@ -901,7 +900,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   // }
 
-  convertHex(s) {
+  convertHextoDec(s) {
 
     function add(x, y) {
       var c = 0,
@@ -927,7 +926,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     });
     return dec;
   }
-
   xmlJson() {
 
     // remove anchor if xmlJson function is called again 
@@ -1009,14 +1007,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   type="System.Collections.Specialized.StringCollection" />
               <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
                   <ctor type="System.Int32">0</ctor>
-                  <Color type="System.Int32"><![CDATA[` + this.convertHex(color) + `]]></Color>
+                  <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(color) + `]]></Color>
               </Fill>
               <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
                   <ctor type="System.Int32">3</ctor>
                   <Alignment type="System.String">
                       <![CDATA[Center]]>
                   </Alignment>
-                  <Color type="System.Int32"><![CDATA[` + this.convertHex(strokeColor) + `]]></Color>
+                  <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(strokeColor) + `]]></Color>
                   <DashCap type="System.String">
                       <![CDATA[Round]]>
                   </DashCap>
@@ -1088,7 +1086,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Alignment type="System.String">
                   <![CDATA[Center]]>
               </Alignment>
-              <Color type="System.Int32"><![CDATA[` + this.convertHex(strokeColor) + `]]></Color>
+              <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(strokeColor) + `]]></Color>
               <DashCap type="System.String">
                   <![CDATA[Round]]>
               </DashCap>
@@ -1157,14 +1155,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
           type="System.Collections.Specialized.StringCollection" />
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
           <ctor type="System.Int32">0</ctor>
-          <Color type="System.Int32"><![CDATA[` + this.convertHex(color) + `]]></Color>
+          <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(color) + `]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
           <ctor type="System.Int32">3</ctor>
           <Alignment type="System.String">
               <![CDATA[Center]]>
           </Alignment>
-          <Color type="System.Int32"><![CDATA[` + this.convertHex(strokeColor) + `]]></Color>
+          <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(strokeColor) + `]]></Color>
           <DashCap type="System.String">
               <![CDATA[Round]]>
           </DashCap>
