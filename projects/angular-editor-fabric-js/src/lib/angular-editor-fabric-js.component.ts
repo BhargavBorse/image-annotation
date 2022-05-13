@@ -766,7 +766,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var rectSizeArray = rectSize.split(',');
             var rectSizeX = rectSizeArray[0];
             var rectSizeY = rectSizeArray[1];
-
+            let sizeX = parseInt(rectSizeX);
+            let sizeY = parseInt(rectSizeY);
+            let height = 100;
+            let mergeY = sizeY / height;
+            let width = 200;
+            let mergeX = sizeX / width;
 
             var fillData = xmlDoc.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
@@ -793,8 +798,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "strokeDashOffset": 0,
             "strokeLineJoin": "miter",
             "strokeMiterLimit": 4,
-            "scaleX": `+ rectSizeX +`,
-            "scaleY": `+ rectSizeY +`,
+            "scaleX": `+ mergeX +`,
+            "scaleY": `+ mergeY +`,
             "angle": `+ rotationData +`,
             "flipX": false,
             "flipY": false,
