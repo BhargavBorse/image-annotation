@@ -744,24 +744,37 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
         
         var items = xmlDoc.getElementsByTagName('Items')[1];
-        // console.log(items.childNodes[0].nextSibling);
+        var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
+        var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent;
+        var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
+
+        var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+        var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+
+        var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+        var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+
+        // var rectLocArray = rectLoc.split(',');
+        // console.warn(rectLocArray[0]);
+        // console.warn(rectLocArray[1]);
+        // loc, size, color, stroke
         this.json = `{
           "version": "3.6.6",
           "objects": [
             {`;
         for(var i = 0; i < items.childNodes.length; i++) {
           if(items.childNodes[i].nodeName == 'RectangleData') {
-            console.log(items.childNodes);
+            // console.log(items.childNodes);
             this.json += `"type": "rect",
             "version": "3.6.6",
             "originX": "left",
             "originY": "top",
-            "left": 10,
-            "top": 10,
-            "width": 50,
-            "height": 50,
-            "fill": "",
-            "stroke": "#ff0000",
+            "left": `+ rectLoc +`,
+            "top": `+ rectLoc +`,
+            "width": `+ rectSize +`,
+            "height": `+ rectSize +`,
+            "fill": `+ fillColor +`,
+            "stroke": `+ outlineStroke +`,
             "strokeWidth": 2,
             "strokeDashArray": null,
             "strokeLineCap": "butt",
@@ -965,7 +978,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Location type="System.String">
                   <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
               </Location>
-              <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+              <Rotation type="System.Single"><![CDATA[` + json.objects[i].angle + `]]></Rotation>
               <Size type="System.String">
                   <![CDATA[` + mergeX + `, ` + mergeY + `]]>
               </Size>
@@ -979,14 +992,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   type="System.Collections.Specialized.StringCollection" />
               <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
                   <ctor type="System.Int32">0</ctor>
-                  <Color type="System.Int32">` + this.convertHex(color) + `</Color>
+                  <Color type="System.Int32"><![CDATA[` + this.convertHex(color) + `]]></Color>
               </Fill>
               <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
                   <ctor type="System.Int32">3</ctor>
                   <Alignment type="System.String">
                       <![CDATA[Center]]>
                   </Alignment>
-                  <Color type="System.Int32">` + this.convertHex(strokeColor) + `</Color>
+                  <Color type="System.Int32"><![CDATA[` + this.convertHex(strokeColor) + `]]></Color>
                   <DashCap type="System.String">
                       <![CDATA[Round]]>
                   </DashCap>
@@ -1058,7 +1071,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Alignment type="System.String">
                   <![CDATA[Center]]>
               </Alignment>
-              <Color type="System.Int32">` + this.convertHex(strokeColor) + `</Color>
+              <Color type="System.Int32"><![CDATA[` + this.convertHex(strokeColor) + `]]></Color>
               <DashCap type="System.String">
                   <![CDATA[Round]]>
               </DashCap>
@@ -1127,14 +1140,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
           type="System.Collections.Specialized.StringCollection" />
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
           <ctor type="System.Int32">0</ctor>
-          <Color type="System.Int32">` + this.convertHex(color) + `</Color>
+          <Color type="System.Int32"><![CDATA[` + this.convertHex(color) + `]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
           <ctor type="System.Int32">3</ctor>
           <Alignment type="System.String">
               <![CDATA[Center]]>
           </Alignment>
-          <Color type="System.Int32">` + this.convertHex(strokeColor) + `</Color>
+          <Color type="System.Int32"><![CDATA[` + this.convertHex(strokeColor) + `]]></Color>
           <DashCap type="System.String">
               <![CDATA[Round]]>
           </DashCap>
