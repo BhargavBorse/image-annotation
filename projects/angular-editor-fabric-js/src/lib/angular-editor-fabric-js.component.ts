@@ -771,12 +771,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var fillData = xmlDoc.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
-
-            // convert fillColor from decimal to hex
-            // alert((1262440885).toString(16));
+            let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
             var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+            let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
@@ -789,8 +788,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "top": `+ rectLocY +`,
             "width": "200",
             "height": "100",
-            "fill": `+ fillColor +`,
-            "stroke": `+ outlineStroke +`,
+            "fill": `+ fillCode +`,
+            "stroke": `+ strokeCode +`,
             "strokeWidth": 2,
             "strokeDashArray": null,
             "strokeLineCap": "butt",
@@ -926,6 +925,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
     });
     return dec;
   }
+
+  convertDectoHex(s)
+    {
+      var s = s.toString(16);
+      if (s.length == 1)
+        s = "0" + s;
+      return s;
+
+    }
+    
   xmlJson() {
 
     // remove anchor if xmlJson function is called again 
