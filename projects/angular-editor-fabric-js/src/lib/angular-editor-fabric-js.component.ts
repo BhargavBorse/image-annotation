@@ -254,6 +254,17 @@ export class FabricjsEditorComponent implements AfterViewInit {
           left: 10,
           top: 10,
           fill: '#ff5722',
+          opacity: 0.5,
+          skewX: 1,
+        });
+        break;
+      case 'ellipse':
+        add = new fabric.Circle({
+          radius: 50,
+          left: 10,
+          top: 10,
+          fill: '',
+          stroke: '#ff0000',
           opacity: 0.5
         });
         break;
