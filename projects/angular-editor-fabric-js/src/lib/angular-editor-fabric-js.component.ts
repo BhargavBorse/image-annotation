@@ -756,10 +756,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         
         var items = xmlDoc.getElementsByTagName('Items')[1];
         
-        // var rectLocArray = rectLoc.split(',');
-        // console.warn(rectLocArray[0]);
-        // console.warn(rectLocArray[1]);
-        
         this.json = `{
           "version": "3.6.6",
           "objects": [
