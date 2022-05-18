@@ -757,10 +757,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
           if(items.childNodes[i].nodeName == 'RectangleData') {
 
             var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
-            var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent;
-            var rectLocArray = rectLoc.split(',');
-            var rectLocX = rectLocArray[0];
-            var rectLocY = rectLocArray[1];
+            var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent.split(',');
+            // var rectLocArray = rectLoc.split(',');
+            var rectLocX = rectLoc[0];
+            var rectLocY = rectLoc[1];
+            alert(rectLocX);
+            alert(rectLocY);
 
             var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
             var rectSizeArray = rectSize.split(',');
@@ -999,11 +1001,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   <![CDATA[2022-04-18T02:32:07]]>
               </ModifiedTime>
               <Location type="System.String">
-                  <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
+                  <![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]>
               </Location>
-              <Rotation type="System.Single"><![CDATA[` + json.objects[i].angle + `]]></Rotation>
+              <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
               <Size type="System.String">
-                  <![CDATA[` + mergeX + `, ` + mergeY + `]]>
+                  <![CDATA[`+mergeX+`,`+mergeY+`]]>
               </Size>
               <Visible type="System.Boolean">True</Visible>
               <CanMove type="System.Boolean">True</CanMove>
@@ -1015,14 +1017,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   type="System.Collections.Specialized.StringCollection" />
               <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
                   <ctor type="System.Int32">0</ctor>
-                  <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(color) + `]]></Color>
+                  <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
               </Fill>
               <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
                   <ctor type="System.Int32">3</ctor>
                   <Alignment type="System.String">
                       <![CDATA[Center]]>
                   </Alignment>
-                  <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(strokeColor) + `]]></Color>
+                  <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
                   <DashCap type="System.String">
                       <![CDATA[Round]]>
                   </DashCap>
@@ -1071,11 +1073,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <![CDATA[2022-04-18T02:32:07]]>
           </ModifiedTime>
           <Location type="System.String">
-              <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
+              <![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]>
           </Location>
           <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
           <Size type="System.String">
-              <![CDATA[` + mergeX + `, ` + mergeY + `]]>
+              <![CDATA[`+mergeX+`,`+mergeY+`]]>
           </Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
@@ -1094,7 +1096,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Alignment type="System.String">
                   <![CDATA[Center]]>
               </Alignment>
-              <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(strokeColor) + `]]></Color>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
               <DashCap type="System.String">
                   <![CDATA[Round]]>
               </DashCap>
@@ -1147,11 +1149,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <![CDATA[2022-04-18T02:32:07]]>
       </ModifiedTime>
       <Location type="System.String">
-          <![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]>
+          <![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]>
       </Location>
-      <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+      <Rotation type="System.Single">`+json.objects[i].angle+`</Rotation>
       <Size type="System.String">
-          <![CDATA[` + mergeX + `, ` + mergeY + `]]>
+          <![CDATA[`+mergeX+`,`+mergeY+`]]>
       </Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
@@ -1163,14 +1165,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
           type="System.Collections.Specialized.StringCollection" />
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
           <ctor type="System.Int32">0</ctor>
-          <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(color) + `]]></Color>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
           <ctor type="System.Int32">3</ctor>
           <Alignment type="System.String">
               <![CDATA[Center]]>
           </Alignment>
-          <Color type="System.Int32"><![CDATA[` + this.convertHextoDec(strokeColor) + `]]></Color>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
           <DashCap type="System.String">
               <![CDATA[Round]]>
           </DashCap>
@@ -1211,9 +1213,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
           <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
-          <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
+          <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
           <Rotation type="System.Single">0</Rotation>
-          <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
+          <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
           <CanResize type="System.Boolean">True</CanResize>
@@ -1259,9 +1261,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
-      <Rotation type="System.Single"><![CDATA[` + json.objects[i].angle + `]]></Rotation>
-      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
+      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1273,14 +1275,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
+      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
-        <Size type="System.Single"><![CDATA[` + json.objects[i].fontSize + `]]></Size>
+        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
         <Bold type="System.Boolean">True</Bold>
         <Italic type="System.Boolean">True</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[` + json.objects[i].linethrough + `]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[` + json.objects[i].underline + `]]></Underline>
+        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1297,7 +1299,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
+        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1307,7 +1309,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[` + json.objects[i].strokeMiterLimit + `]]></MiterLimit>
+        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1331,9 +1333,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
-      <Rotation type="System.Single"><![CDATA[` +json.objects[i].angle + `]]></Rotation>
-      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
+      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1345,14 +1347,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
+      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
-        <Size type="System.Single"><![CDATA[` + json.objects[i].fontSize + `]]></Size>
+        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
         <Bold type="System.Boolean">False</Bold>
         <Italic type="System.Boolean">False</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[` + json.objects[i].linethrough + `]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[` + json.objects[i].underline + `]]></Underline>
+        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1369,7 +1371,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
+        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1379,7 +1381,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[` + json.objects[i].strokeMiterLimit + `]]></MiterLimit>
+        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1403,9 +1405,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
-      <Rotation type="System.Single"><![CDATA[` + json.objects[i].angle + `]]></Rotation>
-      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
+      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1417,14 +1419,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
+      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
-        <Size type="System.Single"><![CDATA[` + json.objects[i].fontSize + `]]></Size>
+        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
         <Bold type="System.Boolean">False</Bold>
         <Italic type="System.Boolean">True</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[` + json.objects[i].linethrough + `]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[` + json.objects[i].underline + `]]></Underline>
+        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1441,7 +1443,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
+        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1451,7 +1453,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[` + json.objects[i].strokeMiterLimit + `]]></MiterLimit>
+        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1475,9 +1477,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
       <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
-      <Rotation type="System.Single"><![CDATA[` + json.objects[i].angle + `]]></Rotation>
-      <Size type="System.String"><![CDATA[` + mergeX + `, ` + mergeY + `]]></Size>
+      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1489,14 +1491,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
       </ExtraProperties>
       <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[` + json.objects[i].text + `]]></Text>
+      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
       <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[` + json.objects[i].fontFamily + `]]></Name>
-        <Size type="System.Single"><![CDATA[` + json.objects[i].fontSize + `]]></Size>
+        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
         <Bold type="System.Boolean">True</Bold>
         <Italic type="System.Boolean">False</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[` + json.objects[i].linethrough + `]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[` + json.objects[i].underline + `]]></Underline>
+        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
         <CharSet type="System.Int32">0</CharSet>
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
@@ -1513,7 +1515,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[` + json.objects[i].textAlign + `]]></Alignment>
+        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
         <Color type="System.Int32">1258291455</Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
@@ -1523,7 +1525,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Size type="System.String"><![CDATA[15,15]]></Size>
         </EndCap>
         <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[` + json.objects[i].strokeMiterLimit + `]]></MiterLimit>
+        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
         <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
           <Style type="System.String"><![CDATA[None]]></Style>
           <Size type="System.String"><![CDATA[15,15]]></Size>
@@ -1539,9 +1541,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
     <FreehandData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
     <CreationTime type="System.String"><![CDATA[2022-04-07T07:18:15]]></CreationTime>
     <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:22]]></ModifiedTime>
-    <Location type="System.String"><![CDATA[` + json.objects[i].left + `, ` + json.objects[i].top + `]]></Location>
-    <Rotation type="System.Single"><![CDATA[` + json.objects[i].angle + `]]></Rotation>
-    <Size type="System.String"><![CDATA[` + json.objects[i].width + `, ` + json.objects[i].height + `]]></Size>
+    <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+ json.objects[i].top+`]]></Location>
+    <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+    <Size type="System.String"><![CDATA[`+json.objects[i].width+`,`+json.objects[i].height+`]]></Size>
     <Visible type="System.Boolean">True</Visible>
     <CanMove type="System.Boolean">True</CanMove>
     <CanResize type="System.Boolean">True</CanResize>
