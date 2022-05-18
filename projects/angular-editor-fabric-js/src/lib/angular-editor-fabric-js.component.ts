@@ -895,6 +895,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var textLocX = textLocArray[0];
             var textLocY = textLocArray[1];
 
+            var text = textData.getElementsByTagName('Text')[0].textContent;
+
+            var fontData = textData.getElementsByTagName('Font')[0];
+            var fontName = fontData.getElementsByTagName('Name')[0].textContent;
+
+            var fontStyle = fontData.getElementsByTagName('Italic')[0].textContent;
+            var fontBold = fontData.getElementsByTagName('Bold')[0].textContent;
+            var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
+            var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
+            
+            var textAlignData = xmlDoc.getElementsByTagName('Outline')[0];
+            var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
+
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
             var textSizeArray = textSize.split(',');
             let sizeX = parseInt(textSizeArray[0]);
@@ -916,7 +929,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json = `{
+            this.json += `{
               "type": "i-text",
               "version": "3.6.6",
               "originX": "left",
@@ -926,7 +939,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "width": 66.74,
               "height": 45.2,
               "fill": "#`+ fontCode +`",
-              "stroke": "`+ strokeCode +`",
+              "stroke": "#`+ strokeCode +`",
               "strokeWidth": 1,
               "strokeDashArray": null,
               "strokeLineCap": "butt",
@@ -949,16 +962,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "transformMatrix": null,
               "skewX": 0,
               "skewY": 0,
-              "text": "bha",
+              "text": `+ text +`,
               "fontSize": 40,
-              "fontWeight": "",
-              "fontFamily": "helvetica",
-              "fontStyle": "normal",
+              "fontWeight": `+ fontBold +`,
+              "fontFamily": `+ fontName +`,
+              "fontStyle": `+ fontStyle +`,
               "lineHeight": 1.16,
-              "underline": false,
+              "underline": `+ fontUnderline +`,
               "overline": false,
-              "linethrough": false,
-              "textAlign": "left",
+              "linethrough": `+ fontLinethrough +`,
+              "textAlign": `+ textAlign +`,
               "textBackgroundColor": "",
               "charSpacing": 0,
               "styles": {},
