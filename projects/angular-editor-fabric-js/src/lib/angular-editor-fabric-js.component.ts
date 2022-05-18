@@ -1210,7 +1210,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Outline>
       <Translucent type="System.Boolean">False</Translucent>
   </RectangleData>`;
-      } else if (json.objects[i].type == "circle") {
+      } else if (json.objects[i].type == "circle" && json.objects[i].skewX == 1) {
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1218,6 +1218,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
+
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+        
 
         this.xmlData += `
           <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -1235,12 +1243,69 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
           <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
             <ctor type="System.Int32">0</ctor>
-            <Color type="System.Int32">16777215</Color>
+            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
           </Fill>
           <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
             <ctor type="System.Int32">3</ctor>
             <Alignment type="System.String"><![CDATA[Center]]></Alignment>
-            <Color type="System.Int32">-16777216</Color>
+            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+            <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+            <DashOffset type="System.Single">0</DashOffset>
+            <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+            <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+              <Style type="System.String"><![CDATA[None]]></Style>
+              <Size type="System.String"><![CDATA[15,15]]></Size>
+            </EndCap>
+            <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+            <MiterLimit type="System.Single">0</MiterLimit>
+            <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+              <Style type="System.String"><![CDATA[None]]></Style>
+              <Size type="System.String"><![CDATA[15,15]]></Size>
+            </StartCap>
+            <Width type="System.Single">4</Width>
+          </Outline>
+          <Translucent type="System.Boolean">False</Translucent>
+        </EllipseData>`;
+      }
+      else if (json.objects[i].type == "circle" && json.objects[i].skewX == 0) {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
+
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
+
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+        
+
+        this.xmlData += `
+          <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+          <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
+          <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
+          <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+          <Rotation type="System.Single">0</Rotation>
+          <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+          <Visible type="System.Boolean">True</Visible>
+          <CanMove type="System.Boolean">True</CanMove>
+          <CanResize type="System.Boolean">True</CanResize>
+          <CanRotate type="System.Boolean">True</CanRotate>
+          <CanMirror type="System.Boolean">True</CanMirror>
+          <CanSelect type="System.Boolean">True</CanSelect>
+          <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
+          <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+            <ctor type="System.Int32">0</ctor>
+            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+          </Fill>
+          <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+            <ctor type="System.Int32">3</ctor>
+            <Alignment type="System.String"><![CDATA[Center]]></Alignment>
+            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
             <DashCap type="System.String"><![CDATA[Round]]></DashCap>
             <DashOffset type="System.Single">0</DashOffset>
             <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
@@ -1266,6 +1331,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
+
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
+        let bgColor = '4B' + json.objects[i].backgroundColor
+        var backColor = bgColor.replace('#', '');
 
         this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -1297,7 +1372,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">-16777216</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
       </FontBrush>
       <Alignment type="System.String"><![CDATA[Near]]></Alignment>
       <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
@@ -1305,12 +1380,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Trimming type="System.String"><![CDATA[None]]></Trimming>
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">419430655</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
         <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32">1258291455</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
         <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
@@ -1339,6 +1414,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
+        let bgColor = '4B' + json.objects[i].backgroundColor
+        var backColor = bgColor.replace('#', '');
+
         this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
       <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
@@ -1369,7 +1454,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">-16777216</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
       </FontBrush>
       <Alignment type="System.String"><![CDATA[Near]]></Alignment>
       <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
@@ -1377,12 +1462,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Trimming type="System.String"><![CDATA[None]]></Trimming>
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">419430655</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
         <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32">1258291455</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
         <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
@@ -1410,6 +1495,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
+
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
+        let bgColor = '4B' + json.objects[i].backgroundColor
+        var backColor = bgColor.replace('#', '');
 
         this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -1441,7 +1536,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">-16777216</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
       </FontBrush>
       <Alignment type="System.String"><![CDATA[Near]]></Alignment>
       <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
@@ -1449,12 +1544,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Trimming type="System.String"><![CDATA[None]]></Trimming>
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">419430655</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
         <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32">1258291455</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
         <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
@@ -1482,6 +1577,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let width = json.objects[i].width;
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
+
+        //color: hex to dec | for fill and stroke
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
+        let bgColor = '4B' + json.objects[i].backgroundColor
+        var backColor = bgColor.replace('#', '');
 
         this.xmlData += `
       <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -1513,7 +1618,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </Font>
       <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">-16777216</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
       </FontBrush>
       <Alignment type="System.String"><![CDATA[Near]]></Alignment>
       <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
@@ -1521,12 +1626,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Trimming type="System.String"><![CDATA[None]]></Trimming>
       <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
         <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32">419430655</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
       </Fill>
       <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
         <ctor type="System.Int32">3</ctor>
         <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32">1258291455</Color>
+        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
         <DashCap type="System.String"><![CDATA[Round]]></DashCap>
         <DashOffset type="System.Single">0</DashOffset>
         <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
