@@ -825,24 +825,48 @@ export class FabricjsEditorComponent implements AfterViewInit {
           },`;
           }
           else if(items.childNodes[i].nodeName == 'EllipseData') {
-            this.json += `{"type": "circle",
+
+            var ellipseData = xmlDoc.getElementsByTagName('EllipseData')[0];
+            var ellipseLoc = ellipseData.getElementsByTagName('Location')[0].textContent;
+            // console.warn(rectLoc);
+            var ellipseLocArray = ellipseLoc.split(',');
+            var ellipseLocX = ellipseLocArray[0];
+            var ellipseLocY = ellipseLocArray[1];
+
+            var ellipseSize = ellipseData.getElementsByTagName('Size')[0].textContent;
+            var ellipseSizeArray = ellipseSize.split(',');
+            let sizeX = parseInt(ellipseSizeArray[0]);
+            let sizeY = parseInt(ellipseSizeArray[1]);
+            let mergeY = sizeY / 100;
+            let mergeX = sizeX / 200;
+
+            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+            let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+
+            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+            let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+
+            this.json += `{
+            "type": "circle",
             "version": "3.6.6",
             "originX": "left",
             "originY": "top",
-            "left": 10,
-            "top": 10,
+            "left": `+ ellipseLocX +`,
+            "top": `+ ellipseLocY +`,
             "width": 100,
             "height": 100,
-            "fill": "#ff5722",
-            "stroke": null,
+            "fill": #`+ fillCode +`,
+            "stroke": #`+ strokeCode +`,
             "strokeWidth": 1,
             "strokeDashArray": null,
             "strokeLineCap": "butt",
             "strokeDashOffset": 0,
             "strokeLineJoin": "miter",
             "strokeMiterLimit": 4,
-            "scaleX": 1,
-            "scaleY": 1,
+            "scaleX": `+ mergeX +`,
+            "scaleY": `+ mergeY +`,
             "angle": 0,
             "flipX": false,
             "flipY": false,
@@ -861,7 +885,85 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "startAngle": 0,
             "endAngle": 6.283185307179586,
             "id": 302050
-          }`;
+          },`;
+          }
+          else if(items.childNodes[i].nodeName == 'TextData') {
+            var textData = xmlDoc.getElementsByTagName('TextData')[0];
+            var textLoc = textData.getElementsByTagName('Location')[0].textContent;
+            // console.warn(rectLoc);
+            var textLocArray = textLoc.split(',');
+            var textLocX = textLocArray[0];
+            var textLocY = textLocArray[1];
+
+            var textSize = textData.getElementsByTagName('Size')[0].textContent;
+            var textSizeArray = textSize.split(',');
+            let sizeX = parseInt(textSizeArray[0]);
+            let sizeY = parseInt(textSizeArray[1]);
+            let mergeY = sizeY / 100;
+            let mergeX = sizeX / 200;
+
+            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+            let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+
+            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+            let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+
+            var fontData = xmlDoc.getElementsByTagName('FontBrush')[0];
+            var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
+            let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
+
+            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+
+            this.json = `{
+              "type": "i-text",
+              "version": "3.6.6",
+              "originX": "left",
+              "originY": "top",
+              "left": `+ textLocX +`,
+              "top": `+ textLocY +`,
+              "width": 66.74,
+              "height": 45.2,
+              "fill": #`+ fontCode +`,
+              "stroke": `+ strokeCode +`,
+              "strokeWidth": 1,
+              "strokeDashArray": null,
+              "strokeLineCap": "butt",
+              "strokeDashOffset": 0,
+              "strokeLineJoin": "miter",
+              "strokeMiterLimit": 4,
+              "scaleX": `+ mergeX +`,
+              "scaleY": `+ mergeY +`,
+              "angle": 0,
+              "flipX": false,
+              "flipY": false,
+              "opacity": 1,
+              "shadow": null,
+              "visible": true,
+              "clipTo": null,
+              "backgroundColor": `+ fillCode +`,
+              "fillRule": "nonzero",
+              "paintFirst": "fill",
+              "globalCompositeOperation": "source-over",
+              "transformMatrix": null,
+              "skewX": 0,
+              "skewY": 0,
+              "text": "bha",
+              "fontSize": 40,
+              "fontWeight": "",
+              "fontFamily": "helvetica",
+              "fontStyle": "normal",
+              "lineHeight": 1.16,
+              "underline": false,
+              "overline": false,
+              "linethrough": false,
+              "textAlign": "left",
+              "textBackgroundColor": "",
+              "charSpacing": 0,
+              "styles": {},
+              "id": 381639
+            }`
           }
         }
         this.json += `],
