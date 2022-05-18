@@ -752,19 +752,18 @@ export class FabricjsEditorComponent implements AfterViewInit {
         this.json = `{
           "version": "3.6.6",
           "objects": [
-            {`;
+            `;
         for(var i = 0; i < items.childNodes.length; i++) {
           if(items.childNodes[i].nodeName == 'RectangleData') {
 
             var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
-            var rectLoc = rectData.getElementsByTagName('Location')[0].firstChild.textContent.split(',');
-            // var rectLocArray = rectLoc.split(',');
-            var rectLocX = rectLoc[0];
-            var rectLocY = rectLoc[1];
-            alert(rectLocX);
-            alert(rectLocY);
+            var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
+            // console.warn(rectLoc);
+            var rectLocArray = rectLoc.split(',');
+            var rectLocX = rectLocArray[0];
+            var rectLocY = rectLocArray[1];
 
-            var rectSize = rectData.getElementsByTagName('Size')[0].firstChild.textContent;
+            var rectSize = rectData.getElementsByTagName('Size')[0].textContent;
             var rectSizeArray = rectSize.split(',');
             let sizeX = parseInt(rectSizeArray[0]);
             let sizeY = parseInt(rectSizeArray[1]);
@@ -781,7 +780,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json += `"type": "rect",
+            this.json += `{"type": "rect",
             "version": "3.6.6",
             "originX": "left",
             "originY": "top",
