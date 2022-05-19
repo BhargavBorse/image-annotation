@@ -731,8 +731,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
         var xmlDoc=(new DOMParser()).parseFromString(CANVAS,"text/xml");
         
         var items = xmlDoc.getElementsByTagName('Items')[1];
-        
-        this.json = `{
+        var jsonDets = "";
+        jsonDets = `{
           "version": "3.6.6",
           "objects": [
             `;
@@ -768,7 +768,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json += `{"type": "rect",
+            jsonDets += `{"type": "rect",
             "version": "3.6.6",
             "originX": "left",
             "originY": "top",
@@ -828,7 +828,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-            this.json += `{
+            jsonDets += `{
             "type": "circle",
             "version": "3.6.6",
             "originX": "left",
@@ -907,7 +907,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json += `{
+            jsonDets += `{
               "type": "i-text",
               "version": "3.6.6",
               "originX": "left",
@@ -940,16 +940,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "transformMatrix": null,
               "skewX": 0,
               "skewY": 0,
-              "text": `+ text +`,
+              "text": "`+ text +`",
               "fontSize": 40,
               "fontWeight": "bold",
-              "fontFamily": `+ fontName +`,
+              "fontFamily": "`+ fontName +`",
               "fontStyle": "normal",
               "lineHeight": 1.16,
               "underline": `+ fontUnderline +`,
               "overline": false,
               "linethrough": `+ fontLinethrough +`,
-              "textAlign": `+ textAlign +`,
+              "textAlign": "`+ textAlign +`",
               "textBackgroundColor": "",
               "charSpacing": 0,
               "styles": {},
@@ -996,7 +996,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json += `{
+            jsonDets += `{
               "type": "i-text",
               "version": "3.6.6",
               "originX": "left",
@@ -1029,16 +1029,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "transformMatrix": null,
               "skewX": 0,
               "skewY": 0,
-              "text": `+ text +`,
+              "text": "`+ text +`",
               "fontSize": 40,
               "fontWeight": "",
-              "fontFamily": `+ fontName +`,
+              "fontFamily": "`+ fontName +`",
               "fontStyle": "italic",
               "lineHeight": 1.16,
               "underline": `+ fontUnderline +`,
               "overline": false,
               "linethrough": `+ fontLinethrough +`,
-              "textAlign": `+ textAlign +`,
+              "textAlign": "`+ textAlign +`",
               "textBackgroundColor": "",
               "charSpacing": 0,
               "styles": {},
@@ -1085,7 +1085,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json += `{
+            jsonDets += `{
               "type": "i-text",
               "version": "3.6.6",
               "originX": "left",
@@ -1118,16 +1118,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "transformMatrix": null,
               "skewX": 0,
               "skewY": 0,
-              "text": `+ text +`,
+              "text": "`+ text +`",
               "fontSize": 40,
               "fontWeight": "",
-              "fontFamily": `+ fontName +`,
+              "fontFamily": "`+ fontName +`",
               "fontStyle": "normal",
               "lineHeight": 1.16,
               "underline": `+ fontUnderline +`,
               "overline": false,
               "linethrough": `+ fontLinethrough +`,
-              "textAlign": `+ textAlign +`,
+              "textAlign": "`+ textAlign +`",
               "textBackgroundColor": "",
               "charSpacing": 0,
               "styles": {},
@@ -1174,7 +1174,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-            this.json += `{
+            jsonDets += `{
               "type": "i-text",
               "version": "3.6.6",
               "originX": "left",
@@ -1207,16 +1207,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "transformMatrix": null,
               "skewX": 0,
               "skewY": 0,
-              "text": `+ text +`,
+              "text": "`+ text +`",
               "fontSize": 40,
               "fontWeight": "bold",
-              "fontFamily": `+ fontName +`,
+              "fontFamily": "`+ fontName +`",
               "fontStyle": "italic",
               "lineHeight": 1.16,
               "underline": `+ fontUnderline +`,
               "overline": false,
               "linethrough": `+ fontLinethrough +`,
-              "textAlign": `+ textAlign +`,
+              "textAlign": "`+ textAlign +`",
               "textBackgroundColor": "",
               "charSpacing": 0,
               "styles": {},
@@ -1224,9 +1224,37 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }`
           }
         }
-        this.json += `],
+        jsonDets += `],
         "background": "white"
       }`;
+      // console.log(this.json);
+
+
+      localStorage.setItem('jsonData', jsonDets);
+
+        const CANVASREAD = localStorage.getItem('jsonData');
+        this.canvas.loadFromJSON(CANVASREAD, () => {
+          console.log('CANVAS untar');
+          console.log(CANVAS);
+          this.canvas.renderAll();
+        });
+
+      // const readers = new FileReader();
+      // readers.onloadend = (e) => {
+      //   const textJson = readers.result.toString();
+      //   localStorage.setItem('jsonData', this.json);
+
+      //   const CANVAS = localStorage.getItem('jsonData');
+      //   this.canvas.loadFromJSON(CANVAS, () => {
+      //     console.log('CANVAS untar');
+      //     console.log(CANVAS);
+      //     this.canvas.renderAll();
+      //   });
+      // };
+      // readers.readAsText(event.target.files[0]);
+
+
+
       };
       reader.readAsText(event.target.files[0]);
     }
