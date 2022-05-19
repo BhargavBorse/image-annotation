@@ -1167,7 +1167,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
             alert("true true");
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
-            // console.warn(rectLoc);
             var textLocArray = textLoc.split(',');
             var textLocX = textLocArray[0];
             var textLocY = textLocArray[1];
