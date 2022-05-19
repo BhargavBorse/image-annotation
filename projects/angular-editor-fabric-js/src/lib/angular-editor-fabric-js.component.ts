@@ -758,15 +758,15 @@ export class FabricjsEditorComponent implements AfterViewInit {
             let mergeY = sizeY / 100;
             let mergeX = sizeX / 200;
 
-            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillData = rectData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
-            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineData = rectData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+            var rotationData = rectData.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
             jsonDets += `{"type": "rect",
             "version": "3.6.6",
@@ -820,11 +820,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
             let mergeY = sizeY / 100;
             let mergeX = sizeX / 200;
 
-            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillData = ellipseData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
-            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineData = ellipseData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
@@ -883,7 +883,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
             var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
             
-            var textAlignData = xmlDoc.getElementsByTagName('Outline')[0];
+            var textAlignData = textData.getElementsByTagName('Outline')[0];
             var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
             
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
@@ -893,19 +893,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
             let mergeY = sizeY / 100;
             let mergeX = sizeX / 200;
 
-            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillData = textData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
-            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineData = textData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-            var fontData = xmlDoc.getElementsByTagName('FontBrush')[0];
+            var fontData = textData.getElementsByTagName('FontBrush')[0];
             var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
 
-            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+            var rotationData = textData.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
             jsonDets += `{
               "type": "i-text",
@@ -972,7 +972,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
             var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
             
-            var textAlignData = xmlDoc.getElementsByTagName('Outline')[0];
+            var textAlignData = textData.getElementsByTagName('Outline')[0];
             var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
 
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
@@ -982,19 +982,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
             let mergeY = sizeY / 100;
             let mergeX = sizeX / 200;
 
-            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillData = textData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
-            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineData = textData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-            var fontData = xmlDoc.getElementsByTagName('FontBrush')[0];
+            var fontData = textData.getElementsByTagName('FontBrush')[0];
             var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
 
-            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+            var rotationData = textData.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
             jsonDets += `{
               "type": "i-text",
@@ -1072,19 +1072,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
             let mergeY = sizeY / 100;
             let mergeX = sizeX / 200;
 
-            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillData = textData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
-            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineData = textData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-            var fontData = xmlDoc.getElementsByTagName('FontBrush')[0];
+            var fontData = textData.getElementsByTagName('FontBrush')[0];
             var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
 
-            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+            var rotationData = textData.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
             jsonDets += `{
               "type": "i-text",
@@ -1151,7 +1151,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
             var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
             
-            var textAlignData = xmlDoc.getElementsByTagName('Outline')[0];
+            var textAlignData = textData.getElementsByTagName('Outline')[0];
             var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
 
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
@@ -1161,19 +1161,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
             let mergeY = sizeY / 100;
             let mergeX = sizeX / 200;
 
-            var fillData = xmlDoc.getElementsByTagName('Fill')[0];
+            var fillData = textData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
 
-            var outlineData = xmlDoc.getElementsByTagName('Outline')[0];
+            var outlineData = textData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-            var fontData = xmlDoc.getElementsByTagName('FontBrush')[0];
+            var fontData = textData.getElementsByTagName('FontBrush')[0];
             var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
 
-            var rotationData = xmlDoc.getElementsByTagName('Rotation')[0].firstChild.textContent;
+            var rotationData = textData.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
             jsonDets += `{
               "type": "i-text",
