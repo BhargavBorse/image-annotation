@@ -66,14 +66,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
-
-
-    // setup front side canvas
     this.canvas = new fabric.Canvas('canvas', {
       hoverCursor: 'pointer',
       selection: false,
       selectionBorderColor: 'blue',
-      // backgroundImage: backImg,
       backgroundColor: 'white',
     });
 
@@ -122,7 +118,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
 
-    // get references to the html canvas element & its context
     this.canvas.on('mouse:down', (e) => {
       const canvasElement: any = document.getElementById('canvas');
     });
@@ -132,16 +127,10 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
   }
 
-  /*------------------------Block elements------------------------*/
-
-  // Block "Size"
-
   changeSize() {
     this.canvas.setWidth(this.size.width);
     this.canvas.setHeight(this.size.height);
   }
-
-  // Block "Add text"
 
   addText() {
     if (this.textString) {
@@ -164,8 +153,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     }
   }
 
-  // Block "Add images"
-
   getImgPolaroid(event: any) {
     const el = event.target;
     fabric.loadSVGFromURL(el.src, (objects, options) => {
@@ -183,8 +170,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
       this.selectItemAfterAdded(image);
     });
   }
-
-  // Block "Upload Image"
 
   addImageOnCanvas(url, renderInBack) {
     if (!renderInBack) {
@@ -287,8 +272,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.selectItemAfterAdded(add);
   }
 
-  /*Canvas*/
-
   cleanSelect() {
     this.canvas.discardActiveObject().renderAll();
   }
@@ -331,8 +314,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
   randomId() {
     return Math.floor(Math.random() * 999999) + 1;
   }
-
-  /*------------------------Global actions for element------------------------*/
 
   getActiveStyle(styleName, object) {
     object = object || this.canvas.getActiveObject();
@@ -419,7 +400,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
     object.setCoords();
     this.canvas.renderAll();
   }
-
 
   getActiveProp(name) {
     const object = this.canvas.getActiveObject();
@@ -594,16 +574,13 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.setActiveProp('fontFamily', this.props.fontFamily);
   }
 
-  /*System*/
-
-
   removeSelected() {
     const activeObject = this.canvas.getActiveObject();
     const activeGroup = this.canvas.getActiveObjects();
 
     if (activeObject) {
       this.canvas.remove(activeObject);
-      // this.textString = '';
+      
     } else if (activeGroup) {
       this.canvas.discardActiveObject();
       const self = this;
@@ -649,7 +626,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
   zoomInCanvas() {
-    //alert(this.canvas.getHeight() + ' AND ' + this.canvas.getWidth());
     this.canvas.setZoom(this.canvas.getZoom() * 1.1);
     this.canvas.setHeight(this.canvas.getHeight() * 1.1);
     this.canvas.setWidth(this.canvas.getWidth() * 1.1);
@@ -771,7 +747,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
-            // console.warn(rectLoc);
             var rectLocArray = rectLoc.split(',');
             var rectLocX = rectLocArray[0];
             var rectLocY = rectLocArray[1];
@@ -834,7 +809,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
             var ellipseData = xmlDoc.getElementsByTagName('EllipseData')[0];
             var ellipseLoc = ellipseData.getElementsByTagName('Location')[0].textContent;
-            // console.warn(rectLoc);
             var ellipseLocArray = ellipseLoc.split(',');
             var ellipseLocX = ellipseLocArray[0];
             var ellipseLocY = ellipseLocArray[1];
@@ -894,10 +868,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
           },`;
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "True" && fontStyleDet == "False") {
-            alert("true false");
+          
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
-            // console.warn(rectLoc);
             var textLocArray = textLoc.split(',');
             var textLocX = textLocArray[0];
             var textLocY = textLocArray[1];
@@ -984,10 +957,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }`
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "True") {
-            alert("false true");
+            
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
-            // console.warn(rectLoc);
             var textLocArray = textLoc.split(',');
             var textLocX = textLocArray[0];
             var textLocY = textLocArray[1];
@@ -1074,10 +1046,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }`
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "False") {
-            alert("false false");
+            
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
-            // console.warn(rectLoc);
             var textLocArray = textLoc.split(',');
             var textLocX = textLocArray[0];
             var textLocY = textLocArray[1];
@@ -1164,7 +1135,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }`
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "True" && fontStyleDet == "True") {
-            alert("true true");
+            
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
             var textLocArray = textLoc.split(',');
@@ -1256,8 +1227,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         this.json += `],
         "background": "white"
       }`;
-        // this.json = `{"objects": [${rect.innerHTML}]}`;
-        // var location = rect.getElementsByTagName('Location')[0].firstChild.textContent;
       };
       reader.readAsText(event.target.files[0]);
     }
@@ -1322,23 +1291,18 @@ export class FabricjsEditorComponent implements AfterViewInit {
     return dec;
   }
 
-  convertDectoHex(s)
-    {
-      var s = s.toString(16);
-      if (s.length == 1)
-        s = "0" + s;
-      return s;
-
-    }
+  convertDectoHex(s){
+    var s = s.toString(16);
+    if (s.length == 1)
+      s = "0" + s;
+    return s;
+  }
     
   xmlJson() {
-
-    // remove anchor if xmlJson function is called again 
     let hideBtn = document.getElementById('hid');
     if (hideBtn) {
       hideBtn.remove();
     }
-
     // "419430655" transparent color code for atlasoft
     this.xml = JSON.stringify(this.canvas, null, 2);
     var json = JSON.parse(this.xml);
@@ -1380,7 +1344,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1528,7 +1491,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1604,7 +1566,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1661,7 +1622,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1717,7 +1677,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1799,7 +1758,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1881,7 +1839,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -1963,7 +1920,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
         let scaleX = json.objects[i].scaleX;
         let mergeX = width * scaleX;
 
-        //color: hex to dec | for fill and stroke
         let fill = '4B' + json.objects[i].fill;
         var color = fill.replace('#', '');
         
@@ -2088,7 +2044,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
   </rdf:RDF>
   </x:xmpmeta>`;
 
-    //Download button for XML file
     let anchor = document.createElement("a");
     anchor.className = "btn btn-outline-dark btn-sm";
     anchor.setAttribute("id", "hid");
@@ -2107,32 +2062,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
     let divCont = document.getElementById('card-header');
     divCont.appendChild(anchor);
-
-    // alert(js2xmlparser.parse("xml", json.objects[0].fill));
-    // const creatorTool = json.background;
-
-    // document.getElementById('creatorTool').innerHTML = creatorTool;
-    // const data = "in xmlJson";
-    // this.xml = data;
-    // var json = JSON.parse(this.json);
-    // console.log(js2xmlparser.parse("xml", json));
-    // console.log(json.objects[0].fill);
-    // let obj = {
-    //   "firstName": "John",
-    //   "lastName": "Smith",
-    //   "dateOfBirth": new Date(1964, 7, 26),
-    //   "address": {
-    //     "@": {
-    //       "type": "home"
-    //     },
-    //     "streetAddress": "3212 22nd St",
-    //     "city": "Chicago",
-    //     "state": "Illinois",
-    //     "zip": 10000
-    //   }
-    // };
-
-    // console.log(js2xmlparser.parse("person", obj));
   }
 
   resetPanels() {
@@ -2140,5 +2069,4 @@ export class FabricjsEditorComponent implements AfterViewInit {
     this.imageEditor = false;
     this.figureEditor = false;
   }
-
 }
