@@ -885,7 +885,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             
             var textAlignData = xmlDoc.getElementsByTagName('Outline')[0];
             var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
-
+            
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
             var textSizeArray = textSize.split(',');
             let sizeX = parseInt(textSizeArray[0]);
@@ -1061,8 +1061,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
             var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
             
-            var textAlignData = xmlDoc.getElementsByTagName('Outline')[0];
+            var textAlignData = textData.getElementsByTagName('Outline')[0];
             var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
+            alert(textAlign);
 
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
             var textSizeArray = textSize.split(',');
@@ -1228,6 +1229,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
         "background": "white"
       }`;
       // console.log(this.json);
+      console.log(jsonDets);
 
 
       localStorage.setItem('jsonData', jsonDets);
@@ -1386,13 +1388,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <ModifiedTime type="System.String">
                   <![CDATA[2022-04-18T02:32:07]]>
               </ModifiedTime>
-              <Location type="System.String">
-                  <![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]>
-              </Location>
+              <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
               <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
-              <Size type="System.String">
-                  <![CDATA[`+mergeX+`,`+mergeY+`]]>
-              </Size>
+              <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
               <Visible type="System.Boolean">True</Visible>
               <CanMove type="System.Boolean">True</CanMove>
               <CanResize type="System.Boolean">True</CanResize>
@@ -1458,13 +1456,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <ModifiedTime type="System.String">
               <![CDATA[2022-04-18T02:32:07]]>
           </ModifiedTime>
-          <Location type="System.String">
-              <![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]>
-          </Location>
+          <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
           <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
-          <Size type="System.String">
-              <![CDATA[`+mergeX+`,`+mergeY+`]]>
-          </Size>
+          <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
           <CanResize type="System.Boolean">True</CanResize>
@@ -1533,13 +1527,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <ModifiedTime type="System.String">
           <![CDATA[2022-04-18T02:32:07]]>
       </ModifiedTime>
-      <Location type="System.String">
-          <![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]>
-      </Location>
+      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
       <Rotation type="System.Single">`+json.objects[i].angle+`</Rotation>
-      <Size type="System.String">
-          <![CDATA[`+mergeX+`,`+mergeY+`]]>
-      </Size>
+      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
       <Visible type="System.Boolean">True</Visible>
       <CanMove type="System.Boolean">True</CanMove>
       <CanResize type="System.Boolean">True</CanResize>
@@ -1697,6 +1687,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Translucent type="System.Boolean">False</Translucent>
         </EllipseData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic") {
+        alert("true true");
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1778,6 +1769,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal") {
+        alert("false false");
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1859,6 +1851,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic") {
+        alert("false true");
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1940,6 +1933,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal") {
+        alert("true false");
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
