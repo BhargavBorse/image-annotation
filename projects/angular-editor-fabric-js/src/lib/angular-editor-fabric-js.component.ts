@@ -893,7 +893,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "id": 302050
           },`;
           }
-          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "true" && fontStyleDet == "false") {
+          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "True" && fontStyleDet == "False") {
+            alert("true false");
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
             // console.warn(rectLoc);
@@ -982,7 +983,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "id": 381639
             }`
           }
-          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "false" && fontStyleDet == "true") {
+          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "True") {
+            alert("false true");
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
             // console.warn(rectLoc);
@@ -1071,7 +1073,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "id": 381639
             }`
           }
-          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "false" && fontStyleDet == "false") {
+          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "False") {
+            alert("false false");
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
             // console.warn(rectLoc);
@@ -1160,7 +1163,8 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "id": 381639
             }`
           }
-          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "true" && fontStyleDet == "true") {
+          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "True" && fontStyleDet == "True") {
+            alert("true true");
             var textData = xmlDoc.getElementsByTagName('TextData')[0];
             var textLoc = textData.getElementsByTagName('Location')[0].textContent;
             // console.warn(rectLoc);
