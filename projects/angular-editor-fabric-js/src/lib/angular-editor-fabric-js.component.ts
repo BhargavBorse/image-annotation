@@ -954,7 +954,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "charSpacing": 0,
               "styles": {},
               "id": 381639
-            }`
+            },`
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "True") {
             
@@ -1043,7 +1043,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "charSpacing": 0,
               "styles": {},
               "id": 381639
-            }`
+            },`
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "False") {
             
@@ -1133,7 +1133,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "charSpacing": 0,
               "styles": {},
               "id": 381639
-            }`
+            },`
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "True" && fontStyleDet == "True") {
             
@@ -1222,7 +1222,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "charSpacing": 0,
               "styles": {},
               "id": 381639
-            }`
+            },`
           }
         }
         jsonDets += `],
