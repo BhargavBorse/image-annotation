@@ -1063,7 +1063,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
             
             var textAlignData = textData.getElementsByTagName('Outline')[0];
             var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
-            alert(textAlign);
 
             var textSize = textData.getElementsByTagName('Size')[0].textContent;
             var textSizeArray = textSize.split(',');
@@ -1224,20 +1223,17 @@ export class FabricjsEditorComponent implements AfterViewInit {
               "id": 381639
             },`
           }
-        }
-        jsonDets += `],
-        "background": "white"
-      }`;
-      // console.log(this.json);
-      console.log(jsonDets);
+        }      
 
+        jsonDets = jsonDets.slice(0, -1);
+      jsonDets += `],
+      "background": "white"
+    }`;
 
       localStorage.setItem('jsonData', jsonDets);
 
         const CANVASREAD = localStorage.getItem('jsonData');
         this.canvas.loadFromJSON(CANVASREAD, () => {
-          console.log('CANVAS untar');
-          console.log(CANVAS);
           this.canvas.renderAll();
         });
 
