@@ -1230,8 +1230,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           "background": "white"
         }`;
 
-      localStorage.setItem('jsonData', jsonDets);
-
+        localStorage.setItem('jsonData', jsonDets);
         const CANVASREAD = localStorage.getItem('jsonData');
         this.canvas.loadFromJSON(CANVASREAD, () => {
           this.canvas.renderAll();
