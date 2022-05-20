@@ -1226,9 +1226,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
         }      
 
         jsonDets = jsonDets.slice(0, -1);
-      jsonDets += `],
-      "background": "white"
-    }`;
+        jsonDets += `],
+          "background": "white"
+        }`;
 
       localStorage.setItem('jsonData', jsonDets);
 
