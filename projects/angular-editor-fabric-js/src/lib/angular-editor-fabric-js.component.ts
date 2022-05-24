@@ -713,8 +713,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
         const CANVAS = localStorage.getItem('jsonData');
         this.canvas.loadFromJSON(CANVAS, () => {
-          console.log('CANVAS untar');
-          console.log(CANVAS);
           this.canvas.renderAll();
         });
       };
@@ -1682,7 +1680,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           <Translucent type="System.Boolean">False</Translucent>
         </EllipseData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic") {
-        alert("true true");
+        
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1764,7 +1762,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal") {
-        alert("false false");
+        
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1846,7 +1844,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic") {
-        alert("false true");
+        
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
@@ -1928,7 +1926,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       <Minimized type="System.Boolean">False</Minimized>
     </TextData>`;
       } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal") {
-        alert("true false");
+        
         let height = json.objects[i].height;
         let scaleY = json.objects[i].scaleY;
         let mergeY = height * scaleY;
