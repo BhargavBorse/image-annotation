@@ -734,16 +734,14 @@ export class FabricjsEditorComponent implements AfterViewInit {
           "version": "3.6.6",
           "objects": [
             `;
-        for(var i = 0; i < items.childNodes.length; i++) {
-         
-          var textDet = xmlDoc.getElementsByTagName('TextData')[0];
-          var fontDet = textDet.getElementsByTagName('Font')[0];
-          var fontStyleDet = fontDet.getElementsByTagName('Italic')[0].textContent;
-          var fontWeightDet = fontDet.getElementsByTagName('Bold')[0].textContent;
+        for(var i = 0; i < items.childNodes.length-2; i++) {
+          if(i%2 == 0) {
+            continue;
+          }
 
           if(items.childNodes[i].nodeName == 'RectangleData') {
             
-            var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
+            var rectData = xmlDoc.getElementsByTagName('RectangleData')[i];
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
             var rectLocArray = rectLoc.split(',');
             var rectLocX = rectLocArray[0];
@@ -865,94 +863,101 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "id": 302050
           },`;
           }
-          else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "True" && fontStyleDet == "False") {
-          
-            var textData = xmlDoc.getElementsByTagName('TextData')[0];
-            var textLoc = textData.getElementsByTagName('Location')[0].textContent;
-            var textLocArray = textLoc.split(',');
-            var textLocX = textLocArray[0];
-            var textLocY = textLocArray[1];
-
-            var text = textData.getElementsByTagName('Text')[0].textContent;
-
-            var fontData = textData.getElementsByTagName('Font')[0];
-            var fontName = fontData.getElementsByTagName('Name')[0].textContent;
-
-            var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
-            var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
+          else if(items.childNodes[i].nodeName == 'TextData') {
+            var textDet = xmlDoc.getElementsByTagName('TextData')[i];
+            var fontDet = textDet.getElementsByTagName('Font')[0];
+            var fontStyleDet = fontDet.getElementsByTagName('Italic')[0].innerHTML;
+            var fontWeightDet = fontDet.getElementsByTagName('Bold')[0].innerHTML;
             
-            var textAlignData = textData.getElementsByTagName('Outline')[0];
-            var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
-            
-            var textSize = textData.getElementsByTagName('Size')[0].textContent;
-            var textSizeArray = textSize.split(',');
-            let sizeX = parseInt(textSizeArray[0]);
-            let sizeY = parseInt(textSizeArray[1]);
-            let mergeY = sizeY / 100;
-            let mergeX = sizeX / 200;
+            if(fontWeightDet == "True" && fontStyleDet == "False"){
 
-            var fillData = textData.getElementsByTagName('Fill')[0];
-            var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
-            let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+              var textData = xmlDoc.getElementsByTagName('TextData')[0];
+              var textLoc = textData.getElementsByTagName('Location')[0].textContent;
+              var textLocArray = textLoc.split(',');
+              var textLocX = textLocArray[0];
+              var textLocY = textLocArray[1];
 
-            var outlineData = textData.getElementsByTagName('Outline')[0];
-            var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
-            let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+              var text = textData.getElementsByTagName('Text')[0].textContent;
 
-            var fontData = textData.getElementsByTagName('FontBrush')[0];
-            var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
-            let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
+              var fontData = textData.getElementsByTagName('Font')[0];
+              var fontName = fontData.getElementsByTagName('Name')[0].textContent;
 
-            var rotationData = textData.getElementsByTagName('Rotation')[0].firstChild.textContent;
+              var fontUnderline = fontData.getElementsByTagName('Underline')[0].textContent;
+              var fontLinethrough = fontData.getElementsByTagName('Strikeout')[0].textContent;
+              
+              var textAlignData = textData.getElementsByTagName('Outline')[0];
+              var textAlign = textAlignData.getElementsByTagName('Alignment')[0].textContent;
+              
+              var textSize = textData.getElementsByTagName('Size')[0].textContent;
+              var textSizeArray = textSize.split(',');
+              let sizeX = parseInt(textSizeArray[0]);
+              let sizeY = parseInt(textSizeArray[1]);
+              let mergeY = sizeY / 100;
+              let mergeX = sizeX / 200;
 
-            jsonDets += `{
-              "type": "i-text",
-              "version": "3.6.6",
-              "originX": "left",
-              "originY": "top",
-              "left": `+ textLocX +`,
-              "top": `+ textLocY +`,
-              "width": 66.74,
-              "height": 45.2,
-              "fill": "#`+ fontCode +`",
-              "stroke": "#`+ strokeCode +`",
-              "strokeWidth": 1,
-              "strokeDashArray": null,
-              "strokeLineCap": "butt",
-              "strokeDashOffset": 0,
-              "strokeLineJoin": "miter",
-              "strokeMiterLimit": 4,
-              "scaleX": `+ mergeX +`,
-              "scaleY": `+ mergeY +`,
-              "angle": `+ rotationData +`,
-              "flipX": false,
-              "flipY": false,
-              "opacity": 1,
-              "shadow": null,
-              "visible": true,
-              "clipTo": null,
-              "backgroundColor": "#`+ fillCode +`",
-              "fillRule": "nonzero",
-              "paintFirst": "fill",
-              "globalCompositeOperation": "source-over",
-              "transformMatrix": null,
-              "skewX": 0,
-              "skewY": 0,
-              "text": "`+ text +`",
-              "fontSize": 40,
-              "fontWeight": "bold",
-              "fontFamily": "`+ fontName +`",
-              "fontStyle": "normal",
-              "lineHeight": 1.16,
-              "underline": `+ fontUnderline +`,
-              "overline": false,
-              "linethrough": `+ fontLinethrough +`,
-              "textAlign": "`+ textAlign +`",
-              "textBackgroundColor": "",
-              "charSpacing": 0,
-              "styles": {},
-              "id": 381639
-            },`
+              var fillData = textData.getElementsByTagName('Fill')[0];
+              var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+              let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+
+              var outlineData = textData.getElementsByTagName('Outline')[0];
+              var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+              let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+
+              var fontData = textData.getElementsByTagName('FontBrush')[0];
+              var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
+              let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
+
+              var rotationData = textData.getElementsByTagName('Rotation')[0].firstChild.textContent;
+
+              jsonDets += `{
+                "type": "i-text",
+                "version": "3.6.6",
+                "originX": "left",
+                "originY": "top",
+                "left": `+ textLocX +`,
+                "top": `+ textLocY +`,
+                "width": 66.74,
+                "height": 45.2,
+                "fill": "#`+ fontCode +`",
+                "stroke": "#`+ strokeCode +`",
+                "strokeWidth": 1,
+                "strokeDashArray": null,
+                "strokeLineCap": "butt",
+                "strokeDashOffset": 0,
+                "strokeLineJoin": "miter",
+                "strokeMiterLimit": 4,
+                "scaleX": `+ mergeX +`,
+                "scaleY": `+ mergeY +`,
+                "angle": `+ rotationData +`,
+                "flipX": false,
+                "flipY": false,
+                "opacity": 1,
+                "shadow": null,
+                "visible": true,
+                "clipTo": null,
+                "backgroundColor": "#`+ fillCode +`",
+                "fillRule": "nonzero",
+                "paintFirst": "fill",
+                "globalCompositeOperation": "source-over",
+                "transformMatrix": null,
+                "skewX": 0,
+                "skewY": 0,
+                "text": "`+ text +`",
+                "fontSize": 40,
+                "fontWeight": "bold",
+                "fontFamily": "`+ fontName +`",
+                "fontStyle": "normal",
+                "lineHeight": 1.16,
+                "underline": `+ fontUnderline +`,
+                "overline": false,
+                "linethrough": `+ fontLinethrough +`,
+                "textAlign": "`+ textAlign +`",
+                "textBackgroundColor": "",
+                "charSpacing": 0,
+                "styles": {},
+                "id": 381639
+              },`
+            }
           }
           else if(items.childNodes[i].nodeName == 'TextData' && fontWeightDet == "False" && fontStyleDet == "True") {
             
