@@ -741,7 +741,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
 
           if(items.childNodes[i].nodeName == 'RectangleData') {
             
-            var rectData = xmlDoc.getElementsByTagName('RectangleData')[i];
+            var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
             var rectLocArray = rectLoc.split(',');
             var rectLocX = rectLocArray[0];
@@ -864,7 +864,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           },`;
           }
           else if(items.childNodes[i].nodeName == 'TextData') {
-            var textDet = xmlDoc.getElementsByTagName('TextData')[i];
+            var textDet = xmlDoc.getElementsByTagName('TextData')[0];
             var fontDet = textDet.getElementsByTagName('Font')[0];
             var fontStyleDet = fontDet.getElementsByTagName('Italic')[0].innerHTML;
             var fontWeightDet = fontDet.getElementsByTagName('Bold')[0].innerHTML;
