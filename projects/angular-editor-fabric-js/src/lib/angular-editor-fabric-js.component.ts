@@ -742,7 +742,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           var fontWeightDet = fontDet.getElementsByTagName('Bold')[0].textContent;
 
           if(items.childNodes[i].nodeName == 'RectangleData') {
-
+            
             var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
             var rectLocArray = rectLoc.split(',');
@@ -759,7 +759,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fillData = rectData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
-
+            console.log(fillCode);
             var outlineData = rectData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
@@ -1462,7 +1462,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               type="System.Collections.Specialized.StringCollection" />
           <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
               <ctor type="System.Int32">0</ctor>
-              <Color type="System.Int32">16777215</Color>
+              <Color type="System.Int32"><![CDATA[16777215]]></Color>
           </Fill>
           <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
               <ctor type="System.Int32">3</ctor>
