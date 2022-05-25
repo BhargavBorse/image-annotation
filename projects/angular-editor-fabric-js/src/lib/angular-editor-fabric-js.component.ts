@@ -734,14 +734,20 @@ export class FabricjsEditorComponent implements AfterViewInit {
           "version": "3.6.6",
           "objects": [
             `;
-        for(var i = 0; i < items.childNodes.length-2; i++) {
+        for(var i = 0; i < items.childNodes.length; i++) {
           if(i%2 == 0) {
+            // console.log(items);
             continue;
           }
 
           if(items.childNodes[i].nodeName == 'RectangleData') {
             
-            var rectData = xmlDoc.getElementsByTagName('RectangleData')[0];
+            // var rectItem = items.childNodes[i];
+            // console.log(rectItem.textContent);
+            
+            var rectData = xmlDoc.getElementsByTagName('RectangleData')[i];
+            console.log(rectData.textContent);
+
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
             var rectLocArray = rectLoc.split(',');
             var rectLocX = rectLocArray[0];
@@ -757,7 +763,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             var fillData = rectData.getElementsByTagName('Fill')[0];
             var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
             let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
-            console.log(fillCode);
+            // console.log(fillCode);
             var outlineData = rectData.getElementsByTagName('Outline')[0];
             var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
             let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
