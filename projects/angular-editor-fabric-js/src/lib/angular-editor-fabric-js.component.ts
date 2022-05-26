@@ -2061,6 +2061,38 @@ export class FabricjsEditorComponent implements AfterViewInit {
   //   <LineType type="System.String"><![CDATA[Straight]]></LineType>
   // </FreehandData>`;
   //     }
-Straight]]></LineType>
-      // </FreehandData>`;
-      //     }
+    }
+    this.xmlData += `</Items>
+  </Items>
+  </LayerData>
+  </LayerDataCollection>
+  </rdf:Description>
+  </rdf:RDF>
+  </x:xmpmeta>`;
+
+    let anchor = document.createElement("a");
+    anchor.className = "btn btn-outline-dark btn-sm";
+    anchor.setAttribute("id", "hid");
+    anchor.style.marginLeft = '10px';
+    let a_text = document.createTextNode('Download XML File');
+    anchor.appendChild(a_text);
+
+    let iTag = document.createElement("i");
+    iTag.setAttribute("class", "fa fa-download");
+    iTag.style.marginLeft = "5px";
+
+    anchor.appendChild(iTag);
+
+    anchor.download = "sample.xml";
+    anchor.href = "data:text/xml," + encodeURIComponent(this.xmlData);
+
+    let divCont = document.getElementById('card-header');
+    divCont.appendChild(anchor);
+  }
+
+  resetPanels() {
+    this.textEditor = false;
+    this.imageEditor = false;
+    this.figureEditor = false;
+  }
+}
