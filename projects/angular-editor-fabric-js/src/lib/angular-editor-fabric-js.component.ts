@@ -739,13 +739,12 @@ export class FabricjsEditorComponent implements AfterViewInit {
             // console.log(items);
             continue;
           }
-
           if(items.childNodes[i].nodeName == 'RectangleData') {
             
-            // var rectItem = items.childNodes[i];
+            var rectItem = items.childNodes[i];
             // console.log(rectItem.textContent);
             
-            var rectData = xmlDoc.getElementsByTagName('RectangleData')[i];
+            var rectData = items.getElementsByTagName('RectangleData')[i];
             console.log(rectData.textContent);
 
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
