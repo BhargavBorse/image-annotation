@@ -734,19 +734,19 @@ export class FabricjsEditorComponent implements AfterViewInit {
           "version": "3.6.6",
           "objects": [
             `;
-        for(var i = 0; i < items.childNodes.length; i++) {
-          if(i%2 == 0) {
-            // console.log(items);
-            continue;
-          }
+        for(var i = 0; i < items.children.length; i++) {
+          // if(i%2 == 0) {
+          //   // console.log(items);
+          //   continue;
+          // }
 
-          if(items.childNodes[i].nodeName == 'RectangleData') {
+          if(items.children[i].nodeName == 'RectangleData') {
             
             // var rectItem = items.childNodes[i];
             // console.log(rectItem.textContent);
             
             var rectData = xmlDoc.getElementsByTagName('RectangleData')[i];
-            console.log(rectData.textContent);
+            // console.log(rectData.textContent);
 
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
             var rectLocArray = rectLoc.split(',');
@@ -807,7 +807,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "id": 808065
           },`;
           }
-          else if(items.childNodes[i].nodeName == 'EllipseData') {
+          else if(items.children[i].nodeName == 'EllipseData') {
 
             var ellipseData = xmlDoc.getElementsByTagName('EllipseData')[0];
             var ellipseLoc = ellipseData.getElementsByTagName('Location')[0].textContent;
@@ -869,7 +869,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             "id": 302050
           },`;
           }
-          else if(items.childNodes[i].nodeName == 'TextData') {
+          else if(items.children[i].nodeName == 'TextData') {
             var textDet = xmlDoc.getElementsByTagName('TextData')[0];
             var fontDet = textDet.getElementsByTagName('Font')[0];
             var fontStyleDet = fontDet.getElementsByTagName('Italic')[0].innerHTML;
