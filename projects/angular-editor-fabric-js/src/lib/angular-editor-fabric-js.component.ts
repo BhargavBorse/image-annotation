@@ -745,10 +745,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
             // var rectItem = items.childNodes[i];
             // console.log(rectItem.textContent);
             
-            var rectData = xmlDoc.getElementsByTagName('RectangleData')[i];
+            var rectData = items.getElementsByTagName('RectangleData')[i];
             // console.log(rectData.textContent);
 
             var rectLoc = rectData.getElementsByTagName('Location')[0].textContent;
+            console.log("Rectangle: "+ rectLoc);
             var rectLocArray = rectLoc.split(',');
             var rectLocX = rectLocArray[0];
             var rectLocY = rectLocArray[1];
@@ -809,8 +810,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
           }
           else if(items.children[i].nodeName == 'EllipseData') {
 
-            var ellipseData = xmlDoc.getElementsByTagName('EllipseData')[0];
+            var ellipseData = items.getElementsByTagName('EllipseData')[0];
             var ellipseLoc = ellipseData.getElementsByTagName('Location')[0].textContent;
+            console.log("Ellipse: "+ ellipseLoc);
             var ellipseLocArray = ellipseLoc.split(',');
             var ellipseLocX = ellipseLocArray[0];
             var ellipseLocY = ellipseLocArray[1];
@@ -870,15 +872,16 @@ export class FabricjsEditorComponent implements AfterViewInit {
           },`;
           }
           else if(items.children[i].nodeName == 'TextData') {
-            var textDet = xmlDoc.getElementsByTagName('TextData')[0];
+            var textDet = items.getElementsByTagName('TextData')[0];
             var fontDet = textDet.getElementsByTagName('Font')[0];
             var fontStyleDet = fontDet.getElementsByTagName('Italic')[0].innerHTML;
             var fontWeightDet = fontDet.getElementsByTagName('Bold')[0].innerHTML;
 
             if(fontWeightDet == "True" && fontStyleDet == "False"){
 
-              var textData = xmlDoc.getElementsByTagName('TextData')[0];
+              var textData = items.getElementsByTagName('TextData')[0];
               var textLoc = textData.getElementsByTagName('Location')[0].textContent;
+              console.log("Text: "+ textLoc);
               var textLocArray = textLoc.split(',');
               var textLocX = textLocArray[0];
               var textLocY = textLocArray[1];
@@ -966,8 +969,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }
             else if(fontWeightDet == "False" && fontStyleDet == "True"){
               
-              var textData = xmlDoc.getElementsByTagName('TextData')[0];
+              var textData = items.getElementsByTagName('TextData')[0];
               var textLoc = textData.getElementsByTagName('Location')[0].textContent;
+              console.log("Text: "+ textLoc);
               var textLocArray = textLoc.split(',');
               var textLocX = textLocArray[0];
               var textLocY = textLocArray[1];
@@ -1055,8 +1059,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }
             else if(fontWeightDet == "True" && fontStyleDet == "True"){
               
-              var textData = xmlDoc.getElementsByTagName('TextData')[0];
+              var textData = items.getElementsByTagName('TextData')[0];
               var textLoc = textData.getElementsByTagName('Location')[0].textContent;
+              console.log("Text: "+ textLoc);
               var textLocArray = textLoc.split(',');
               var textLocX = textLocArray[0];
               var textLocY = textLocArray[1];
@@ -1144,8 +1149,9 @@ export class FabricjsEditorComponent implements AfterViewInit {
             }
             else if(fontWeightDet == "False" && fontStyleDet == "False"){
               
-              var textData = xmlDoc.getElementsByTagName('TextData')[0];
+              var textData = items.getElementsByTagName('TextData')[0];
               var textLoc = textData.getElementsByTagName('Location')[0].textContent;
+              console.log("Text: "+ textLoc);
               var textLocArray = textLoc.split(',');
               var textLocX = textLocArray[0];
               var textLocY = textLocArray[1];
