@@ -709,10 +709,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       const reader = new FileReader();
       reader.onloadend = (e) => {
         const textJson = reader.result.toString();
-        localStorage.setItem('jsonData', textJson);
-
-        const CANVAS = localStorage.getItem('jsonData');
-        this.canvas.loadFromJSON(CANVAS, () => {
+        this.canvas.loadFromJSON(textJson, () => {
           this.canvas.renderAll();
         });
       };
@@ -1245,28 +1242,11 @@ export class FabricjsEditorComponent implements AfterViewInit {
           "background": "white"
         }`;
 
-        localStorage.setItem('jsonData', jsonDets);
-        const CANVASREAD = localStorage.getItem('jsonData');
-        this.canvas.loadFromJSON(CANVASREAD, () => {
+        // localStorage.setItem('jsonData', jsonDets);
+        // const CANVASREAD = localStorage.getItem('jsonData');
+        this.canvas.loadFromJSON(jsonDets, () => {
           this.canvas.renderAll();
         });
-
-      // const readers = new FileReader();
-      // readers.onloadend = (e) => {
-      //   const textJson = readers.result.toString();
-      //   localStorage.setItem('jsonData', this.json);
-
-      //   const CANVAS = localStorage.getItem('jsonData');
-      //   this.canvas.loadFromJSON(CANVAS, () => {
-      //     console.log('CANVAS untar');
-      //     console.log(CANVAS);
-      //     this.canvas.renderAll();
-      //   });
-      // };
-      // readers.readAsText(event.target.files[0]);
-
-
-
       };
       reader.readAsText(event.target.files[0]);
     }
@@ -1275,34 +1255,6 @@ export class FabricjsEditorComponent implements AfterViewInit {
       alert('Please select JSON or XML File');
     }
   }
-
-
-  // saveCanvasToJSON() {
-  //   const json = JSON.stringify(this.canvas);
-  //   localStorage.setItem('Kanvas', json);
-  //   console.log('json');
-  //   console.log(json);
-  // }
-
-  // loadCanvasFromJSON() {
-  //   const CANVAS = localStorage.getItem('jsonData');
-  //   console.log('CANVAS');
-  //   console.log(CANVAS);
-
-  //   // and load everything from the same json
-  //   this.canvas.loadFromJSON(CANVAS, () => {
-  //     console.log('CANVAS untar');
-  //     console.log(CANVAS);
-
-  //     // making sure to render canvas at the end
-  //     this.canvas.renderAll();
-
-  //     // and checking if object's "name" is preserved
-  //     console.log('this.canvas.item(0).name');
-  //     console.log(this.canvas);
-  //   });
-
-  // }
 
   convertHextoDec(s) {
 
