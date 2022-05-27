@@ -732,7 +732,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           "objects": [
             `;
 
-        let annotationNames: string[] = ['RectangleData'];
+        let annotationNames: string[] = ['RectangleData', 'EllipseData', 'TextData'];
 
         for (var i = 0; i < annotationNames.length; i++) {
           var annotations = xmlDoc.getElementsByTagName(annotationNames[i]);
@@ -745,9 +745,15 @@ export class FabricjsEditorComponent implements AfterViewInit {
           }
         }
 
-        console.log('jsonDets', jsonDets);
-
-        return;
+          jsonDets = jsonDets.slice(0, -1);
+          jsonDets += `],
+          "background": "white"
+        }`;
+        this.canvas.loadFromJSON(jsonDets, () => {
+          this.canvas.renderAll();
+        });
+        console.log(jsonDets);
+      return;
 
         for (var i = 0; i < items.children.length; i++) {
           // if(i%2 == 0) {
@@ -1160,7 +1166,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                 "charSpacing": 0,
                 "styles": {},
                 "id": 381639
-              },`
+              },` 
             }
             else if (fontWeightDet == "False" && fontStyleDet == "False") {
 
@@ -1274,65 +1280,370 @@ export class FabricjsEditorComponent implements AfterViewInit {
   }
 
   getJsonFromXml(annotaionNode) {
-    var rectLoc = annotaionNode.getElementsByTagName('Location')[0].textContent;
-    console.log("Rectangle: " + rectLoc);
-    var rectLocArray = rectLoc.split(',');
-    var rectLocX = rectLocArray[0];
-    var rectLocY = rectLocArray[1];
+    if(annotaionNode.nodeName == "RectangleData"){
+      var rectLoc = annotaionNode.getElementsByTagName('Location')[0].textContent;
+      console.log("Rectangle: " + rectLoc);
+      var rectLocArray = rectLoc.split(',');
+      var rectLocX = rectLocArray[0];
+      var rectLocY = rectLocArray[1];
 
-    var rectSize = annotaionNode.getElementsByTagName('Size')[0].textContent;
-    var rectSizeArray = rectSize.split(',');
-    let sizeX = parseInt(rectSizeArray[0]);
-    let sizeY = parseInt(rectSizeArray[1]);
-    let mergeY = sizeY / 100;
-    let mergeX = sizeX / 200;
+      var rectSize = annotaionNode.getElementsByTagName('Size')[0].textContent;
+      var rectSizeArray = rectSize.split(',');
+      let sizeX = parseInt(rectSizeArray[0]);
+      let sizeY = parseInt(rectSizeArray[1]);
+      let mergeY = sizeY / 100;
+      let mergeX = sizeX / 200;
 
-    var fillData = annotaionNode.getElementsByTagName('Fill')[0];
-    var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
-    let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
-    // console.log(fillCode);
-    var outlineData = annotaionNode.getElementsByTagName('Outline')[0];
-    var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
-    let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+      var fillData = annotaionNode.getElementsByTagName('Fill')[0];
+      var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+      // console.log(fillCode);
+      var outlineData = annotaionNode.getElementsByTagName('Outline')[0];
+      var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
 
-    var rotationData = annotaionNode.getElementsByTagName('Rotation')[0].firstChild.textContent;
+      var rotationData = annotaionNode.getElementsByTagName('Rotation')[0].firstChild.textContent;
 
-    return `{"type": "rect",
-            "version": "3.6.6",
-            "originX": "left",
-            "originY": "top",
-            "left": `+ rectLocX + `,
-            "top": `+ rectLocY + `,
-            "width": 200,
-            "height": 100,
-            "fill": "#`+ fillCode + `",
-            "stroke": "#`+ strokeCode + `",
-            "strokeWidth": 2,
-            "strokeDashArray": null,
-            "strokeLineCap": "butt",
-            "strokeDashOffset": 0,
-            "strokeLineJoin": "miter",
-            "strokeMiterLimit": 4,
-            "scaleX": `+ mergeX + `,
-            "scaleY": `+ mergeY + `,
-            "angle": `+ rotationData + `,
-            "flipX": false,
-            "flipY": false,
-            "opacity": 0.5,
-            "shadow": null,
-            "visible": true,
-            "clipTo": null,
-            "backgroundColor": "",
-            "fillRule": "nonzero",
-            "paintFirst": "fill",
-            "globalCompositeOperation": "source-over",
-            "transformMatrix": null,
-            "skewX": 0,
-            "skewY": 0,
-            "rx": 0,
-            "ry": 0,
-            "id": 808065
-          },`;
+      return `{"type": "rect",
+              "version": "3.6.6",
+              "originX": "left",
+              "originY": "top",
+              "left": `+ rectLocX + `,
+              "top": `+ rectLocY + `,
+              "width": 200,
+              "height": 100,
+              "fill": "#`+ fillCode + `",
+              "stroke": "#`+ strokeCode + `",
+              "strokeWidth": 2,
+              "strokeDashArray": null,
+              "strokeLineCap": "butt",
+              "strokeDashOffset": 0,
+              "strokeLineJoin": "miter",
+              "strokeMiterLimit": 4,
+              "scaleX": `+ mergeX + `,
+              "scaleY": `+ mergeY + `,
+              "angle": `+ rotationData + `,
+              "flipX": false,
+              "flipY": false,
+              "opacity": 0.5,
+              "shadow": null,
+              "visible": true,
+              "clipTo": null,
+              "backgroundColor": "",
+              "fillRule": "nonzero",
+              "paintFirst": "fill",
+              "globalCompositeOperation": "source-over",
+              "transformMatrix": null,
+              "skewX": 0,
+              "skewY": 0,
+              "rx": 0,
+              "ry": 0,
+              "id": 808065
+            },`;
+    }
+    else if(annotaionNode.nodeName == "EllipseData"){
+      var ellipseLoc = annotaionNode.getElementsByTagName('Location')[0].textContent;
+      console.log("Ellipse: " + ellipseLoc);
+      var ellipseLocArray = ellipseLoc.split(',');
+      var ellipseLocX = ellipseLocArray[0];
+      var ellipseLocY = ellipseLocArray[1];
+
+      var ellipseSize = annotaionNode.getElementsByTagName('Size')[0].textContent;
+      var ellipseSizeArray = ellipseSize.split(',');
+      let sizeX = parseInt(ellipseSizeArray[0]);
+      let sizeY = parseInt(ellipseSizeArray[1]);
+      let mergeY = sizeY / 100;
+      let mergeX = sizeX / 200;
+
+      var fillData = annotaionNode.getElementsByTagName('Fill')[0];
+      var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+      // console.log(fillCode);
+      var outlineData = annotaionNode.getElementsByTagName('Outline')[0];
+      var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+
+      var rotationData = annotaionNode.getElementsByTagName('Rotation')[0].firstChild.textContent;
+
+      return `{
+        "type": "circle",
+        "version": "3.6.6",
+        "originX": "left",
+        "originY": "top",
+        "left": `+ ellipseLocX + `,
+        "top": `+ ellipseLocY + `,
+        "width": 100,
+        "height": 100,
+        "fill": "#`+ fillCode + `",
+        "stroke": "#`+ strokeCode + `",
+        "strokeWidth": 1,
+        "strokeDashArray": null,
+        "strokeLineCap": "butt",
+        "strokeDashOffset": 0,
+        "strokeLineJoin": "miter",
+        "strokeMiterLimit": 4,
+        "scaleX": `+ mergeX + `,
+        "scaleY": `+ mergeY + `,
+        "angle": 0,
+        "flipX": false,
+        "flipY": false,
+        "opacity": 0.5,
+        "shadow": null,
+        "visible": true,
+        "clipTo": null,
+        "backgroundColor": "",
+        "fillRule": "nonzero",
+        "paintFirst": "fill",
+        "globalCompositeOperation": "source-over",
+        "transformMatrix": null,
+        "skewX": 0,
+        "skewY": 0,
+        "radius": 50,
+        "startAngle": 0,
+        "endAngle": 6.283185307179586,
+        "id": 302050
+      },`;
+    }
+    else if(annotaionNode.nodeName == "TextData"){
+      var textLoc = annotaionNode.getElementsByTagName('Location')[0].textContent;
+      console.log("Text: " + textLoc);
+      var textLocArray = textLoc.split(',');
+      var textLocX = textLocArray[0];
+      var textLocY = textLocArray[1];
+
+      var textSize = annotaionNode.getElementsByTagName('Size')[0].textContent;
+      var textSizeArray = textSize.split(',');
+      let sizeX = parseInt(textSizeArray[0]);
+      let sizeY = parseInt(textSizeArray[1]);
+      let mergeY = sizeY / 100;
+      let mergeX = sizeX / 200;
+
+      var fillData = annotaionNode.getElementsByTagName('Fill')[0];
+      var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
+      // console.log(fillCode);
+      var outlineData = annotaionNode.getElementsByTagName('Outline')[0];
+      var textAlign = outlineData.getElementsByTagName('Alignment')[0].textContent;
+      var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
+
+      var rotationData = annotaionNode.getElementsByTagName('Rotation')[0].firstChild.textContent;
+
+      var textData = annotaionNode.getElementsByTagName('Text')[0].firstChild.textContent;
+
+      var fontDet = annotaionNode.getElementsByTagName('Font')[0];
+      var fontName = fontDet.getElementsByTagName('Name')[0].firstChild.textContent;
+      var fontLinethrough = fontDet.getElementsByTagName('Strikeout')[0].firstChild.textContent;
+      var fontUnderline = fontDet.getElementsByTagName('Underline')[0].firstChild.textContent;
+      
+      var fontStyleDet = fontDet.getElementsByTagName('Italic')[0].innerHTML;
+      var fontWeightDet = fontDet.getElementsByTagName('Bold')[0].innerHTML;
+
+      var fontData = annotaionNode.getElementsByTagName('FontBrush')[0];
+      var fontColor = fontData.getElementsByTagName('Color')[0].firstChild.textContent;
+      let fontCode = parseInt(fontColor, 10).toString(16).toUpperCase().substring(2);
+
+      if (fontWeightDet == "True" && fontStyleDet == "False"){
+        return `{
+          "type": "i-text",
+          "version": "3.6.6",
+          "originX": "left",
+          "originY": "top",
+          "left": `+ textLocX + `,
+          "top": `+ textLocY + `,
+          "width": 100,
+          "height": 100,
+          "fill": "#`+ fontCode + `",
+          "stroke": "#`+ strokeCode + `",
+          "strokeWidth": 1,
+          "strokeDashArray": null,
+          "strokeLineCap": "butt",
+          "strokeDashOffset": 0,
+          "strokeLineJoin": "miter",
+          "strokeMiterLimit": 4,
+          "scaleX": `+ mergeX + `,
+          "scaleY": `+ mergeY + `,
+          "angle": `+ rotationData +`,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 0.5,
+          "shadow": null,
+          "visible": true,
+          "clipTo": null,
+          "backgroundColor": "#`+ fillCode + `",
+          "fillRule": "nonzero",
+          "paintFirst": "fill",
+          "globalCompositeOperation": "source-over",
+          "transformMatrix": null,
+          "skewX": 0,
+          "skewY": 0,
+          "text": "`+ textData + `",
+          "fontSize": `+ sizeY + `,
+          "fontWeight": "bold",
+          "fontFamily": "`+ fontName + `",
+          "fontStyle": "normal",
+          "lineHeight": 1.16,
+          "underline": `+ fontUnderline + `,
+          "overline": false,
+          "linethrough": `+ fontLinethrough + `,
+          "textDecoration": "none",
+          "textAlign": "`+ textAlign + `",
+          "textBackgroundColor": "",
+          "charSpacing": 0,
+          "id": 302050
+        },`;
+      }
+      else if (fontWeightDet == "False" && fontStyleDet == "True"){
+        return `{
+          "type": "i-text",
+          "version": "3.6.6",
+          "originX": "left",
+          "originY": "top",
+          "left": `+ textLocX + `,
+          "top": `+ textLocY + `,
+          "width": 100,
+          "height": 100,
+          "fill": "#`+ fontCode + `",
+          "stroke": "#`+ strokeCode + `",
+          "strokeWidth": 1,
+          "strokeDashArray": null,
+          "strokeLineCap": "butt",
+          "strokeDashOffset": 0,
+          "strokeLineJoin": "miter",
+          "strokeMiterLimit": 4,
+          "scaleX": `+ mergeX + `,
+          "scaleY": `+ mergeY + `,
+          "angle": `+ rotationData +`,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 0.5,
+          "shadow": null,
+          "visible": true,
+          "clipTo": null,
+          "backgroundColor": "#`+ fillCode + `",
+          "fillRule": "nonzero",
+          "paintFirst": "fill",
+          "globalCompositeOperation": "source-over",
+          "transformMatrix": null,
+          "skewX": 0,
+          "skewY": 0,
+          "text": "`+ textData + `",
+          "fontSize": `+ sizeY + `,
+          "fontWeight": "",
+          "fontFamily": "`+ fontName + `",
+          "fontStyle": "italic",
+          "lineHeight": 1.16,
+          "underline": `+ fontUnderline + `,
+          "overline": false,
+          "linethrough": `+ fontLinethrough + `,
+          "textDecoration": "none",
+          "textAlign": "`+ textAlign + `",
+          "textBackgroundColor": "",
+          "charSpacing": 0,
+          "id": 302050
+        },`;
+      }
+      else if (fontWeightDet == "True" && fontStyleDet == "True"){
+        return `{
+          "type": "i-text",
+          "version": "3.6.6",
+          "originX": "left",
+          "originY": "top",
+          "left": `+ textLocX + `,
+          "top": `+ textLocY + `,
+          "width": 100,
+          "height": 100,
+          "fill": "#`+ fontCode + `",
+          "stroke": "#`+ strokeCode + `",
+          "strokeWidth": 1,
+          "strokeDashArray": null,
+          "strokeLineCap": "butt",
+          "strokeDashOffset": 0,
+          "strokeLineJoin": "miter",
+          "strokeMiterLimit": 4,
+          "scaleX": `+ mergeX + `,
+          "scaleY": `+ mergeY + `,
+          "angle": `+ rotationData +`,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 0.5,
+          "shadow": null,
+          "visible": true,
+          "clipTo": null,
+          "backgroundColor": "#`+ fillCode + `",
+          "fillRule": "nonzero",
+          "paintFirst": "fill",
+          "globalCompositeOperation": "source-over",
+          "transformMatrix": null,
+          "skewX": 0,
+          "skewY": 0,
+          "text": "`+ textData + `",
+          "fontSize": `+ sizeY + `,
+          "fontWeight": "bold",
+          "fontFamily": "`+ fontName + `",
+          "fontStyle": "italic",
+          "lineHeight": 1.16,
+          "underline": `+ fontUnderline + `,
+          "overline": false,
+          "linethrough": `+ fontLinethrough + `,
+          "textDecoration": "none",
+          "textAlign": "`+ textAlign + `",
+          "textBackgroundColor": "",
+          "charSpacing": 0,
+          "id": 302050
+        },`;
+      }
+      else if (fontWeightDet == "False" && fontStyleDet == "False"){
+        return `{
+          "type": "i-text",
+          "version": "3.6.6",
+          "originX": "left",
+          "originY": "top",
+          "left": `+ textLocX + `,
+          "top": `+ textLocY + `,
+          "width": 100,
+          "height": 100,
+          "fill": "#`+ fontCode + `",
+          "stroke": "#`+ strokeCode + `",
+          "strokeWidth": 1,
+          "strokeDashArray": null,
+          "strokeLineCap": "butt",
+          "strokeDashOffset": 0,
+          "strokeLineJoin": "miter",
+          "strokeMiterLimit": 4,
+          "scaleX": `+ mergeX + `,
+          "scaleY": `+ mergeY + `,
+          "angle": `+ rotationData +`,
+          "flipX": false,
+          "flipY": false,
+          "opacity": 0.5,
+          "shadow": null,
+          "visible": true,
+          "clipTo": null,
+          "backgroundColor": "#`+ fillCode + `",
+          "fillRule": "nonzero",
+          "paintFirst": "fill",
+          "globalCompositeOperation": "source-over",
+          "transformMatrix": null,
+          "skewX": 0,
+          "skewY": 0,
+          "text": "`+ textData + `",
+          "fontSize": `+ sizeY + `,
+          "fontWeight": "",
+          "fontFamily": "`+ fontName + `",
+          "fontStyle": "normal",
+          "lineHeight": 1.16,
+          "underline": `+ fontUnderline + `,
+          "overline": false,
+          "linethrough": `+ fontLinethrough + `,
+          "textDecoration": "none",
+          "textAlign": "`+ textAlign + `",
+          "textBackgroundColor": "",
+          "charSpacing": 0,
+          "id": 302050
+        },`;
+      }
+    }
   }
 
   convertHextoDec(s) {
