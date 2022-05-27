@@ -1327,22 +1327,92 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <Items type="System.Collections.ArrayList">
               `;
     for (let i = 0; i < json.objects.length; i++) {
-      if (json.objects[i].type == "rect" && json.objects[i].rx == "1" && json.objects[i].fill != "") {
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-        
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
+      if (json.objects[i].type == "rect") {
+        if(json.objects[i].rx == "1" && json.objects[i].fill != "") {
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+          
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
 
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
 
-        this.xmlData += `
+          this.xmlData += `
+                <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+                <CreationTime type="System.String">
+                    <![CDATA[2022-04-18T02:31:30]]>
+                </CreationTime>
+                <ModifiedTime type="System.String">
+                    <![CDATA[2022-04-18T02:32:07]]>
+                </ModifiedTime>
+                <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+                <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+                <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+                <Visible type="System.Boolean">True</Visible>
+                <CanMove type="System.Boolean">True</CanMove>
+                <CanResize type="System.Boolean">True</CanResize>
+                <CanRotate type="System.Boolean">True</CanRotate>
+                <CanMirror type="System.Boolean">True</CanMirror>
+                <CanSelect type="System.Boolean">True</CanSelect>
+                <ExtraProperties assembly="System"
+                    type="System.Collections.Specialized.StringCollection" />
+                <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+                    <ctor type="System.Int32">0</ctor>
+                    <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+                </Fill>
+                <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+                    <ctor type="System.Int32">3</ctor>
+                    <Alignment type="System.String">
+                        <![CDATA[Center]]>
+                    </Alignment>
+                    <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+                    <DashCap type="System.String">
+                        <![CDATA[Round]]>
+                    </DashCap>
+                    <DashOffset type="System.Single">0</DashOffset>
+                    <DashStyle type="System.String">
+                        <![CDATA[Solid]]>
+                    </DashStyle>
+                    <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                        <Style type="System.String"><![CDATA[None]]></Style>
+                        <Size type="System.String">
+                            <![CDATA[15,15]]>
+                        </Size>
+                    </EndCap>
+                    <LineJoin type="System.String">
+                        <![CDATA[Round]]>
+                    </LineJoin>
+                    <MiterLimit type="System.Single">0</MiterLimit>
+                    <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                        <Style type="System.String"><![CDATA[None]]></Style>
+                        <Size type="System.String">
+                            <![CDATA[15,15]]>
+                        </Size>
+                    </StartCap>
+                    <Width type="System.Single">4</Width>
+                </Outline>
+                <Translucent type="System.Boolean">False</Translucent>
+            </RectangleData>`;
+          }
+          else if(json.objects[i].rx == "0" && json.objects[i].fill == ""){
+            let height = json.objects[i].height;
+            let scaleY = json.objects[i].scaleY;
+            let mergeY = height * scaleY;
+  
+            let width = json.objects[i].width;
+            let scaleX = json.objects[i].scaleX;
+            let mergeX = width * scaleX;
+  
+            let stroke = '4B' + json.objects[i].stroke;
+            var strokeColor = stroke.replace('#', '');
+  
+            this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String">
                   <![CDATA[2022-04-18T02:31:30]]>
@@ -1351,7 +1421,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   <![CDATA[2022-04-18T02:32:07]]>
               </ModifiedTime>
               <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-              <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+              <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
               <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
               <Visible type="System.Boolean">True</Visible>
               <CanMove type="System.Boolean">True</CanMove>
@@ -1363,7 +1433,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
                   type="System.Collections.Specialized.StringCollection" />
               <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
                   <ctor type="System.Int32">0</ctor>
-                  <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+                  <Color type="System.Int32"><![CDATA[16777215]]></Color>
               </Fill>
               <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
                   <ctor type="System.Int32">3</ctor>
@@ -1398,19 +1468,23 @@ export class FabricjsEditorComponent implements AfterViewInit {
               </Outline>
               <Translucent type="System.Boolean">False</Translucent>
           </RectangleData>`;
-      } else if (json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill == "") {
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
+          }
+          else if(json.objects[i].rx == "0" && json.objects[i].fill != ""){
+            let height = json.objects[i].height;
+            let scaleY = json.objects[i].scaleY;
+            let mergeY = height * scaleY;
+            
+            let width = json.objects[i].width;
+            let scaleX = json.objects[i].scaleX;
+            let mergeX = width * scaleX;
 
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
+            let fill = '4B' + json.objects[i].fill;
+            var color = fill.replace('#', '');
+            
+            let stroke = '4B' + json.objects[i].stroke;
+            var strokeColor = stroke.replace('#', '');
 
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-
-        this.xmlData += `
+            this.xmlData += `
           <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String">
               <![CDATA[2022-04-18T02:31:30]]>
@@ -1419,7 +1493,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               <![CDATA[2022-04-18T02:32:07]]>
           </ModifiedTime>
           <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-          <Rotation type="System.Single">` + json.objects[i].angle + `</Rotation>
+          <Rotation type="System.Single">`+json.objects[i].angle+`</Rotation>
           <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
           <Visible type="System.Boolean">True</Visible>
           <CanMove type="System.Boolean">True</CanMove>
@@ -1431,7 +1505,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
               type="System.Collections.Specialized.StringCollection" />
           <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
               <ctor type="System.Int32">0</ctor>
-              <Color type="System.Int32"><![CDATA[16777215]]></Color>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
           </Fill>
           <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
               <ctor type="System.Int32">3</ctor>
@@ -1466,517 +1540,452 @@ export class FabricjsEditorComponent implements AfterViewInit {
           </Outline>
           <Translucent type="System.Boolean">False</Translucent>
       </RectangleData>`;
-      } else if (json.objects[i].type == "rect" && json.objects[i].rx == "0" && json.objects[i].fill != "") {
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-        
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
+          }
+      }
+      else if (json.objects[i].type == "circle") {
+        if(json.objects[i].skewX == 1){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
 
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
 
-        this.xmlData += `
-      <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-      <CreationTime type="System.String">
-          <![CDATA[2022-04-18T02:31:30]]>
-      </CreationTime>
-      <ModifiedTime type="System.String">
-          <![CDATA[2022-04-18T02:32:07]]>
-      </ModifiedTime>
-      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-      <Rotation type="System.Single">`+json.objects[i].angle+`</Rotation>
-      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-      <Visible type="System.Boolean">True</Visible>
-      <CanMove type="System.Boolean">True</CanMove>
-      <CanResize type="System.Boolean">True</CanResize>
-      <CanRotate type="System.Boolean">True</CanRotate>
-      <CanMirror type="System.Boolean">True</CanMirror>
-      <CanSelect type="System.Boolean">True</CanSelect>
-      <ExtraProperties assembly="System"
-          type="System.Collections.Specialized.StringCollection" />
-      <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
+          
+
+          this.xmlData += `
+            <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+            <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
+            <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
+            <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+            <Rotation type="System.Single">0</Rotation>
+            <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+            <Visible type="System.Boolean">True</Visible>
+            <CanMove type="System.Boolean">True</CanMove>
+            <CanResize type="System.Boolean">True</CanResize>
+            <CanRotate type="System.Boolean">True</CanRotate>
+            <CanMirror type="System.Boolean">True</CanMirror>
+            <CanSelect type="System.Boolean">True</CanSelect>
+            <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
+            <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+              <ctor type="System.Int32">0</ctor>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+            </Fill>
+            <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+              <ctor type="System.Int32">3</ctor>
+              <Alignment type="System.String"><![CDATA[Center]]></Alignment>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+              <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+              <DashOffset type="System.Single">0</DashOffset>
+              <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+              <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                <Style type="System.String"><![CDATA[None]]></Style>
+                <Size type="System.String"><![CDATA[15,15]]></Size>
+              </EndCap>
+              <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+              <MiterLimit type="System.Single">0</MiterLimit>
+              <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                <Style type="System.String"><![CDATA[None]]></Style>
+                <Size type="System.String"><![CDATA[15,15]]></Size>
+              </StartCap>
+              <Width type="System.Single">4</Width>
+            </Outline>
+            <Translucent type="System.Boolean">False</Translucent>
+          </EllipseData>`;
+        }
+        else if(json.objects[i].skewX == 0){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
+          
+
+          this.xmlData += `
+            <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+            <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
+            <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
+            <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+            <Rotation type="System.Single">0</Rotation>
+            <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+            <Visible type="System.Boolean">True</Visible>
+            <CanMove type="System.Boolean">True</CanMove>
+            <CanResize type="System.Boolean">True</CanResize>
+            <CanRotate type="System.Boolean">True</CanRotate>
+            <CanMirror type="System.Boolean">True</CanMirror>
+            <CanSelect type="System.Boolean">True</CanSelect>
+            <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
+            <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+              <ctor type="System.Int32">0</ctor>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+            </Fill>
+            <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+              <ctor type="System.Int32">3</ctor>
+              <Alignment type="System.String"><![CDATA[Center]]></Alignment>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+              <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+              <DashOffset type="System.Single">0</DashOffset>
+              <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+              <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                <Style type="System.String"><![CDATA[None]]></Style>
+                <Size type="System.String"><![CDATA[15,15]]></Size>
+              </EndCap>
+              <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+              <MiterLimit type="System.Single">0</MiterLimit>
+              <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                <Style type="System.String"><![CDATA[None]]></Style>
+                <Size type="System.String"><![CDATA[15,15]]></Size>
+              </StartCap>
+              <Width type="System.Single">4</Width>
+            </Outline>
+            <Translucent type="System.Boolean">False</Translucent>
+          </EllipseData>`;
+        }
+      }
+      else if (json.objects[i].type == "i-text") {
+        if(json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
+
+          let bgColor = '4B' + json.objects[i].backgroundColor
+          var backColor = bgColor.replace('#', '');
+
+          this.xmlData += `
+        <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+        <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+        <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+        <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+        <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+        <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+        <Visible type="System.Boolean">True</Visible>
+        <CanMove type="System.Boolean">True</CanMove>
+        <CanResize type="System.Boolean">True</CanResize>
+        <CanRotate type="System.Boolean">True</CanRotate>
+        <CanMirror type="System.Boolean">True</CanMirror>
+        <CanSelect type="System.Boolean">True</CanSelect>
+        <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+          <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+          <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+        </ExtraProperties>
+        <Padding type="System.Single">2</Padding>
+        <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
+        <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+          <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+          <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
+          <Bold type="System.Boolean">True</Bold>
+          <Italic type="System.Boolean">True</Italic>
+          <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+          <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
+          <CharSet type="System.Int32">0</CharSet>
+        </Font>
+        <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
           <ctor type="System.Int32">0</ctor>
           <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-      </Fill>
-      <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+        </FontBrush>
+        <Alignment type="System.String"><![CDATA[Near]]></Alignment>
+        <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+        <FormatFlags type="System.Int32">0</FormatFlags>
+        <Trimming type="System.String"><![CDATA[None]]></Trimming>
+        <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
+        </Fill>
+        <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
           <ctor type="System.Int32">3</ctor>
-          <Alignment type="System.String">
-              <![CDATA[Center]]>
-          </Alignment>
+          <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
           <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-          <DashCap type="System.String">
-              <![CDATA[Round]]>
-          </DashCap>
+          <DashCap type="System.String"><![CDATA[Round]]></DashCap>
           <DashOffset type="System.Single">0</DashOffset>
-          <DashStyle type="System.String">
-              <![CDATA[Solid]]>
-          </DashStyle>
+          <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
           <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-              <Style type="System.String"><![CDATA[None]]></Style>
-              <Size type="System.String">
-                  <![CDATA[15,15]]>
-              </Size>
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
           </EndCap>
-          <LineJoin type="System.String">
-              <![CDATA[Round]]>
-          </LineJoin>
-          <MiterLimit type="System.Single">0</MiterLimit>
+          <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+          <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
           <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-              <Style type="System.String"><![CDATA[None]]></Style>
-              <Size type="System.String">
-                  <![CDATA[15,15]]>
-              </Size>
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
           </StartCap>
           <Width type="System.Single">4</Width>
-      </Outline>
-      <Translucent type="System.Boolean">False</Translucent>
-  </RectangleData>`;
-      } else if (json.objects[i].type == "circle" && json.objects[i].skewX == 1) {
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
+        </Outline>
+        <AutoSize type="System.Boolean">False</AutoSize>
+        <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+        <Minimized type="System.Boolean">False</Minimized>
+      </TextData>`;
+        }
+        else if(json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
 
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
 
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-        
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
 
-        this.xmlData += `
-          <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-          <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
-          <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
-          <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-          <Rotation type="System.Single">0</Rotation>
-          <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-          <Visible type="System.Boolean">True</Visible>
-          <CanMove type="System.Boolean">True</CanMove>
-          <CanResize type="System.Boolean">True</CanResize>
-          <CanRotate type="System.Boolean">True</CanRotate>
-          <CanMirror type="System.Boolean">True</CanMirror>
-          <CanSelect type="System.Boolean">True</CanSelect>
-          <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
-          <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-            <ctor type="System.Int32">0</ctor>
-            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-          </Fill>
-          <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
-            <ctor type="System.Int32">3</ctor>
-            <Alignment type="System.String"><![CDATA[Center]]></Alignment>
-            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-            <DashCap type="System.String"><![CDATA[Round]]></DashCap>
-            <DashOffset type="System.Single">0</DashOffset>
-            <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
-            <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-              <Style type="System.String"><![CDATA[None]]></Style>
-              <Size type="System.String"><![CDATA[15,15]]></Size>
-            </EndCap>
-            <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-            <MiterLimit type="System.Single">0</MiterLimit>
-            <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-              <Style type="System.String"><![CDATA[None]]></Style>
-              <Size type="System.String"><![CDATA[15,15]]></Size>
-            </StartCap>
-            <Width type="System.Single">4</Width>
-          </Outline>
-          <Translucent type="System.Boolean">False</Translucent>
-        </EllipseData>`;
+          let bgColor = '4B' + json.objects[i].backgroundColor
+          var backColor = bgColor.replace('#', '');
+
+          this.xmlData += `
+        <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+        <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+        <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+        <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+        <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+        <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+        <Visible type="System.Boolean">True</Visible>
+        <CanMove type="System.Boolean">True</CanMove>
+        <CanResize type="System.Boolean">True</CanResize>
+        <CanRotate type="System.Boolean">True</CanRotate>
+        <CanMirror type="System.Boolean">True</CanMirror>
+        <CanSelect type="System.Boolean">True</CanSelect>
+        <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+          <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+          <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+        </ExtraProperties>
+        <Padding type="System.Single">2</Padding>
+        <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
+        <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+          <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+          <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
+          <Bold type="System.Boolean">False</Bold>
+          <Italic type="System.Boolean">False</Italic>
+          <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+          <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
+          <CharSet type="System.Int32">0</CharSet>
+        </Font>
+        <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+        </FontBrush>
+        <Alignment type="System.String"><![CDATA[Near]]></Alignment>
+        <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+        <FormatFlags type="System.Int32">0</FormatFlags>
+        <Trimming type="System.String"><![CDATA[None]]></Trimming>
+        <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
+        </Fill>
+        <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+          <ctor type="System.Int32">3</ctor>
+          <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+          <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+          <DashOffset type="System.Single">0</DashOffset>
+          <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+          <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
+          </EndCap>
+          <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+          <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
+          <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
+          </StartCap>
+          <Width type="System.Single">4</Width>
+        </Outline>
+        <AutoSize type="System.Boolean">False</AutoSize>
+        <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+        <Minimized type="System.Boolean">False</Minimized>
+      </TextData>`;
+        }
+        else if(json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
+
+          let bgColor = '4B' + json.objects[i].backgroundColor
+          var backColor = bgColor.replace('#', '');
+
+          this.xmlData += `
+        <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+        <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+        <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+        <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+        <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+        <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+        <Visible type="System.Boolean">True</Visible>
+        <CanMove type="System.Boolean">True</CanMove>
+        <CanResize type="System.Boolean">True</CanResize>
+        <CanRotate type="System.Boolean">True</CanRotate>
+        <CanMirror type="System.Boolean">True</CanMirror>
+        <CanSelect type="System.Boolean">True</CanSelect>
+        <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+          <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+          <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+        </ExtraProperties>
+        <Padding type="System.Single">2</Padding>
+        <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
+        <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+          <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+          <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
+          <Bold type="System.Boolean">False</Bold>
+          <Italic type="System.Boolean">True</Italic>
+          <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+          <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
+          <CharSet type="System.Int32">0</CharSet>
+        </Font>
+        <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+        </FontBrush>
+        <Alignment type="System.String"><![CDATA[Near]]></Alignment>
+        <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+        <FormatFlags type="System.Int32">0</FormatFlags>
+        <Trimming type="System.String"><![CDATA[None]]></Trimming>
+        <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
+        </Fill>
+        <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+          <ctor type="System.Int32">3</ctor>
+          <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+          <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+          <DashOffset type="System.Single">0</DashOffset>
+          <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+          <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
+          </EndCap>
+          <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+          <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
+          <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
+          </StartCap>
+          <Width type="System.Single">4</Width>
+        </Outline>
+        <AutoSize type="System.Boolean">False</AutoSize>
+        <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+        <Minimized type="System.Boolean">False</Minimized>
+      </TextData>`;
+        }
+        else if(json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal"){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
+
+          let bgColor = '4B' + json.objects[i].backgroundColor
+          var backColor = bgColor.replace('#', '');
+
+          this.xmlData += `
+        <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+        <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
+        <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
+        <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+        <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
+        <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+        <Visible type="System.Boolean">True</Visible>
+        <CanMove type="System.Boolean">True</CanMove>
+        <CanResize type="System.Boolean">True</CanResize>
+        <CanRotate type="System.Boolean">True</CanRotate>
+        <CanMirror type="System.Boolean">True</CanMirror>
+        <CanSelect type="System.Boolean">True</CanSelect>
+        <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
+          <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
+          <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
+        </ExtraProperties>
+        <Padding type="System.Single">2</Padding>
+        <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
+        <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
+          <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
+          <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
+          <Bold type="System.Boolean">True</Bold>
+          <Italic type="System.Boolean">False</Italic>
+          <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
+          <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
+          <CharSet type="System.Int32">0</CharSet>
+        </Font>
+        <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
+        </FontBrush>
+        <Alignment type="System.String"><![CDATA[Near]]></Alignment>
+        <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
+        <FormatFlags type="System.Int32">0</FormatFlags>
+        <Trimming type="System.String"><![CDATA[None]]></Trimming>
+        <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+          <ctor type="System.Int32">0</ctor>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
+        </Fill>
+        <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+          <ctor type="System.Int32">3</ctor>
+          <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
+          <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+          <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+          <DashOffset type="System.Single">0</DashOffset>
+          <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+          <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
+          </EndCap>
+          <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+          <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
+          <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+            <Style type="System.String"><![CDATA[None]]></Style>
+            <Size type="System.String"><![CDATA[15,15]]></Size>
+          </StartCap>
+          <Width type="System.Single">4</Width>
+        </Outline>
+        <AutoSize type="System.Boolean">False</AutoSize>
+        <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
+        <Minimized type="System.Boolean">False</Minimized>
+      </TextData>`;
+        }
       }
-      else if (json.objects[i].type == "circle" && json.objects[i].skewX == 0) {
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
-
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-        
-
-        this.xmlData += `
-          <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-          <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
-          <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
-          <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-          <Rotation type="System.Single">0</Rotation>
-          <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-          <Visible type="System.Boolean">True</Visible>
-          <CanMove type="System.Boolean">True</CanMove>
-          <CanResize type="System.Boolean">True</CanResize>
-          <CanRotate type="System.Boolean">True</CanRotate>
-          <CanMirror type="System.Boolean">True</CanMirror>
-          <CanSelect type="System.Boolean">True</CanSelect>
-          <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
-          <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-            <ctor type="System.Int32">0</ctor>
-            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-          </Fill>
-          <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
-            <ctor type="System.Int32">3</ctor>
-            <Alignment type="System.String"><![CDATA[Center]]></Alignment>
-            <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-            <DashCap type="System.String"><![CDATA[Round]]></DashCap>
-            <DashOffset type="System.Single">0</DashOffset>
-            <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
-            <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-              <Style type="System.String"><![CDATA[None]]></Style>
-              <Size type="System.String"><![CDATA[15,15]]></Size>
-            </EndCap>
-            <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-            <MiterLimit type="System.Single">0</MiterLimit>
-            <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-              <Style type="System.String"><![CDATA[None]]></Style>
-              <Size type="System.String"><![CDATA[15,15]]></Size>
-            </StartCap>
-            <Width type="System.Single">4</Width>
-          </Outline>
-          <Translucent type="System.Boolean">False</Translucent>
-        </EllipseData>`;
-      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic") {
-        
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
-
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-
-        let bgColor = '4B' + json.objects[i].backgroundColor
-        var backColor = bgColor.replace('#', '');
-
-        this.xmlData += `
-      <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-      <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
-      <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
-      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-      <Visible type="System.Boolean">True</Visible>
-      <CanMove type="System.Boolean">True</CanMove>
-      <CanResize type="System.Boolean">True</CanResize>
-      <CanRotate type="System.Boolean">True</CanRotate>
-      <CanMirror type="System.Boolean">True</CanMirror>
-      <CanSelect type="System.Boolean">True</CanSelect>
-      <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
-        <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
-        <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
-      </ExtraProperties>
-      <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
-      <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
-        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
-        <Bold type="System.Boolean">True</Bold>
-        <Italic type="System.Boolean">True</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
-        <CharSet type="System.Int32">0</CharSet>
-      </Font>
-      <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-      </FontBrush>
-      <Alignment type="System.String"><![CDATA[Near]]></Alignment>
-      <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
-      <FormatFlags type="System.Int32">0</FormatFlags>
-      <Trimming type="System.String"><![CDATA[None]]></Trimming>
-      <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
-      </Fill>
-      <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
-        <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-        <DashCap type="System.String"><![CDATA[Round]]></DashCap>
-        <DashOffset type="System.Single">0</DashOffset>
-        <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
-        <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </EndCap>
-        <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
-        <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </StartCap>
-        <Width type="System.Single">4</Width>
-      </Outline>
-      <AutoSize type="System.Boolean">False</AutoSize>
-      <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
-      <Minimized type="System.Boolean">False</Minimized>
-    </TextData>`;
-      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal") {
-        
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
-
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-
-        let bgColor = '4B' + json.objects[i].backgroundColor
-        var backColor = bgColor.replace('#', '');
-
-        this.xmlData += `
-      <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-      <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
-      <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
-      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-      <Visible type="System.Boolean">True</Visible>
-      <CanMove type="System.Boolean">True</CanMove>
-      <CanResize type="System.Boolean">True</CanResize>
-      <CanRotate type="System.Boolean">True</CanRotate>
-      <CanMirror type="System.Boolean">True</CanMirror>
-      <CanSelect type="System.Boolean">True</CanSelect>
-      <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
-        <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
-        <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
-      </ExtraProperties>
-      <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
-      <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
-        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
-        <Bold type="System.Boolean">False</Bold>
-        <Italic type="System.Boolean">False</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
-        <CharSet type="System.Int32">0</CharSet>
-      </Font>
-      <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-      </FontBrush>
-      <Alignment type="System.String"><![CDATA[Near]]></Alignment>
-      <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
-      <FormatFlags type="System.Int32">0</FormatFlags>
-      <Trimming type="System.String"><![CDATA[None]]></Trimming>
-      <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
-      </Fill>
-      <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
-        <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-        <DashCap type="System.String"><![CDATA[Round]]></DashCap>
-        <DashOffset type="System.Single">0</DashOffset>
-        <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
-        <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </EndCap>
-        <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
-        <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </StartCap>
-        <Width type="System.Single">4</Width>
-      </Outline>
-      <AutoSize type="System.Boolean">False</AutoSize>
-      <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
-      <Minimized type="System.Boolean">False</Minimized>
-    </TextData>`;
-      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic") {
-        
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
-
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-
-        let bgColor = '4B' + json.objects[i].backgroundColor
-        var backColor = bgColor.replace('#', '');
-
-        this.xmlData += `
-      <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-      <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
-      <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
-      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-      <Visible type="System.Boolean">True</Visible>
-      <CanMove type="System.Boolean">True</CanMove>
-      <CanResize type="System.Boolean">True</CanResize>
-      <CanRotate type="System.Boolean">True</CanRotate>
-      <CanMirror type="System.Boolean">True</CanMirror>
-      <CanSelect type="System.Boolean">True</CanSelect>
-      <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
-        <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
-        <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
-      </ExtraProperties>
-      <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
-      <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
-        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
-        <Bold type="System.Boolean">False</Bold>
-        <Italic type="System.Boolean">True</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
-        <CharSet type="System.Int32">0</CharSet>
-      </Font>
-      <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-      </FontBrush>
-      <Alignment type="System.String"><![CDATA[Near]]></Alignment>
-      <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
-      <FormatFlags type="System.Int32">0</FormatFlags>
-      <Trimming type="System.String"><![CDATA[None]]></Trimming>
-      <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
-      </Fill>
-      <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
-        <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-        <DashCap type="System.String"><![CDATA[Round]]></DashCap>
-        <DashOffset type="System.Single">0</DashOffset>
-        <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
-        <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </EndCap>
-        <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
-        <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </StartCap>
-        <Width type="System.Single">4</Width>
-      </Outline>
-      <AutoSize type="System.Boolean">False</AutoSize>
-      <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
-      <Minimized type="System.Boolean">False</Minimized>
-    </TextData>`;
-      } else if (json.objects[i].type == "i-text" && json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal") {
-        
-        let height = json.objects[i].height;
-        let scaleY = json.objects[i].scaleY;
-        let mergeY = height * scaleY;
-
-        let width = json.objects[i].width;
-        let scaleX = json.objects[i].scaleX;
-        let mergeX = width * scaleX;
-
-        let fill = '4B' + json.objects[i].fill;
-        var color = fill.replace('#', '');
-        
-        let stroke = '4B' + json.objects[i].stroke;
-        var strokeColor = stroke.replace('#', '');
-
-        let bgColor = '4B' + json.objects[i].backgroundColor
-        var backColor = bgColor.replace('#', '');
-
-        this.xmlData += `
-      <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
-      <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
-      <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:18:01]]></ModifiedTime>
-      <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
-      <Rotation type="System.Single"><![CDATA[`+json.objects[i].angle+`]]></Rotation>
-      <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
-      <Visible type="System.Boolean">True</Visible>
-      <CanMove type="System.Boolean">True</CanMove>
-      <CanResize type="System.Boolean">True</CanResize>
-      <CanRotate type="System.Boolean">True</CanRotate>
-      <CanMirror type="System.Boolean">True</CanMirror>
-      <CanSelect type="System.Boolean">True</CanSelect>
-      <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection">
-        <ExtraPropertiesEntry type="System.String"><![CDATA[AllowEditing]]></ExtraPropertiesEntry>
-        <ExtraPropertiesEntry type="System.String"><![CDATA[True]]></ExtraPropertiesEntry>
-      </ExtraProperties>
-      <Padding type="System.Single">2</Padding>
-      <Text type="System.String"><![CDATA[`+json.objects[i].text+`]]></Text>
-      <Font assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationFont">
-        <Name type="System.String"><![CDATA[`+json.objects[i].fontFamily+`]]></Name>
-        <Size type="System.Single"><![CDATA[`+json.objects[i].fontSize+`]]></Size>
-        <Bold type="System.Boolean">True</Bold>
-        <Italic type="System.Boolean">False</Italic>
-        <Strikeout type="System.Boolean"><![CDATA[`+json.objects[i].linethrough+`]]></Strikeout>
-        <Underline type="System.Boolean"><![CDATA[`+json.objects[i].underline+`]]></Underline>
-        <CharSet type="System.Int32">0</CharSet>
-      </Font>
-      <FontBrush assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(color)+`]]></Color>
-      </FontBrush>
-      <Alignment type="System.String"><![CDATA[Near]]></Alignment>
-      <LineAlignment type="System.String"><![CDATA[Near]]></LineAlignment>
-      <FormatFlags type="System.Int32">0</FormatFlags>
-      <Trimming type="System.String"><![CDATA[None]]></Trimming>
-      <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
-        <ctor type="System.Int32">0</ctor>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(backColor)+`]]></Color>
-      </Fill>
-      <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
-        <ctor type="System.Int32">3</ctor>
-        <Alignment type="System.String"><![CDATA[`+json.objects[i].textAlign+`]]></Alignment>
-        <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
-        <DashCap type="System.String"><![CDATA[Round]]></DashCap>
-        <DashOffset type="System.Single">0</DashOffset>
-        <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
-        <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </EndCap>
-        <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
-        <MiterLimit type="System.Single"><![CDATA[`+json.objects[i].strokeMiterLimit+`]]></MiterLimit>
-        <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
-          <Style type="System.String"><![CDATA[None]]></Style>
-          <Size type="System.String"><![CDATA[15,15]]></Size>
-        </StartCap>
-        <Width type="System.Single">4</Width>
-      </Outline>
-      <AutoSize type="System.Boolean">False</AutoSize>
-      <RenderingHint type="System.String"><![CDATA[SystemDefault]]></RenderingHint>
-      <Minimized type="System.Boolean">False</Minimized>
-    </TextData>`;
-       } 
   // else if (json.objects[i].type == "path") {
   //       this.xmlData += `
   //   <FreehandData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
