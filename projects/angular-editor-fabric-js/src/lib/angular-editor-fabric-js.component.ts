@@ -1718,21 +1718,22 @@ export class FabricjsEditorComponent implements AfterViewInit {
               `;
     for (let i = 0; i < json.objects.length; i++) {
       if (json.objects[i].type == "rect") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
+        
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
+
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
         if(json.objects[i].rx == "1" && json.objects[i].fill != "") {
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
           
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
-          
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-
           this.xmlData += `
                 <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
                 <CreationTime type="System.String">
@@ -1791,17 +1792,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
             </RectangleData>`;
           }
           else if(json.objects[i].rx == "0" && json.objects[i].fill == ""){
-            let height = json.objects[i].height;
-            let scaleY = json.objects[i].scaleY;
-            let mergeY = height * scaleY;
-  
-            let width = json.objects[i].width;
-            let scaleX = json.objects[i].scaleX;
-            let mergeX = width * scaleX;
-  
-            let stroke = '4B' + json.objects[i].stroke;
-            var strokeColor = stroke.replace('#', '');
-  
+            
             this.xmlData += `
               <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
               <CreationTime type="System.String">
@@ -1860,20 +1851,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           </RectangleData>`;
           }
           else if(json.objects[i].rx == "0" && json.objects[i].fill != ""){
-            let height = json.objects[i].height;
-            let scaleY = json.objects[i].scaleY;
-            let mergeY = height * scaleY;
             
-            let width = json.objects[i].width;
-            let scaleX = json.objects[i].scaleX;
-            let mergeX = width * scaleX;
-
-            let fill = '4B' + json.objects[i].fill;
-            var color = fill.replace('#', '');
-            
-            let stroke = '4B' + json.objects[i].stroke;
-            var strokeColor = stroke.replace('#', '');
-
             this.xmlData += `
           <RectangleData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
           <CreationTime type="System.String">
@@ -1933,21 +1911,21 @@ export class FabricjsEditorComponent implements AfterViewInit {
           }
       }
       else if (json.objects[i].type == "circle") {
-        if(json.objects[i].skewX == 1 && json.objects[i].fill != ""){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
 
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
 
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
-          
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-          
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
+        if(json.objects[i].skewX == 1 && json.objects[i].fill != ""){          
 
           this.xmlData += `
             <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
@@ -1990,21 +1968,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           </EllipseData>`;
         }
         else if(json.objects[i].skewX == 0  && json.objects[i].fill == ""){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
-
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
           
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-          
-
           this.xmlData += `
             <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
             <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
@@ -2046,21 +2010,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           </EllipseData>`;
         }
         else if(json.objects[i].skewX == 0 && json.objects[i].fill != ""){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
-
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
           
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-          
-
           this.xmlData += `
             <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
             <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
@@ -2103,24 +2053,25 @@ export class FabricjsEditorComponent implements AfterViewInit {
         }
       }
       else if (json.objects[i].type == "i-text") {
+        let height = json.objects[i].height;
+        let scaleY = json.objects[i].scaleY;
+        let mergeY = height * scaleY;
+
+        let width = json.objects[i].width;
+        let scaleX = json.objects[i].scaleX;
+        let mergeX = width * scaleX;
+
+        let fill = '4B' + json.objects[i].fill;
+        var color = fill.replace('#', '');
+        
+        let stroke = '4B' + json.objects[i].stroke;
+        var strokeColor = stroke.replace('#', '');
+
+        let bgColor = '4B' + json.objects[i].backgroundColor
+        var backColor = bgColor.replace('#', '');
+        
         if(json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "italic"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
-
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
           
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-
-          let bgColor = '4B' + json.objects[i].backgroundColor
-          var backColor = bgColor.replace('#', '');
-
           this.xmlData += `
         <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
         <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
@@ -2186,23 +2137,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </TextData>`;
         }
         else if(json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "normal"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
-
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
-          
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-
-          let bgColor = '4B' + json.objects[i].backgroundColor
-          var backColor = bgColor.replace('#', '');
-
+         
           this.xmlData += `
         <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
         <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
@@ -2268,23 +2203,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </TextData>`;
         }
         else if(json.objects[i].fontWeight == "" && json.objects[i].fontStyle == "italic"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
-
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
           
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-
-          let bgColor = '4B' + json.objects[i].backgroundColor
-          var backColor = bgColor.replace('#', '');
-
           this.xmlData += `
         <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
         <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
@@ -2350,23 +2269,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       </TextData>`;
         }
         else if(json.objects[i].fontWeight == "bold" && json.objects[i].fontStyle == "normal"){
-          let height = json.objects[i].height;
-          let scaleY = json.objects[i].scaleY;
-          let mergeY = height * scaleY;
-
-          let width = json.objects[i].width;
-          let scaleX = json.objects[i].scaleX;
-          let mergeX = width * scaleX;
-
-          let fill = '4B' + json.objects[i].fill;
-          var color = fill.replace('#', '');
           
-          let stroke = '4B' + json.objects[i].stroke;
-          var strokeColor = stroke.replace('#', '');
-
-          let bgColor = '4B' + json.objects[i].backgroundColor
-          var backColor = bgColor.replace('#', '');
-
           this.xmlData += `
         <TextData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
         <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:38]]></CreationTime>
