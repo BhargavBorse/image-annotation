@@ -1297,7 +1297,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       var fillData = annotaionNode.getElementsByTagName('Fill')[0];
       var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
       let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
-      // console.log(fillCode);
+      console.log("Rect Fill Code: "+ fillCode);
       var outlineData = annotaionNode.getElementsByTagName('Outline')[0];
       var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
       let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
@@ -1358,7 +1358,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
       var fillData = annotaionNode.getElementsByTagName('Fill')[0];
       var fillColor = fillData.getElementsByTagName('Color')[0].firstChild.textContent;
       let fillCode = parseInt(fillColor, 10).toString(16).toUpperCase().substring(2);
-      // console.log(fillCode);
+      console.log("Fill Code:" +fillCode);
       var outlineData = annotaionNode.getElementsByTagName('Outline')[0];
       var outlineStroke = outlineData.getElementsByTagName('Color')[0].firstChild.textContent;
       let strokeCode = parseInt(outlineStroke, 10).toString(16).toUpperCase().substring(2);
@@ -1933,7 +1933,7 @@ export class FabricjsEditorComponent implements AfterViewInit {
           }
       }
       else if (json.objects[i].type == "circle") {
-        if(json.objects[i].skewX == 1){
+        if(json.objects[i].skewX == 1 && json.objects[i].fill != ""){
           let height = json.objects[i].height;
           let scaleY = json.objects[i].scaleY;
           let mergeY = height * scaleY;
@@ -1989,7 +1989,63 @@ export class FabricjsEditorComponent implements AfterViewInit {
             <Translucent type="System.Boolean">False</Translucent>
           </EllipseData>`;
         }
-        else if(json.objects[i].skewX == 0){
+        else if(json.objects[i].skewX == 0  && json.objects[i].fill == ""){
+          let height = json.objects[i].height;
+          let scaleY = json.objects[i].scaleY;
+          let mergeY = height * scaleY;
+
+          let width = json.objects[i].width;
+          let scaleX = json.objects[i].scaleX;
+          let mergeX = width * scaleX;
+
+          let fill = '4B' + json.objects[i].fill;
+          var color = fill.replace('#', '');
+          
+          let stroke = '4B' + json.objects[i].stroke;
+          var strokeColor = stroke.replace('#', '');
+          
+
+          this.xmlData += `
+            <EllipseData assembly="Atalasoft.dotImage" namespace="Atalasoft.Annotate">
+            <CreationTime type="System.String"><![CDATA[2022-04-07T07:17:22]]></CreationTime>
+            <ModifiedTime type="System.String"><![CDATA[2022-04-07T07:17:30]]></ModifiedTime>
+            <Location type="System.String"><![CDATA[`+json.objects[i].left+`,`+json.objects[i].top+`]]></Location>
+            <Rotation type="System.Single">0</Rotation>
+            <Size type="System.String"><![CDATA[`+mergeX+`,`+mergeY+`]]></Size>
+            <Visible type="System.Boolean">True</Visible>
+            <CanMove type="System.Boolean">True</CanMove>
+            <CanResize type="System.Boolean">True</CanResize>
+            <CanRotate type="System.Boolean">True</CanRotate>
+            <CanMirror type="System.Boolean">True</CanMirror>
+            <CanSelect type="System.Boolean">True</CanSelect>
+            <ExtraProperties assembly="System" type="System.Collections.Specialized.StringCollection" />
+            <Fill assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationBrush">
+              <ctor type="System.Int32">0</ctor>
+              <Color type="System.Int32"><![CDATA[16777215]]></Color>
+            </Fill>
+            <Outline assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationPen">
+              <ctor type="System.Int32">3</ctor>
+              <Alignment type="System.String"><![CDATA[Center]]></Alignment>
+              <Color type="System.Int32"><![CDATA[`+this.convertHextoDec(strokeColor)+`]]></Color>
+              <DashCap type="System.String"><![CDATA[Round]]></DashCap>
+              <DashOffset type="System.Single">0</DashOffset>
+              <DashStyle type="System.String"><![CDATA[Solid]]></DashStyle>
+              <EndCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                <Style type="System.String"><![CDATA[None]]></Style>
+                <Size type="System.String"><![CDATA[15,15]]></Size>
+              </EndCap>
+              <LineJoin type="System.String"><![CDATA[Round]]></LineJoin>
+              <MiterLimit type="System.Single">0</MiterLimit>
+              <StartCap assembly="Atalasoft.dotImage" type="Atalasoft.Annotate.AnnotationLineCap">
+                <Style type="System.String"><![CDATA[None]]></Style>
+                <Size type="System.String"><![CDATA[15,15]]></Size>
+              </StartCap>
+              <Width type="System.Single">4</Width>
+            </Outline>
+            <Translucent type="System.Boolean">False</Translucent>
+          </EllipseData>`;
+        }
+        else if(json.objects[i].skewX == 0 && json.objects[i].fill != ""){
           let height = json.objects[i].height;
           let scaleY = json.objects[i].scaleY;
           let mergeY = height * scaleY;
